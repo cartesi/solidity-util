@@ -1,0 +1,27 @@
+{
+  "name": "@cartesi/util",
+  "version": "0.1.0-alpha.4",
+  "description": "Solidity Util Contracts",
+  "scripts": {
+    "prepare": "truffle compile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "truffle": "^5.0.44"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cartesi/solidity-util.git"
+  },
+  "keywords": [
+    "cartesi"
+  ],
+  "files": [
+    "contracts",
+    "migrations",
+    "build"
+  ],
+  "author": "Danilo Tuler <danilo@cartesi.io>",
+  "license": "Apache-2.0"
+}
