@@ -12,7 +12,7 @@ jobs:
       - uses: tuler/validate-semver-release@feature/alpha-rc
         id: validate
 
-      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
       - run: npm ci
       - run: npm publish --tag ${{ steps.validate.outputs.release-workflow-tag }}
         env:
