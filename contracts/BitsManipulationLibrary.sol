@@ -10,7 +10,6 @@
 // specific language governing permissions and limitations under the License.
 
 
-
 pragma solidity ^0.5.0;
 
 /// @title Bits Manipulation Library
