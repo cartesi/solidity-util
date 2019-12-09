@@ -14,6 +14,16 @@ module.exports = {
       port: 8545,
       network_id: "*" // Match any network id
     },
+    ganache: {
+      host: "ganache",
+      port: 8545,
+      network_id: "*" // Match any network id
+    },
+    geth: {
+      host: "geth",
+      port: 8545,
+      network_id: 15
+    },
     coverage: {
       host: "localhost",
       network_id: "*",

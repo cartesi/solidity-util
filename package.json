@@ -22,7 +22,8 @@
   "files": [
     "contracts",
     "migrations",
-    "build"
+    "build",
+    "truffle-config.js"
   ],
   "author": "Danilo Tuler <danilo@cartesi.io>",
   "license": "Apache-2.0"
