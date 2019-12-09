@@ -44,7 +44,7 @@ library Merkle {
         require(_logOfSize >= 3, "Must be at least a word");
         require(_logOfSize <= 64, "Cannot be bigger than the machine itself");
 
-        uint64 size = 2 ** _logOfSize;
+        uint64 size = uint64(2) ** _logOfSize;
 
         require(((size - 1) & _position) == 0, "Position is not aligned");
         require(siblings.length == 64 - _logOfSize, "Proof length does not match");
