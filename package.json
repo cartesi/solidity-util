@@ -1,15 +1,14 @@
 {
   "name": "@cartesi/util",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Solidity Util Contracts",
   "scripts": {
     "prepare": "truffle compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@truffle/hdwallet-provider": "^1.0.26"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@truffle/hdwallet-provider": "^1.0.26",
     "truffle": "^5.1.3"
   },
   "repository": {
