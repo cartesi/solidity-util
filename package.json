@@ -1,6 +1,6 @@
 {
   "name": "@cartesi/util",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Solidity Util Contracts",
   "scripts": {
     "prepare": "truffle compile",
@@ -9,7 +9,7 @@
   "dependencies": {},
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.0.33",
-    "truffle": "^5.1.17"
+    "truffle": "^5.1.19"
   },
   "resolutions": {
     "ethereumjs-util": "6.2.0"
