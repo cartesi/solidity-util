@@ -26,16 +26,15 @@ contract CartesiMath {
     }
 
     function log2ApproxTimes1k(uint256 num) public returns (uint256) {
-       require (num > 0, "Number cannot be zero");
-        uint256 leading;
+        require (num > 0, "Number cannot be zero");
+        uint256 leading = 0;
         uint256 original = num;
 
-       while (num != 0) {
-           if (log2tableTimes1k[num] != 0) {
-               break;
-           }
+        if (num == 1) return 0;
+
+        while (log2tableTimes1k[num] == 0) {
            num = num >> 1;
-           leading++;
+           leading += 1;
        }
        return log2tableTimes1k[original] = (leading * 1000) + log2tableTimes1k[num];
     }
