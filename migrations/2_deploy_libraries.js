@@ -12,8 +12,10 @@
 
 const BitsManipulationLibrary = artifacts.require("BitsManipulationLibrary");
 const Merkle = artifacts.require("Merkle");
+const CartesiMath = artifacts.require("CartesiMath");
 
 module.exports = function(deployer) {
     deployer.deploy(BitsManipulationLibrary);
     deployer.deploy(Merkle);
+    deployer.deploy(CartesiMath);
 };
