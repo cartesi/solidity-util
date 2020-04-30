@@ -53,7 +53,7 @@ contract SpeedBump is Instantiator, Decorated {
         return _stakedBalance.mul(2 ** exponent);
     }
 
-    function claimRound(uint256 _index) returns (bool) {
+    function claimRound(uint256 _index) public returns (bool) {
 
         if ((block.number).sub(instance[_index].currentGoalBlockNumber) > 255) {
             // cannot get hash of block if its older than 256
@@ -65,7 +65,7 @@ contract SpeedBump is Instantiator, Decorated {
         }
 
         bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
-        bytes32 hashedAddress = keccak256(msg.sender);
+        bytes32 hashedAddress = keccak256(abi.encodePacked(msg.sender));
         uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
 
         // no safemath because we expect overflow
