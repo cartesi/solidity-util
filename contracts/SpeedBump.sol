@@ -66,13 +66,13 @@ contract SpeedBump is Instantiator, Decorated {
 
         bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
         bytes32 hashedAddress = keccak256(msg.sender);
-        uint256 stakedBalance = token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
+        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
 
         // no safemath because we expect overflow
         if ((hashedAddress + currentGoal) < getCurrentInterval(_index, stakedBalance)) {
-            roundWinner[roundCount] = msg.sender;
-            _adjustDifficulty();
-            _reset();
+            instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
+            _adjustDifficulty(_index);
+            _reset(_index);
 
             return true;
         }
@@ -81,7 +81,7 @@ contract SpeedBump is Instantiator, Decorated {
 
     function _reset(uint256 _index) private {
         instance[_index].roundCount++;
-        instance[_index].currentGoalBlockNumber = blockhash(block.number + 1);
+        instance[_index].currentGoalBlockNumber = block.number + 1;
         instance[_index].currentDrawStartTime = now;
     }
 
