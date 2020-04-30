@@ -6,7 +6,9 @@
     "prepare": "truffle compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@openzeppelin/contracts": "^2.5.0"
+  },
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.0.33",
     "truffle": "^5.1.19"
