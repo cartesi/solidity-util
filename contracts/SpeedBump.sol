@@ -25,13 +25,12 @@ contract SpeedBump is Instantiator, Decorated {
     mapping(uint256 => SpeedBumpCtx) internal instance;
 
     function instantiate(
-        uint256 _difficulty,
         uint256 _difficultyAdjustmentParameter,
         uint256 _desiredDrawTimeInterval,
         IERC20 _token) public returns (uint256)
     {
-        require(_desiredDrawTimeInterval > 0, "Desired draw time interval has to be bigger than zero");
-        instance[currentIndex].difficulty = _difficulty;
+        require(_desiredDrawTimeInterval > 30, "Desired draw time interval has to be bigger than 30 seconds");
+        instance[currentIndex].difficulty = 1;
         instance[currentIndex].difficultyAdjustmentParameter = _difficultyAdjustmentParameter;
         instance[currentIndex].desiredDrawTimeInterval = _desiredDrawTimeInterval;
         instance[currentIndex].token = _token;
