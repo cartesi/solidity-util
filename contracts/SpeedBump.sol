@@ -36,8 +36,8 @@ contract SpeedBump is Instantiator, Decorated {
         instance[currentIndex].desiredDrawTimeInterval = _desiredDrawTimeInterval;
         instance[currentIndex].token = _token;
 
-        currentGoalBlockNumber = block.number + 1; // goal has to be in the future, so miner cant manipulate (easily)
-        currentDrawStartTime = now; // first draw starts when the instance is created
+        instance[currentIndex].currentGoalBlockNumber = block.number + 1; // goal has to be in the future, so miner cant manipulate (easily)
+        instance[currentIndex].currentDrawStartTime = now; // first draw starts when the instance is created
 
         active[currentIndex] = true;
         return currentIndex++;
@@ -79,13 +79,13 @@ contract SpeedBump is Instantiator, Decorated {
         return false;
     }
 
-    function _reset(_index) private {
+    function _reset(uint256 _index) private {
         instance[_index].roundCount++;
         instance[_index].currentGoalBlockNumber = blockhash(block.number + 1);
         instance[_index].currentDrawStartTime = now;
     }
 
-    function _adjustDifficulty(_index) private {
+    function _adjustDifficulty(uint256 _index) private {
         if (now.sub(instance[_index].currentDrawStartTime) < instance[_index].desiredDrawTimeInterval) {
             instance[_index].difficulty.add(instance[_index].difficultyAdjustmentParameter); // maybe this should be multiplication instead of addition
         } else if (now.sub(instance[_index].currentDrawStartTime) > instance[_index].desiredDrawTimeInterval) {
