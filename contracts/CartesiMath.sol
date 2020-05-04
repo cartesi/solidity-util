@@ -161,6 +161,6 @@ contract CartesiMath {
            num = num >> 1;
            leading += 1;
        }
-       return log2tableTimes1M[original] = (leading.mul(uint256(1000))).add(log2tableTimes1M[num]);
+       return log2tableTimes1M[original] = (leading.mul(uint256(1000000))).add(log2tableTimes1M[num]);
     }
 }
