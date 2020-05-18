@@ -83,9 +83,9 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
 
     function _adjustDifficulty(uint256 _index) private {
         if (now.sub(instance[_index].currentDrawStartTime) < instance[_index].desiredDrawTimeInterval) {
-            instance[_index].difficulty.add(instance[_index].difficultyAdjustmentParameter); // maybe this should be multiplication instead of addition
+            instance[_index].difficulty.mul(instance[_index].difficultyAdjustmentParameter); // maybe this should be multiplication instead of addition
         } else if (now.sub(instance[_index].currentDrawStartTime) > instance[_index].desiredDrawTimeInterval) {
-            instance[_index].difficulty.sub(instance[_index].difficultyAdjustmentParameter); // maybe this should be division instead of sub
+            instance[_index].difficulty.div(instance[_index].difficultyAdjustmentParameter); // maybe this should be division instead of sub
         }
     }
 }
