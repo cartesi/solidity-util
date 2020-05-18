@@ -43,7 +43,7 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         return currentIndex++;
     }
 
-    function getLogOfWeightedDistance(uint256 _index) public returns (uint256) {
+    function getLogOfWeightedDistance(uint256 _index) public view returns (uint256) {
         // intervalos sempre zero e outro número
         bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
         bytes32 hashedAddress = keccak256(abi.encodePacked(msg.sender));

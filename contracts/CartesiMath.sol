@@ -150,10 +150,9 @@ contract CartesiMath {
         log2tableTimes1M[128] = 7000000;
     }
 
-    function log2ApproxTimes1M(uint256 num) public returns (uint256) {
+    function log2ApproxTimes1M(uint256 num) public view returns (uint256) {
         require (num > 0, "Number cannot be zero");
         uint256 leading = 0;
-        uint256 original = num;
 
         if (num == 1) return 0;
 
