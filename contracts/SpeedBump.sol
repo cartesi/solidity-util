@@ -3,10 +3,11 @@ pragma solidity ^0.5.0;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 
+import "./CartesiMath.sol";
 import "./Instantiator.sol";
 import "./Decorated.sol";
 
-contract SpeedBump is Instantiator, Decorated {
+contract SpeedBump is Instantiator, Decorated, CartesiMath{
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
@@ -42,14 +43,14 @@ contract SpeedBump is Instantiator, Decorated {
         return currentIndex++;
     }
 
-    function getCurrentInterval(uint256 _index, uint256 _stakedBalance) public view returns (uint256) {
+    function getLogOfWeightedDistance(uint256 _index) public returns (uint256) {
         // intervalos sempre zero e outro número
-        uint256 timePassedMicroSeconds = (now.sub(instance[_index].currentDrawStartTime)).mul(1000000); // time since draw started times 1e6 (microseconds)
+        bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
+        bytes32 hashedAddress = keccak256(abi.encodePacked(msg.sender));
+        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
+        uint256 distance = uint256(currentGoal) - uint256(hashedAddress); // not safemath, we need overflow
 
-        uint256 exponent = timePassedMicroSeconds.div(instance[_index].difficulty);
-
-        // TO-DO: check if solidity's exponentiation is ok here
-        return _stakedBalance.mul(2 ** exponent);
+        return CartesiMath.log2ApproxTimes1M(distance.div(stakedBalance));
     }
 
     function claimRound(uint256 _index) public returns (bool) {
@@ -63,16 +64,12 @@ contract SpeedBump is Instantiator, Decorated {
             return false;
         }
 
-        bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
-        bytes32 hashedAddress = keccak256(abi.encodePacked(msg.sender));
-        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
+        uint256 timePassedMicroSeconds = (now.sub(instance[_index].currentDrawStartTime)).mul(1000000); // time since draw started times 1e6 (microseconds)
 
-        // no safemath because we expect overflow
-        if ((hashedAddress + currentGoal) < getCurrentInterval(_index, stakedBalance)) {
+        if (getLogOfWeightedDistance(_index) < instance[_index].difficulty.mul(timePassedMicroSeconds)) {
             instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
             _adjustDifficulty(_index);
             _reset(_index);
-
             return true;
         }
         return false;
