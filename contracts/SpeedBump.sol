@@ -25,6 +25,11 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
 
     mapping(uint256 => SpeedBumpCtx) internal instance;
 
+    /// @notice Instantiates a Speed Bump structure
+    /// @param _difficultyAdjustmentParameter how quickly the difficulty gets updated
+    /// according to the difference between time passed and desired draw time interval.
+    /// @param _desiredDrawTimeInterval how often we want to elect a winner
+    /// @param _token which token will be used
     function instantiate(
         uint256 _difficultyAdjustmentParameter,
         uint256 _desiredDrawTimeInterval,
@@ -43,6 +48,9 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         return currentIndex++;
     }
 
+    /// @notice Calculates the log of the distance between the goal and callers address
+    /// then weigths it by the amount of staked tokens.
+    /// @param _index the index of the instance of speedbump you want to interact with
     function getLogOfWeightedDistance(uint256 _index) internal view returns (uint256) {
         // intervalos sempre zero e outro número
         bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
@@ -53,6 +61,8 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         return CartesiMath.log2ApproxTimes1M(distance.div(stakedBalance));
     }
 
+    /// @notice Claim yourself as the winner of a round
+    /// @param _index the index of the instance of speedbump you want to interact with
     function claimRound(uint256 _index) public returns (bool) {
 
         if ((block.number).sub(instance[_index].currentGoalBlockNumber) > 220) {
@@ -81,14 +91,21 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         return false;
     }
 
+    /// @notice Reset instance, advancing round and choosing new goal
+    /// @param _index the index of the instance of speedbump you want to interact with
     function _reset(uint256 _index) private {
         instance[_index].roundCount++;
         instance[_index].currentGoalBlockNumber = block.number + 1;
         instance[_index].currentDrawStartTime = now;
     }
 
-    // TODO: Discuss if this should be multiplication/Division or Addition/Subtraction
+    /// @notice Calculates new difficulty parameter
+    /// @param _oldDifficulty is the difficulty of previous round
+    /// @param _timePassed is how long the previous round took
+    /// @param _desiredDrawTime is how long a round is supposed to take
+    /// @param _adjustmentParam is how fast the difficulty gets adjusted
     function getNewDifficulty(uint256 _oldDifficulty, uint256 _timePassed, uint256 _desiredDrawTime, uint256 _adjustmentParam) internal pure returns (uint256) {
+        // TODO: Discuss if this should be multiplication/Division or Addition/Subtraction
         if (_timePassed < _desiredDrawTime) {
             return _oldDifficulty.mul(_adjustmentParam);
         } else if (_timePassed > _desiredDrawTime) {
