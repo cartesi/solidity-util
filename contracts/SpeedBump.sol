@@ -55,8 +55,8 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
 
     function claimRound(uint256 _index) public returns (bool) {
 
-        if ((block.number).sub(instance[_index].currentGoalBlockNumber) > 255) {
-            // cannot get hash of block if its older than 256
+        if ((block.number).sub(instance[_index].currentGoalBlockNumber) > 220) {
+            // cannot get hash of block if its older than 256, we set 220 to avoid edge cases
             // so update goal and return false
             // new goal cannot be in the past, otherwise user could "choose it"
             instance[_index].currentGoalBlockNumber = block.number + 1;
