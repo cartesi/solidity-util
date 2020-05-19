@@ -68,7 +68,13 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
 
         if (getLogOfWeightedDistance(_index) < instance[_index].difficulty.mul(timePassedMicroSeconds)) {
             instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
-            _adjustDifficulty(_index);
+            instance[_index].difficulty = getNewDifficulty(
+                instance[_index].difficulty,
+                now.sub(instance[_index].currentDrawStartTime),
+                instance[_index].desiredDrawTimeInterval,
+                instance[_index].difficultyAdjustmentParameter
+            );
+
             _reset(_index);
             return true;
         }
@@ -81,11 +87,14 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         instance[_index].currentDrawStartTime = now;
     }
 
-    function _adjustDifficulty(uint256 _index) private {
-        if (now.sub(instance[_index].currentDrawStartTime) < instance[_index].desiredDrawTimeInterval) {
-            instance[_index].difficulty.mul(instance[_index].difficultyAdjustmentParameter); // maybe this should be multiplication instead of addition
-        } else if (now.sub(instance[_index].currentDrawStartTime) > instance[_index].desiredDrawTimeInterval) {
-            instance[_index].difficulty.div(instance[_index].difficultyAdjustmentParameter); // maybe this should be division instead of sub
+    // TODO: Discuss if this should be multiplication/Division or Addition/Subtraction
+    function getNewDifficulty(uint256 _oldDifficulty, uint256 _timePassed, uint256 _desiredDrawTime, uint256 _adjustmentParam) internal pure returns (uint256) {
+        if (_timePassed < _desiredDrawTime) {
+            return _oldDifficulty.mul(_adjustmentParam);
+        } else if (_timePassed > _desiredDrawTime) {
+            return _oldDifficulty.div(_adjustmentParam);
         }
+
+        return _oldDifficulty;
     }
 }
