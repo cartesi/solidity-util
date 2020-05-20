@@ -9,7 +9,8 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-
+/// @title CartesiMath
+/// @author Felipe Argento
 pragma solidity ^0.5.0;
 
 
@@ -150,16 +151,18 @@ contract CartesiMath {
         log2tableTimes1M[128] = 7000000;
     }
 
-    function log2ApproxTimes1M(uint256 num) public view returns (uint256) {
-        require (num > 0, "Number cannot be zero");
+    /// @notice Approximates log2 * 1M
+    /// @param _num number to take log2 * 1M of
+    function log2ApproxTimes1M(uint256 _num) public view returns (uint256) {
+        require (_num > 0, "Number cannot be zero");
         uint256 leading = 0;
 
-        if (num == 1) return 0;
+        if (_num == 1) return 0;
 
-        while (log2tableTimes1M[num] == 0) {
-           num = num >> 1;
+        while (log2tableTimes1M[_num] == 0) {
+           _num = _num >> 1;
            leading += 1;
        }
-       return (leading.mul(uint256(1000000))).add(log2tableTimes1M[num]);
+       return (leading.mul(uint256(1000000))).add(log2tableTimes1M[_num]);
     }
 }
