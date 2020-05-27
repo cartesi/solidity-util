@@ -49,16 +49,14 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
     }
 
     /// @notice Calculates the log of the distance between the goal and callers address
-    /// then weigths it by the amount of staked tokens.
     /// @param _index the index of the instance of speedbump you want to interact with
-    function getLogOfWeightedDistance(uint256 _index) internal view returns (uint256) {
+    function getLogOfDistance(uint256 _index) internal view returns (uint256) {
         // intervalos sempre zero e outro número
         bytes32 currentGoal = blockhash(instance[_index].currentGoalBlockNumber);
         bytes32 hashedAddress = keccak256(abi.encodePacked(msg.sender));
-        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
-        uint256 distance = uint256(currentGoal) - uint256(hashedAddress); // not safemath, we need overflow
+        uint256 distance = uint256(keccak256(abi.encodePacked(hashedAddress, currentGoal)));
 
-        return CartesiMath.log2ApproxTimes1M(distance.div(stakedBalance));
+        return CartesiMath.log2ApproxTimes1M(distance);
     }
 
     /// @notice Claim yourself as the winner of a round
@@ -75,8 +73,9 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         }
 
         uint256 timePassedMicroSeconds = (now.sub(instance[_index].currentDrawStartTime)).mul(1000000); // time since draw started times 1e6 (microseconds)
-
-        if (getLogOfWeightedDistance(_index) < instance[_index].difficulty.mul(timePassedMicroSeconds)) {
+        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
+        // multiplications shouldnt overflow, subtraction should
+        if ((stakedBalance.mul(timePassedMicroSeconds)) > instance[_index].difficulty.mul((256 - getLogOfDistance(_index)))) {
             instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
             instance[_index].difficulty = getNewDifficulty(
                 instance[_index].difficulty,
