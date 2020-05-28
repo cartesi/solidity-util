@@ -16,7 +16,7 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         uint256 roundCount; // how many draw rounds happened
         uint256 currentDrawStartTime; // timestamp of when current draw started
         uint256 difficulty; // difficulty parameter defines how big the interval will be
-        uint256 difficultyAdjustmentParameter; // how fast the difficulty gets adjusted to reach the desired draw time
+        uint256 difficultyAdjustmentParameter; // how fast the difficulty gets adjusted to reach the desired draw time, number * 100000
         uint256 desiredDrawTimeInterval; // desired draw time interval, used to tune difficulty
         uint256 currentGoalBlockNumber; // block number which will decide current draw's goal
 
@@ -102,13 +102,13 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
     /// @param _oldDifficulty is the difficulty of previous round
     /// @param _timePassed is how long the previous round took
     /// @param _desiredDrawTime is how long a round is supposed to take
-    /// @param _adjustmentParam is how fast the difficulty gets adjusted
+    /// @param _adjustmentParam is how fast the difficulty gets adjusted, should be number * 1000000
     function getNewDifficulty(uint256 _oldDifficulty, uint256 _timePassed, uint256 _desiredDrawTime, uint256 _adjustmentParam) internal pure returns (uint256) {
         // TODO: Discuss if this should be multiplication/Division or Addition/Subtraction
         if (_timePassed < _desiredDrawTime) {
-            return _oldDifficulty.mul(_adjustmentParam);
+            return _oldDifficulty.mul(_adjustmentParam).div(1000000);
         } else if (_timePassed > _desiredDrawTime) {
-            return _oldDifficulty.div(_adjustmentParam);
+            return _oldDifficulty.mul(1000000).div(_adjustmentParam);
         }
 
         return _oldDifficulty;
