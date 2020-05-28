@@ -75,7 +75,7 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
         uint256 timePassedMicroSeconds = (now.sub(instance[_index].currentDrawStartTime)).mul(1000000); // time since draw started times 1e6 (microseconds)
         uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
         // multiplications shouldnt overflow, subtraction should
-        if ((stakedBalance.mul(timePassedMicroSeconds)) > instance[_index].difficulty.mul((256 - getLogOfDistance(_index)))) {
+        if ((stakedBalance.mul(timePassedMicroSeconds)) > instance[_index].difficulty.mul((256000000 - getLogOfDistance(_index)))) {
             instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
             instance[_index].difficulty = getNewDifficulty(
                 instance[_index].difficulty,
