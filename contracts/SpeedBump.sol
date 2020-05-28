@@ -65,29 +65,35 @@ contract SpeedBump is Instantiator, Decorated, CartesiMath{
 
         if ((block.number).sub(instance[_index].currentGoalBlockNumber) > 220) {
             // cannot get hash of block if its older than 256, we set 220 to avoid edge cases
-            // so update goal and return false
+            // so whoever calls this wins the round (if they have at least 1 ctsi staked)
             // new goal cannot be in the past, otherwise user could "choose it"
-            instance[_index].currentGoalBlockNumber = block.number + 1;
-
-            return false;
+            require(instance[_index].token.balanceOf(msg.sender) > 0, "Caller must have at least one token"); // this should be the staked balance, not full balance
+            return _roundFinished(_index);
         }
 
         uint256 timePassedMicroSeconds = (now.sub(instance[_index].currentDrawStartTime)).mul(1000000); // time since draw started times 1e6 (microseconds)
-        uint256 stakedBalance = instance[currentIndex].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
+        uint256 stakedBalance = instance[_index].token.balanceOf(msg.sender); // this is supposed to be staked balance not full balance
         // multiplications shouldnt overflow, subtraction should
         if ((stakedBalance.mul(timePassedMicroSeconds)) > instance[_index].difficulty.mul((256000000 - getLogOfDistance(_index)))) {
-            instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
-            instance[_index].difficulty = getNewDifficulty(
-                instance[_index].difficulty,
-                now.sub(instance[_index].currentDrawStartTime),
-                instance[_index].desiredDrawTimeInterval,
-                instance[_index].difficultyAdjustmentParameter
-            );
-
-            _reset(_index);
-            return true;
+            return _roundFinished(_index);
         }
         return false;
+    }
+    /// @notice Finish Round, declare winner and ajust difficulty
+    /// @param _index the index of the instance of speedbump you want to interact with
+    function _roundFinished(uint256 _index) private returns (bool) {
+        // declare winner
+        instance[_index].roundWinner[instance[_index].roundCount] = msg.sender;
+        // adjust difficulty
+        instance[_index].difficulty = getNewDifficulty(
+            instance[_index].difficulty,
+            now.sub(instance[_index].currentDrawStartTime),
+            instance[_index].desiredDrawTimeInterval,
+            instance[_index].difficultyAdjustmentParameter
+        );
+
+        _reset(_index);
+        return true;
     }
 
     /// @notice Reset instance, advancing round and choosing new goal
