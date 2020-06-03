@@ -1,5 +1,6 @@
 // Copyright 2019 Cartesi Pte. Ltd.
 
+// SPDX-License-Identifier: Apache-2.0
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 // this file except in compliance with the License. You may obtain a copy of the
 // License at http://www.apache.org/licenses/LICENSE-2.0
@@ -10,10 +11,10 @@
 // specific language governing permissions and limitations under the License.
 
 
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 
-contract Instantiator {
+abstract contract Instantiator {
     uint256 public currentIndex = 0;
 
     mapping(uint256 => bool) internal active;
@@ -47,9 +48,9 @@ contract Instantiator {
         return nonce[_index];
     }
 
-    function isConcerned(uint256 _index, address _user) public view returns (bool);
+    function isConcerned(uint256 _index, address _user) public virtual view returns (bool);
 
-    function getSubInstances(uint256 _index, address) public view returns (address[] memory _addresses, uint256[] memory _indices);
+    function getSubInstances(uint256 _index, address) public virtual view returns (address[] memory _addresses, uint256[] memory _indices);
 
     function deactivate(uint256 _index) internal {
         active[_index] = false;
