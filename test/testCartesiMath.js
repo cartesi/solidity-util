@@ -20,8 +20,14 @@ contract("CartesiMath", async accounts => {
 
             var logApprox = await instance.log2ApproxTimes1M(new BigNumber(random), {from: accounts[0]});
             var realLog = Math.log2(random) * 1000000;
+            var error;
 
-            var error = Math.abs((realLog - logApprox) / realLog);
+            if (realLog != 0) {
+                error = Math.abs((realLog - logApprox) / realLog);
+            } else {
+                error = Math.abs(realLog - logApprox);
+            }
+
             if (max_error < error) {
                 max_error = error;
             }
