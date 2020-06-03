@@ -27,6 +27,14 @@ You can also use the deployed contract:
     const BitsManipulationLibrary = contract(require("@cartesi/util/build/contracts/BitsManipulationLibrary.json"));
     BitsManipulationLibrary.setNetwork(4); // for rinkeby
 
+## Build
+
+To get a list of all available `npm` targets run:
+
+```shell
+% npm run info
+```
+
 ## Contributing
 
 Thank you for your interest in Cartesi! Head over to our [Contributing Guidelines](CONTRIBUTING.md) for instructions on how to sign our Contributors Agreement and get started with Cartesi!
