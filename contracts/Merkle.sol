@@ -50,7 +50,7 @@ library Merkle {
         require(((size - 1) & _position) == 0, "Position is not aligned");
         require(siblings.length == 64 - _logOfSize, "Proof length does not match");
 
-        for (uint i = 0; i < siblings.length; i++) {
+        for (uint64 i = 0; i < siblings.length; i++) {
             if ((_position & (size << i)) == 0) {
                 _drive = keccak256(abi.encodePacked(_drive, siblings[i]));
             } else {
@@ -114,5 +114,4 @@ library Merkle {
             return calculateRootFromPowerOfTwo(newHashes);
         }
     }
-
 }
