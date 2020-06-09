@@ -8,7 +8,7 @@
     "test": "truffle test",
     "clean": "rimraf build",
     "deploy": "run-s deploy:development",
-    "deploy:testnet": "run-s deploy:ropsten deploy:kovan deploy:rinkeby deploy:matic_testnet",
+    "deploy:testnet": "run-s deploy:ropsten deploy:rinkeby deploy:matic_testnet",
     "deploy:development": "truffle migrate --network development",
     "deploy:ropsten": "truffle migrate --network ropsten",
     "deploy:kovan": "truffle migrate --network kovan",
