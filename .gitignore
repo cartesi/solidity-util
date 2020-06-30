@@ -1,9 +1,13 @@
+artifacts
+cache
 coverage*
+deployments
+dist
 node_modules
+src/types
 test/*/
+.mnemonic
 .vscode
 .node*
 *.bin
 *.abi
-/out
-build
