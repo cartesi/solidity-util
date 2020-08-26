@@ -80,11 +80,11 @@ contract WorkerManagerImpl is WorkerManager {
         // set owner
         userOf[_workerAddress] = msg.sender;
 
-        // transfer ether to worker
-        _workerAddress.transfer(msg.value);
-
         // change state
         stateOf[_workerAddress] = WorkerState.Pending;
+
+        // transfer ether to worker
+        _workerAddress.transfer(msg.value);
 
         // emit event
         emit JobOffer(_workerAddress, msg.sender);
