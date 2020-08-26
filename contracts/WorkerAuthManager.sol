@@ -34,6 +34,10 @@ interface WorkerAuthManager {
         view
         returns (bool);
 
+    /// @notice Get the owner of the worker node
+    /// @param workerAddress address of the worker node
+    function getOwner(address workerAddress) external view returns (address);
+
     /// @notice A DApp has been authorized by a user for a worker
     event Authorization(
         address indexed user,

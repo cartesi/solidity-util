@@ -95,6 +95,15 @@ contract WorkerAuthManagerImpl is WorkerAuthManager {
             )];
     }
 
+    function getOwner(address _workerAddress)
+        public
+        override
+        view
+        returns (address)
+    {
+        return workerManager.getOwner(_workerAddress);
+    }
+
     /*
     // XXX: we can't do this because the worker need to accept the job before receiving an authorization
     function hireAndAuthorize(
