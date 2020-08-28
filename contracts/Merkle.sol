@@ -16,7 +16,7 @@ pragma solidity ^0.6.0;
 
 
 library Merkle {
-    function getPristineHash(uint8 _log2Size) internal pure returns (bytes32) {
+    function getPristineHash(uint8 _log2Size) public pure returns (bytes32) {
         require(_log2Size >= 3, "Has to be at least one word");
         require(_log2Size <= 64, "Cannot be bigger than the machine itself");
 
@@ -30,10 +30,15 @@ library Merkle {
         return runningHash;
     }
 
-    function getRoot(uint64 _position, bytes8 _value, bytes32[] memory proof) internal pure returns (bytes32) {
+    function getRoot(uint64 _position, bytes8 _value, bytes32[] memory proof) public pure returns (bytes32) {
         bytes32 runningHash = keccak256(abi.encodePacked(_value));
 
-        return getRootWithDrive(_position, 3, runningHash, proof);
+        return getRootWithDrive(
+            _position,
+            3,
+            runningHash,
+            proof
+        );
     }
 
     function getRootWithDrive(
@@ -41,7 +46,8 @@ library Merkle {
         uint64 _logOfSize,
         bytes32 _drive,
         bytes32[] memory siblings
-    ) internal pure returns (bytes32) {
+    ) public pure returns (bytes32)
+    {
         require(_logOfSize >= 3, "Must be at least a word");
         require(_logOfSize <= 64, "Cannot be bigger than the machine itself");
 
@@ -50,18 +56,20 @@ library Merkle {
         require(((size - 1) & _position) == 0, "Position is not aligned");
         require(siblings.length == 64 - _logOfSize, "Proof length does not match");
 
-        for (uint64 i = 0; i < siblings.length; i++) {
+        bytes32 drive = _drive;
+
+        for (uint i = 0; i < siblings.length; i++) {
             if ((_position & (size << i)) == 0) {
-                _drive = keccak256(abi.encodePacked(_drive, siblings[i]));
+                drive = keccak256(abi.encodePacked(drive, siblings[i]));
             } else {
-                _drive = keccak256(abi.encodePacked(siblings[i], _drive));
+                drive = keccak256(abi.encodePacked(siblings[i], drive));
             }
         }
 
-        return _drive;
+        return drive;
     }
 
-    function getLog2Floor(uint256 number) internal pure returns (uint32) {
+    function getLog2Floor(uint256 number) public pure returns (uint32) {
 
         uint32 result = 0;
 
@@ -75,7 +83,7 @@ library Merkle {
         return result;
     }
 
-    function isPowerOf2(uint256 number) internal pure returns (bool) {
+    function isPowerOf2(uint256 number) public pure returns (bool) {
 
         uint256 checkNumber = number;
         if (checkNumber == 0) {
@@ -98,7 +106,7 @@ library Merkle {
     /// @notice Calculate the root of Merkle tree from an array of power of 2 elements
     /// @param hashes The array containing power of 2 elements
     /// @return byte32 the root hash being calculated
-    function calculateRootFromPowerOfTwo(bytes32[] memory hashes) internal pure returns (bytes32) {
+    function calculateRootFromPowerOfTwo(bytes32[] memory hashes) public pure returns (bytes32) {
         // revert when the input is not of power of 2
         require(isPowerOf2(hashes.length), "The input array must contain power of 2 elements");
 
@@ -114,4 +122,5 @@ library Merkle {
             return calculateRootFromPowerOfTwo(newHashes);
         }
     }
+
 }
