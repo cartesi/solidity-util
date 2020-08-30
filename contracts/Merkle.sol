@@ -43,7 +43,7 @@ library Merkle {
 
     function getRootWithDrive(
         uint64 _position,
-        uint64 _logOfSize,
+        uint8 _logOfSize,
         bytes32 _drive,
         bytes32[] memory siblings
     ) public pure returns (bytes32)
@@ -58,7 +58,7 @@ library Merkle {
 
         bytes32 drive = _drive;
 
-        for (uint i = 0; i < siblings.length; i++) {
+        for (uint64 i = 0; i < siblings.length; i++) {
             if ((_position & (size << i)) == 0) {
                 drive = keccak256(abi.encodePacked(drive, siblings[i]));
             } else {
@@ -69,9 +69,9 @@ library Merkle {
         return drive;
     }
 
-    function getLog2Floor(uint256 number) public pure returns (uint32) {
+    function getLog2Floor(uint256 number) public pure returns (uint8) {
 
-        uint32 result = 0;
+        uint8 result = 0;
 
         uint256 checkNumber = number;
         checkNumber = checkNumber >> 1;
