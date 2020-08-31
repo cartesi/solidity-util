@@ -34,9 +34,10 @@ contract DelayedWithdraw is Ownable {
         uint timestamp;
     }
 
-    // event Withdraw requested
-    // event Withdraw canceled
-    // event Withdraw finalized
+    event WithdrawRequested(uint256 _amount, uint256 _timestamp);
+    event WithdrawCanceled(uint256 _amount, uint256 _timestamp);
+    event WithdrawFinalized(uint256 _amount, address _beneficiary);
+
     constructor(IERC20 _ctsi, address _beneficiary) public {
         ctsi = _ctsi;
         beneficiary = _beneficiary;
@@ -53,6 +54,8 @@ contract DelayedWithdraw is Ownable {
         );
         withdrawal.timestamp = block.timestamp;
 
+        emit WithdrawRequested(withdrawal.amount, block.timestamp);
+
         return true;
     }
 
@@ -67,11 +70,17 @@ contract DelayedWithdraw is Ownable {
         withdrawal.amount = 0;
         ctsi.transfer(beneficiary, amount);
 
+        emit WithdrawFinalized(amount, beneficiary);
         return true;
     }
 
     function cancelWithdrawal() public onlyOwner returns (bool) {
         require(withdrawal.amount > 0, "There are no active withdrawal requests");
+
+        emit WithdrawRequested(withdrawal.amount, block.timestamp);
+
         withdrawal.amount = 0;
+
+        return true;
     }
 }
