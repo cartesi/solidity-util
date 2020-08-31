@@ -1,4 +1,4 @@
-// Copyright 2019 Cartesi Pte. Ltd.
+// Copyright 2020 Cartesi Pte. Ltd.
 
 // SPDX-License-Identifier: Apache-2.0
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -37,7 +37,7 @@ contract DelayedWithdraw is Ownable {
 
     /// @notice Constructor
     /// @param _ctsi IERC20 that this contract is gonna work with
-    /// @param _beneficiary IERC20 that this contract is gonna work with
+    /// @param _beneficiary address that will receive the withdraws
     constructor(IERC20 _ctsi, address _beneficiary) public {
         ctsi = _ctsi;
         beneficiary = _beneficiary;
@@ -66,7 +66,7 @@ contract DelayedWithdraw is Ownable {
         uint256 amount = withdrawal.amount;
         require(
             withdrawal.timestamp > block.timestamp.add(delay),
-            "Withadral is not old enough to be finalized"
+            "Withdrawal is not old enough to be finalized"
         );
         require(amount > 0, "There are no active withdrawal requests");
 
@@ -77,7 +77,7 @@ contract DelayedWithdraw is Ownable {
         return true;
     }
 
-    /// @notice Cancesl any pending unfinalized withdrawal
+    /// @notice Cancel any pending unfinalized withdrawal
     function cancelWithdrawal() public onlyOwner returns (bool) {
         require(withdrawal.amount > 0, "There are no active withdrawal requests");
 
