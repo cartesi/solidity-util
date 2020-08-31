@@ -81,7 +81,7 @@ contract DelayedWithdraw is Ownable {
     function cancelWithdrawal() public onlyOwner returns (bool) {
         require(withdrawal.amount > 0, "There are no active withdrawal requests");
 
-        emit WithdrawRequested(withdrawal.amount, block.timestamp);
+        emit WithdrawCanceled(withdrawal.amount, block.timestamp);
 
         withdrawal.amount = 0;
 
