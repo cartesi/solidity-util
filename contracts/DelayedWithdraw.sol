@@ -29,8 +29,8 @@ contract DelayedWithdraw is Ownable {
 
     struct Withdrawal {
         address receiver;
-        uint amount;
-        uint timestamp;
+        uint256 amount;
+        uint256 timestamp;
     }
 
 
@@ -38,6 +38,21 @@ contract DelayedWithdraw is Ownable {
     /// @param _ctsi IERC20 that this contract is gonna work with
     constructor(IERC20 _ctsi) public {
         ctsi = _ctsi;
+    }
+
+    /// @notice Get the amount of tokens to be released next withdrawal
+    function getWithdrawalAmount() public view returns (uint256) {
+        return withdrawal.amount;
+    }
+
+    /// @notice Get the receiver of tokens to be released next withdrawal
+    function getWithdrawalReceiver() public view returns (address) {
+        return withdrawal.receiver;
+    }
+
+    /// @notice Get the timestamp of when next withdrawal was created
+    function getWithdrawalTimestamp() public view returns (uint256) {
+        return withdrawal.timestamp;
     }
 
     /// @notice Creates a withdrawal request that will be finalized after delay time
