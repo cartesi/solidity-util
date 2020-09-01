@@ -24,12 +24,11 @@ contract DelayedWithdraw is Ownable {
     uint256 constant delay = 7 days;
 
     Withdrawal private withdrawal;
-    address public beneficiary;
-
     IERC20 ctsi;
 
 
     struct Withdrawal {
+        address receiver;
         uint amount;
         uint timestamp;
     }
@@ -37,15 +36,21 @@ contract DelayedWithdraw is Ownable {
 
     /// @notice Constructor
     /// @param _ctsi IERC20 that this contract is gonna work with
-    /// @param _beneficiary address that will receive the withdraws
-    constructor(IERC20 _ctsi, address _beneficiary) public {
+    constructor(IERC20 _ctsi) public {
         ctsi = _ctsi;
-        beneficiary = _beneficiary;
     }
 
     /// @notice Creates a withdrawal request that will be finalized after delay time
+    /// @param _receiver address that will receive the token
     /// @param _amount amount of tokens for the request
-    function requestWithdrawal(uint256 _amount) public onlyOwner() returns (bool) {
+    function requestWithdrawal(
+        address _receiver,
+        uint256 _amount
+    )
+        public
+        onlyOwner()
+        returns (bool)
+    {
         require(_amount > 0, "withdrawal amount has to be bigger than 0");
 
         uint256 newAmount = withdrawal.amount.add(_amount);
@@ -54,14 +59,16 @@ contract DelayedWithdraw is Ownable {
             newAmount > ctsi.balanceOf(address(this)),
             "Not enough tokens in the contract for this Withdrawal request"
         );
+        withdrawal.receiver = _receiver;
+        withdrawal.amount = newAmount;
         withdrawal.timestamp = block.timestamp;
 
-        emit WithdrawRequested(withdrawal.amount, block.timestamp);
+        emit WithdrawRequested(_receiver, newAmount, block.timestamp);
 
         return true;
     }
 
-    /// @notice Finalizes withdraw and transfer the tokens to beneficiary
+    /// @notice Finalizes withdraw and transfer the tokens to receiver
     function finalizeWithdraw() public onlyOwner returns (bool) {
         uint256 amount = withdrawal.amount;
         require(
@@ -71,9 +78,9 @@ contract DelayedWithdraw is Ownable {
         require(amount > 0, "There are no active withdrawal requests");
 
         withdrawal.amount = 0;
-        ctsi.transfer(beneficiary, amount);
+        ctsi.transfer(withdrawal.receiver, amount);
 
-        emit WithdrawFinalized(amount, beneficiary);
+        emit WithdrawFinalized(withdrawal.receiver, amount);
         return true;
     }
 
@@ -81,7 +88,7 @@ contract DelayedWithdraw is Ownable {
     function cancelWithdrawal() public onlyOwner returns (bool) {
         require(withdrawal.amount > 0, "There are no active withdrawal requests");
 
-        emit WithdrawCanceled(withdrawal.amount, block.timestamp);
+        emit WithdrawCanceled(withdrawal.receiver, withdrawal.amount, block.timestamp);
 
         withdrawal.amount = 0;
 
@@ -89,7 +96,7 @@ contract DelayedWithdraw is Ownable {
     }
 
     /// @notice Events signalling interactions
-    event WithdrawRequested(uint256 _amount, uint256 _timestamp);
-    event WithdrawCanceled(uint256 _amount, uint256 _timestamp);
-    event WithdrawFinalized(uint256 _amount, address _beneficiary);
+    event WithdrawRequested(address _receiver, uint256 _amount, uint256 _timestamp);
+    event WithdrawCanceled(address _receiver, uint256 _amount, uint256 _timestamp);
+    event WithdrawFinalized(address _receiver, uint256 _amount);
 }
