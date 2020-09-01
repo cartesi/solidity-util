@@ -56,7 +56,7 @@ contract DelayedWithdraw is Ownable {
         uint256 newAmount = withdrawal.amount.add(_amount);
 
         require(
-            newAmount > ctsi.balanceOf(address(this)),
+            newAmount <= ctsi.balanceOf(address(this)),
             "Not enough tokens in the contract for this Withdrawal request"
         );
         withdrawal.receiver = _receiver;
@@ -72,7 +72,7 @@ contract DelayedWithdraw is Ownable {
     function finalizeWithdraw() public onlyOwner returns (bool) {
         uint256 amount = withdrawal.amount;
         require(
-            withdrawal.timestamp > block.timestamp.add(delay),
+            withdrawal.timestamp.add(delay) <= block.timestamp,
             "Withdrawal is not old enough to be finalized"
         );
         require(amount > 0, "There are no active withdrawal requests");
