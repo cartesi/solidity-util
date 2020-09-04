@@ -6,11 +6,16 @@ import {
 const func: DeployFunction = async (bre: BuidlerRuntimeEnvironment) => {
     const { deployments, getNamedAccounts } = bre;
     const { deploy } = deployments;
-    const a = await getNamedAccounts();
     const { deployer } = await getNamedAccounts();
+    const WorkerManagerImpl = await deployments.get("WorkerManagerImpl");
 
-    await deploy("WorkerManagerImpl", { from: deployer, log: true });
+    await deploy("WorkerAuthManagerImpl", {
+        from: deployer,
+        args: [WorkerManagerImpl.address],
+        log: true
+    });
 };
 
 export default func;
-export const tags = ['WorkerManager'];
+export const tags = ["WorkerAuthManager"];
+export const dependencies = ["WorkerManager"];
