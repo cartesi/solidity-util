@@ -8,12 +8,13 @@
     "test": "buidler test",
     "clean": "rimraf artifacts && rimraf cache && rimraf deployments && rimraf src/types/*",
     "deploy": "run-s deploy:development",
-    "deploy:testnet": "run-s deploy:ropsten deploy:rinkeby deploy:matic_testnet",
+    "deploy:testnet": "run-s deploy:ropsten deploy:rinkeby deploy:matic_testnet deploy:bsc_testnet",
     "deploy:development": "buidler deploy --network localhost",
     "deploy:ropsten": "buidler deploy --network ropsten",
     "deploy:kovan": "buidler deploy --network kovan",
     "deploy:rinkeby": "buidler deploy --network rinkeby",
     "deploy:matic_testnet": "buidler deploy --network matic_testnet",
+    "deploy:bsc_testnet": "buidler deploy --network bsc_testnet",
     "prepack": "run-s clean deploy:testnet",
     "start": "buidler node"
   },
@@ -27,7 +28,8 @@
     "deploy:ropsten": "Deploy contracts to ropsten. Requires two environment variables: PROJECT_ID and MNEMONIC.",
     "deploy:kovan": "Deploy contracts to kovan. Requires two environment variables: PROJECT_ID and MNEMONIC.",
     "deploy:rinkeby": "Deploy contracts to rinkeby. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-    "deploy:matic_testnet": "Deploy contracts to matic_testnet."
+    "deploy:matic_testnet": "Deploy contracts to matic_testnet.",
+    "deploy:bsc_testnet": "Deploy contracts to bsc_testnet."
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",
