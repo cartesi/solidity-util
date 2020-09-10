@@ -14,46 +14,21 @@
 pragma solidity ^0.7.0;
 
 
-abstract contract Instantiator {
-    uint256 public currentIndex = 0;
+interface Instantiator {
 
-    mapping(uint256 => bool) internal active;
-    mapping(uint256 => uint256) internal nonce;
+    modifier onlyInstantiated(uint256 _index) virtual;
 
-    modifier onlyInstantiated(uint256 _index) {
-        require(currentIndex > _index, "Index not instantiated");
-        _;
-    }
+    modifier onlyActive(uint256 _index) virtual;
 
-    modifier onlyActive(uint256 _index) {
-        require(currentIndex > _index, "Index not instantiated");
-        require(isActive(_index), "Index inactive");
-        _;
-    }
+    modifier increasesNonce(uint256 _index) virtual;
 
-    modifier increasesNonce(uint256 _index)
-    {
-        nonce[_index]++;
-        _;
-    }
+    function isActive(uint256 _index) external view returns (bool);
 
-    function isActive(uint256 _index) public view returns (bool) {
-        return(active[_index]);
-    }
+    function getNonce(uint256 _index) external view returns (uint256);
 
-    function getNonce(uint256 _index) public view
-        onlyActive(_index)
-        returns (uint256 currentNonce)
-    {
-        return nonce[_index];
-    }
+    function isConcerned(uint256 _index, address _user) external view returns (bool);
 
-    function isConcerned(uint256 _index, address _user) public virtual view returns (bool);
+    function getSubInstances(uint256 _index, address) external view returns (address[] memory _addresses, uint256[] memory _indices);
 
-    function getSubInstances(uint256 _index, address) public virtual view returns (address[] memory _addresses, uint256[] memory _indices);
-
-    function deactivate(uint256 _index) internal {
-        active[_index] = false;
-        nonce[_index] = 0;
-    }
+    function deactivate(uint256 _index) external;
 }
