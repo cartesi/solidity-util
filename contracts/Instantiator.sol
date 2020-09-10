@@ -11,7 +11,7 @@
 // specific language governing permissions and limitations under the License.
 
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 
 abstract contract Instantiator {

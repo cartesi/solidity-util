@@ -12,7 +12,7 @@
 
 /// @title CartesiMath
 /// @author Felipe Argento
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
@@ -20,7 +20,7 @@ contract CartesiMath {
     using SafeMath for uint256;
     mapping(uint256 => uint256) log2tableTimes1M;
 
-    constructor() public {
+    constructor() {
         log2tableTimes1M[1] = 0;
         log2tableTimes1M[2] = 1000000;
         log2tableTimes1M[3] = 1584962;

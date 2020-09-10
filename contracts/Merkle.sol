@@ -12,7 +12,7 @@
 
 
 /// @title Library for Merkle proofs
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 
 library Merkle {

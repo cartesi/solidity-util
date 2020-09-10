@@ -12,7 +12,7 @@
 
 /// @title WorkerManagerImpl
 /// @author Danilo Tuler
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 import "./WorkerManager.sol";
 

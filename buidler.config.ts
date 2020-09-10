@@ -77,7 +77,7 @@ const config: BuidlerConfig = {
         }
     },
     solc: {
-        version: "0.6.12",
+        version: "0.7.0",
         optimizer: {
             enabled: true
         }

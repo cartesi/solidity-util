@@ -12,7 +12,7 @@
 
 /// @title WorkerAuthManagerImpl
 /// @author Danilo Tuler
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 import "./WorkerManager.sol";
 import "./WorkerAuthManager.sol";
@@ -23,7 +23,7 @@ contract WorkerAuthManagerImpl is WorkerAuthManager {
     /// @dev permissions keyed by hash(user, worker, dapp)
     mapping(bytes32 => bool) private permissions;
 
-    constructor(address _workerManager) public {
+    constructor(address _workerManager) {
         workerManager = WorkerManager(_workerManager);
     }
 
