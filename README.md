@@ -6,12 +6,18 @@ Basic solidity contracts and solidity libraries used the Cartesi on-chain code.
 
 Packaged as npm and published at https://www.npmjs.com/package/@cartesi/util
 
-The npm package contains deployment information of contracts to testnets (`ropsten`, `kovan` and `rinkeby`).
-In the future it may also include deployment to `mainnet`.
+The npm package contains `buidler` deployment artifacts with information of deployed contracts on the following testnets:
+- Ropsten
+- Kovan
+- Rinkeby
+- Matic Testnet
+- Binance Smart Chain Testnet
+
+In the future it may also include deployment to mainnets.
 
 ## Getting Started
 
-To use this package in another truffle project you must include as a dependency in `package.json`.
+To use this package in another project you must include as a dependency in `package.json`.
 
     "dependencies": {
         "@cartesi/util": "<version>"
@@ -21,18 +27,12 @@ And in your solidity contract import it as:
 
     import "@cartesi/util/contracts/Instantiator.sol";
 
-You can also use the deployed contract:
-
-    const contract = require("@truffle/contract");
-    const BitsManipulationLibrary = contract(require("@cartesi/util/build/contracts/BitsManipulationLibrary.json"));
-    BitsManipulationLibrary.setNetwork(4); // for rinkeby
-
 ## Build
 
-To get a list of all available `npm` targets run:
+To get a list of all available `yarn` targets run:
 
 ```shell
-% npm run info
+% yarn run info
 ```
 
 ## Contributing
