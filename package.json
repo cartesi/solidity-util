@@ -1,6 +1,6 @@
 {
   "name": "@cartesi/util",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Solidity Util Contracts",
   "scripts": {
     "info": "npm-scripts-info",
@@ -16,7 +16,6 @@
     "deploy:goerli": "buidler deploy --network goerli",
     "deploy:matic_testnet": "buidler deploy --network matic_testnet",
     "deploy:bsc_testnet": "buidler deploy --network bsc_testnet",
-    "prepack": "run-s clean deploy:testnet",
     "start": "buidler node"
   },
   "scripts-info": {
