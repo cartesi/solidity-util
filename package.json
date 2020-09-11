@@ -4,7 +4,7 @@
   "description": "Solidity Util Contracts",
   "scripts": {
     "info": "npm-scripts-info",
-    "prepare": "buidler compile",
+    "prepare": "buidler compile && buidler typechain",
     "test": "buidler test",
     "clean": "rimraf artifacts && rimraf cache && rimraf deployments && rimraf src/types/*",
     "deploy": "run-s deploy:development",
@@ -32,7 +32,7 @@
     "deploy:bsc_testnet": "Deploy contracts to bsc_testnet."
   },
   "dependencies": {
-    "@openzeppelin/contracts": "3.1.0-solc-0.7",
+    "@openzeppelin/contracts": "3.2.0-solc-0.7",
     "ethers": "5.0.8",
     "solc": "0.7.1"
   },
