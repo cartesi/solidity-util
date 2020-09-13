@@ -28,6 +28,7 @@ describe("WorkerManager", async () => {
         instance: WorkerManager,
         worker: string,
         isAvailable: boolean,
+        isPending: boolean,
         isOwned: boolean,
         isRetired: boolean
     ) => {
@@ -35,6 +36,11 @@ describe("WorkerManager", async () => {
             await instance.isAvailable(worker),
             `isAvailable should be ${isAvailable}`
         ).to.be.equal(isAvailable);
+        expect(
+            await instance.isPending(worker),
+            `isAvailable should be ${isPending}`
+        ).to.be.equal(isPending);
+
         expect(
             await instance.isOwned(worker),
             `isOwned should be ${isOwned}`
@@ -47,7 +53,7 @@ describe("WorkerManager", async () => {
 
     it("initial state", async () => {
         const { worker } = await getNamedAccounts();
-        await expectState(instanceUser, worker, true, false, false);
+        await expectState(instanceUser, worker, true, false, false, false);
     });
 
     it("hire", async () => {
@@ -82,7 +88,7 @@ describe("WorkerManager", async () => {
             .withArgs(worker, user);
 
         // TODO: add change in balance check of [-1, 1]
-        await expectState(instanceUser, worker, false, false, false);
+        await expectState(instanceUser, worker, false, true, false, false);
         expect(
             await instanceUser.getUser(worker),
             "worker's user should be user address"
@@ -106,7 +112,7 @@ describe("WorkerManager", async () => {
             await instanceUser.getUser(worker),
             "worker's user should be user"
         ).to.equal(user);
-        await expectState(instanceUser, worker, false, false, false);
+        await expectState(instanceUser, worker, false, true, false, false);
 
         await expect(
             instanceWorker.cancelHire(worker),
@@ -120,7 +126,7 @@ describe("WorkerManager", async () => {
             "worker's user should be the same, after hire was cancelled"
         ).to.equal(user);
 
-        await expectState(instanceUser, worker, false, false, true);
+        await expectState(instanceUser, worker, false, false, false, true);
     });
 
     it("acceptJob", async () => {
@@ -159,7 +165,7 @@ describe("WorkerManager", async () => {
             "boss should be boss address after the job is accepted"
         ).to.equal(user);
 
-        await expectState(instanceUser, worker, false, true, false);
+        await expectState(instanceUser, worker, false, false, true, false);
     });
 
     it("rejectJob", async () => {
@@ -201,7 +207,7 @@ describe("WorkerManager", async () => {
             "boss should not be boss address after the job is rejected"
         ).to.not.equal(user);
 
-        await expectState(instanceUser, worker, true, false, false);
+        await expectState(instanceUser, worker, true, false, false, false);
     });
 
     it("retire", async () => {
@@ -232,6 +238,6 @@ describe("WorkerManager", async () => {
             .to.emit(instanceUser, "Retired")
             .withArgs(worker, user);
 
-        await expectState(instanceUser, worker, false, false, true);
+        await expectState(instanceUser, worker, false, false, false, true);
     });
 });
