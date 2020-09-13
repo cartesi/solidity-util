@@ -19,6 +19,10 @@ interface WorkerManager {
     /// @param workerAddress address of the worker node
     function isAvailable(address workerAddress) external view returns (bool);
 
+    /// @notice Returns true if worker node is pending
+    /// @param workerAddress address of the worker node
+    function isPending(address workerAddress) external view returns (bool);
+
     /// @notice Get the owner of the worker node
     /// @param workerAddress address of the worker node
     function getOwner(address workerAddress) external view returns (address);

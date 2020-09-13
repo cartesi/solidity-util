@@ -23,7 +23,7 @@ contract WorkerManagerImpl is WorkerManager {
     /// @dev transfers bigger than maximum value should be done directly
     uint256 constant MAXIMUM_FUNDING = 3 ether;
 
-    /// @notice A worker can be in 5 different states, starting from Available
+    /// @notice A worker can be in 4 different states, starting from Available
     enum WorkerState {Available, Pending, Owned, Retired}
 
     /// @dev mapping from worker to its user
@@ -39,6 +39,15 @@ contract WorkerManagerImpl is WorkerManager {
         returns (bool)
     {
         return stateOf[workerAddress] == WorkerState.Available;
+    }
+
+    function isPending(address workerAddress)
+        public
+        override
+        view
+        returns (bool)
+    {
+        return stateOf[workerAddress] == WorkerState.Pending;
     }
 
     function getOwner(address _workerAddress)
