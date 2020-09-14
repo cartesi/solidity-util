@@ -43,5 +43,5 @@ Thank you for your interest in Cartesi! Head over to our [Contributing Guideline
 Please note we have a [Code of Conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 ## License
-The machine-solidity-step repository and all contributions are licensed under
+The solidity-util repository and all contributions are licensed under
 [APACHE 2.0](https://www.apache.org/licenses/LICENSE-2.0). Please review our [LICENSE](LICENSE) file.
