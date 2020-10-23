@@ -9,5 +9,4 @@ jobs:
         with:
           node-version: '14'
       - run: yarn install
-      - run: npx buidler typechain
       - run: yarn test

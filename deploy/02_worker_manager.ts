@@ -1,9 +1,9 @@
 import {
-    BuidlerRuntimeEnvironment,
+    HardhatRuntimeEnvironment,
     DeployFunction
-} from "@nomiclabs/buidler/types";
+} from "hardhat/types";
 
-const func: DeployFunction = async (bre: BuidlerRuntimeEnvironment) => {
+const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     const { deployments, getNamedAccounts } = bre;
     const { deploy } = deployments;
     const a = await getNamedAccounts();
