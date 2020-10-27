@@ -2,7 +2,8 @@ artifacts
 bin
 cache
 coverage*
-deployments
+**/solcInputs
+deployments/localhost
 dist
 node_modules
 src/types
