@@ -67,10 +67,10 @@
     "cartesi"
   ],
   "files": [
-    "artifacts",
     "contracts",
     "deploy",
-    "deployments"
+    "deployments/*/*.json",
+    "deployments/*/.chainid"
   ],
   "author": "Danilo Tuler <danilo@cartesi.io>",
   "license": "Apache-2.0"
