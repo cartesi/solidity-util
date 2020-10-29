@@ -4,7 +4,7 @@
   "description": "Solidity Util Contracts",
   "scripts": {
     "info": "npm-scripts-info",
-    "prepare": "hardhat compile && hardhat typechain",
+    "prepare": "hardhat compile && hardhat typechain && tsc",
     "test": "hardhat test",
     "clean": "rimraf artifacts && rimraf cache && rimraf deployments/localhost && rimraf src/types/*",
     "deploy": "run-s deploy:development",
@@ -68,10 +68,13 @@
   ],
   "files": [
     "contracts",
-    "deploy",
     "deployments/*/*.json",
-    "deployments/*/.chainid"
+    "deployments/*/.chainid",
+    "dist/deploy/*.js",
+    "dist/src/types"
   ],
+  "main": "./dist/src/types/index.js",
+  "types": "./dist/src/types/index.d.ts",
   "author": "Danilo Tuler <danilo@cartesi.io>",
   "license": "Apache-2.0"
 }
