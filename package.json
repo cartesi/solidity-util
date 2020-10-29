@@ -1,6 +1,6 @@
 {
   "name": "@cartesi/util",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Solidity Util Contracts",
   "scripts": {
     "info": "npm-scripts-info",
