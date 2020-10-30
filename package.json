@@ -3,25 +3,26 @@
   "version": "0.5.1",
   "description": "Solidity Util Contracts",
   "scripts": {
-    "info": "npm-scripts-info",
-    "prepare": "hardhat compile && hardhat typechain && tsc",
-    "test": "hardhat test",
+    "build": "hardhat compile && hardhat typechain && tsc",
     "clean": "rimraf artifacts && rimraf cache && rimraf deployments/localhost && rimraf src/types/*",
     "deploy": "run-s deploy:development",
     "deploy:testnet": "run-s deploy:ropsten deploy:rinkeby deploy:kovan deploy:goerli deploy:matic_testnet deploy:bsc_testnet",
     "deploy:development": "hardhat deploy --network localhost",
-    "deploy:ropsten": "hardhat deploy --network ropsten",
-    "deploy:rinkeby": "hardhat deploy --network rinkeby",
-    "deploy:kovan": "hardhat deploy --network kovan",
-    "deploy:goerli": "hardhat deploy --network goerli",
-    "deploy:matic_testnet": "hardhat deploy --network matic_testnet",
-    "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet",
+    "deploy:ropsten": "hardhat deploy --network ropsten --export export/abi/ropsten.json",
+    "deploy:rinkeby": "hardhat deploy --network rinkeby --export export/abi/rinkeby.json",
+    "deploy:kovan": "hardhat deploy --network kovan --export export/abi/kovan.json",
+    "deploy:goerli": "hardhat deploy --network goerli --export export/abi/goerli.json",
+    "deploy:matic_testnet": "hardhat deploy --network matic_testnet --export export/abi/matic_testnet.json",
+    "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet --export export/abi/bsc_testnet.json",
+    "export": "hardhat export-artifacts export/artifacts",
+    "info": "npm-scripts-info",
     "prepack": "run-s clean prepare",
-    "start": "hardhat node"
+    "prepare": "run-s build export",
+    "start": "hardhat node",
+    "test": "hardhat test"
   },
   "scripts-info": {
-    "info": "Displays information about the scripts.",
-    "test": "Run unit tests",
+    "build": "Build contracts and typescript code",
     "clean": "Clean build artifacts, including contracts deployment information",
     "deploy": "Deploy contracts to local ganache. Requires ganache running on localhost:8545",
     "deploy:testnet": "Deploy contracts to all supported testnets. Requires two environment variables: PROJECT_ID and MNEMONIC.",
@@ -31,7 +32,10 @@
     "deploy:kovan": "Deploy contracts to kovan. Requires two environment variables: PROJECT_ID and MNEMONIC.",
     "deploy:goerli": "Deploy contracts to goerli. Requires two environment variables: PROJECT_ID and MNEMONIC.",
     "deploy:matic_testnet": "Deploy contracts to matic_testnet.",
-    "deploy:bsc_testnet": "Deploy contracts to bsc_testnet."
+    "deploy:bsc_testnet": "Deploy contracts to bsc_testnet.",
+    "export": "Export artifacts in a simpler format",
+    "info": "Displays information about the scripts.",
+    "test": "Run unit tests"
   },
   "dependencies": {
     "@openzeppelin/contracts": "3.2.1-solc-0.7"
@@ -48,7 +52,7 @@
     "ethereum-waffle": "^3.1.2",
     "ethers": "^5.0.19",
     "hardhat": "^2.0.2",
-    "hardhat-deploy": "0.7.0-beta.22",
+    "hardhat-deploy": "0.7.0-beta.23",
     "hardhat-deploy-ethers": "0.3.0-beta.5",
     "hardhat-typechain": "^0.3.3",
     "npm-run-all": "^4.1.5",
@@ -70,8 +74,9 @@
     "contracts",
     "deployments/*/*.json",
     "deployments/*/.chainid",
+    "dist/src/types",
     "dist/deploy/*.js",
-    "dist/src/types"
+    "export"
   ],
   "main": "./dist/src/types/index.js",
   "types": "./dist/src/types/index.d.ts",

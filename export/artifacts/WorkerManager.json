@@ -1,0 +1,370 @@
+{
+  "contractName": "WorkerManager",
+  "sourceName": "contracts/WorkerManager.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "JobAccepted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "JobOffer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "JobRejected",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "Retired",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "acceptJob",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "cancelHire",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getOwner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getUser",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "hire",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "isAvailable",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "isOwned",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "isPending",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "isRetired",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rejectJob",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "retire",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "cancelHire(address)": {
+        "params": {
+          "workerAddress": "address of the worker node"
+        }
+      },
+      "getOwner(address)": {
+        "params": {
+          "workerAddress": "address of the worker node"
+        }
+      },
+      "hire(address)": {
+        "params": {
+          "workerAddress": "address of the worker"
+        }
+      },
+      "isAvailable(address)": {
+        "params": {
+          "workerAddress": "address of the worker node"
+        }
+      },
+      "isPending(address)": {
+        "params": {
+          "workerAddress": "address of the worker node"
+        }
+      },
+      "retire(address)": {
+        "details": "this also removes all authorizations in place",
+        "params": {
+          "workerAddress": "address of the worker to be retired"
+        }
+      }
+    },
+    "version": 1
+  },
+  "evm": {
+    "bytecode": {
+      "generatedSources": [],
+      "linkReferences": {},
+      "object": "",
+      "opcodes": "",
+      "sourceMap": ""
+    },
+    "deployedBytecode": {
+      "generatedSources": [],
+      "immutableReferences": {},
+      "linkReferences": {},
+      "object": "",
+      "opcodes": "",
+      "sourceMap": ""
+    },
+    "gasEstimates": null,
+    "methodIdentifiers": {
+      "acceptJob()": "9b789b7e",
+      "cancelHire(address)": "b64b3bed",
+      "getOwner(address)": "fa544161",
+      "getUser(address)": "6f77926b",
+      "hire(address)": "d9d6bd86",
+      "isAvailable(address)": "2896f60b",
+      "isOwned(address)": "f4dc754b",
+      "isPending(address)": "a00745b6",
+      "isRetired(address)": "6d3c6275",
+      "rejectJob()": "03d6e81e",
+      "retire(address)": "9e6371ba"
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.7.4+commit.3f05b770\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"JobAccepted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"JobOffer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"JobRejected\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"Retired\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptJob\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"cancelHire\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"getOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"getUser\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"hire\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"isAvailable\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"isOwned\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"isPending\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"isRetired\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rejectJob\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"retire\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"cancelHire(address)\":{\"params\":{\"workerAddress\":\"address of the worker node\"}},\"getOwner(address)\":{\"params\":{\"workerAddress\":\"address of the worker node\"}},\"hire(address)\":{\"params\":{\"workerAddress\":\"address of the worker\"}},\"isAvailable(address)\":{\"params\":{\"workerAddress\":\"address of the worker node\"}},\"isPending(address)\":{\"params\":{\"workerAddress\":\"address of the worker node\"}},\"retire(address)\":{\"details\":\"this also removes all authorizations in place\",\"params\":{\"workerAddress\":\"address of the worker to be retired\"}}},\"version\":1},\"userdoc\":{\"events\":{\"JobOffer(address,address)\":{\"notice\":\"Events signalling every state transition\"}},\"kind\":\"user\",\"methods\":{\"acceptJob()\":{\"notice\":\"Called by the worker to accept the job\"},\"cancelHire(address)\":{\"notice\":\"Called by the user to cancel a job offer\"},\"getOwner(address)\":{\"notice\":\"Get the owner of the worker node\"},\"getUser(address)\":{\"notice\":\"Get the user of the worker node, which may not be the owner yet, or how was the previous owner of a retired node\"},\"hire(address)\":{\"notice\":\"Asks the worker to work for the sender. Sender needs to pay something.\"},\"isAvailable(address)\":{\"notice\":\"Returns true if worker node is available\"},\"isOwned(address)\":{\"notice\":\"Returns true if worker node is owned by some user\"},\"isPending(address)\":{\"notice\":\"Returns true if worker node is pending\"},\"isRetired(address)\":{\"notice\":\"Returns true if worker node was retired by its owner\"},\"rejectJob()\":{\"notice\":\"Called by the worker to reject a job offer\"},\"retire(address)\":{\"notice\":\"Called by the user to retire his worker.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/WorkerManager.sol\":\"WorkerManager\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/WorkerManager.sol\":{\"content\":\"// Copyright 2010 Cartesi Pte. Ltd.\\n\\n// SPDX-License-Identifier: Apache-2.0\\n// Licensed under the Apache License, Version 2.0 (the \\\"License\\\"); you may not use\\n// this file except in compliance with the License. You may obtain a copy of the\\n// License at http://www.apache.org/licenses/LICENSE-2.0\\n\\n// Unless required by applicable law or agreed to in writing, software distributed\\n// under the License is distributed on an \\\"AS IS\\\" BASIS, WITHOUT WARRANTIES OR\\n// CONDITIONS OF ANY KIND, either express or implied. See the License for the\\n// specific language governing permissions and limitations under the License.\\n\\n/// @title WorkerManager\\n/// @author Danilo Tuler\\npragma solidity ^0.7.0;\\n\\ninterface WorkerManager {\\n    /// @notice Returns true if worker node is available\\n    /// @param workerAddress address of the worker node\\n    function isAvailable(address workerAddress) external view returns (bool);\\n\\n    /// @notice Returns true if worker node is pending\\n    /// @param workerAddress address of the worker node\\n    function isPending(address workerAddress) external view returns (bool);\\n\\n    /// @notice Get the owner of the worker node\\n    /// @param workerAddress address of the worker node\\n    function getOwner(address workerAddress) external view returns (address);\\n\\n    /// @notice Get the user of the worker node, which may not be the owner yet, or how was the previous owner of a retired node\\n    function getUser(address workerAddress) external view returns (address);\\n\\n    /// @notice Returns true if worker node is owned by some user\\n    function isOwned(address workerAddress) external view returns (bool);\\n\\n    /// @notice Asks the worker to work for the sender. Sender needs to pay something.\\n    /// @param workerAddress address of the worker\\n    function hire(address payable workerAddress) external payable;\\n\\n    /// @notice Called by the worker to accept the job\\n    function acceptJob() external;\\n\\n    /// @notice Called by the worker to reject a job offer\\n    function rejectJob() external payable;\\n\\n    /// @notice Called by the user to cancel a job offer\\n    /// @param workerAddress address of the worker node\\n    function cancelHire(address workerAddress) external;\\n\\n    /// @notice Called by the user to retire his worker.\\n    /// @param workerAddress address of the worker to be retired\\n    /// @dev this also removes all authorizations in place\\n    function retire(address payable workerAddress) external;\\n\\n    /// @notice Returns true if worker node was retired by its owner\\n    function isRetired(address workerAddress) external view returns (bool);\\n\\n    /// @notice Events signalling every state transition\\n    event JobOffer(address indexed worker, address indexed user);\\n    event JobAccepted(address indexed worker, address indexed user);\\n    event JobRejected(address indexed worker, address indexed user);\\n    event Retired(address indexed worker, address indexed user);\\n}\\n\",\"keccak256\":\"0x4125ae5b95704439e239db685d26aef470a341ae5b4668a01f31500ba352d72e\",\"license\":\"Apache-2.0\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  },
+  "userdoc": {
+    "events": {
+      "JobOffer(address,address)": {
+        "notice": "Events signalling every state transition"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "acceptJob()": {
+        "notice": "Called by the worker to accept the job"
+      },
+      "cancelHire(address)": {
+        "notice": "Called by the user to cancel a job offer"
+      },
+      "getOwner(address)": {
+        "notice": "Get the owner of the worker node"
+      },
+      "getUser(address)": {
+        "notice": "Get the user of the worker node, which may not be the owner yet, or how was the previous owner of a retired node"
+      },
+      "hire(address)": {
+        "notice": "Asks the worker to work for the sender. Sender needs to pay something."
+      },
+      "isAvailable(address)": {
+        "notice": "Returns true if worker node is available"
+      },
+      "isOwned(address)": {
+        "notice": "Returns true if worker node is owned by some user"
+      },
+      "isPending(address)": {
+        "notice": "Returns true if worker node is pending"
+      },
+      "isRetired(address)": {
+        "notice": "Returns true if worker node was retired by its owner"
+      },
+      "rejectJob()": {
+        "notice": "Called by the worker to reject a job offer"
+      },
+      "retire(address)": {
+        "notice": "Called by the user to retire his worker."
+      }
+    },
+    "version": 1
+  }
+}

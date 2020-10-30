@@ -1,0 +1,223 @@
+{
+  "contractName": "WorkerAuthManager",
+  "sourceName": "contracts/WorkerAuthManager.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "dapp",
+          "type": "address"
+        }
+      ],
+      "name": "Authorization",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "dapp",
+          "type": "address"
+        }
+      ],
+      "name": "Deauthorization",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_workerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_dappAddress",
+          "type": "address"
+        }
+      ],
+      "name": "authorize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_workerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_dappAddresses",
+          "type": "address"
+        }
+      ],
+      "name": "deauthorize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "workerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getOwner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_workerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_dappAddress",
+          "type": "address"
+        }
+      ],
+      "name": "isAuthorized",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "authorize(address,address)": {
+        "params": {
+          "_dappAddress": "address of the dapp that permission will be given to",
+          "_workerAddress": "address of the worker node to given permission"
+        }
+      },
+      "deauthorize(address,address)": {
+        "params": {
+          "_dappAddresses": "addresses of dapps that will lose permission",
+          "_workerAddress": "address of the proxy that will lose permission"
+        }
+      },
+      "getOwner(address)": {
+        "params": {
+          "workerAddress": "address of the worker node"
+        }
+      },
+      "isAuthorized(address,address)": {
+        "params": {
+          "_dappAddress": "address of the DApp",
+          "_workerAddress": "address of the worker"
+        }
+      }
+    },
+    "version": 1
+  },
+  "evm": {
+    "bytecode": {
+      "generatedSources": [],
+      "linkReferences": {},
+      "object": "",
+      "opcodes": "",
+      "sourceMap": ""
+    },
+    "deployedBytecode": {
+      "generatedSources": [],
+      "immutableReferences": {},
+      "linkReferences": {},
+      "object": "",
+      "opcodes": "",
+      "sourceMap": ""
+    },
+    "gasEstimates": null,
+    "methodIdentifiers": {
+      "authorize(address,address)": "2bef4595",
+      "deauthorize(address,address)": "6d892f7e",
+      "getOwner(address)": "fa544161",
+      "isAuthorized(address,address)": "65e4ad9e"
+    }
+  },
+  "metadata": "{\"compiler\":{\"version\":\"0.7.4+commit.3f05b770\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"dapp\",\"type\":\"address\"}],\"name\":\"Authorization\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"worker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"dapp\",\"type\":\"address\"}],\"name\":\"Deauthorization\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_workerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_dappAddress\",\"type\":\"address\"}],\"name\":\"authorize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_workerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_dappAddresses\",\"type\":\"address\"}],\"name\":\"deauthorize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"workerAddress\",\"type\":\"address\"}],\"name\":\"getOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_workerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_dappAddress\",\"type\":\"address\"}],\"name\":\"isAuthorized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"authorize(address,address)\":{\"params\":{\"_dappAddress\":\"address of the dapp that permission will be given to\",\"_workerAddress\":\"address of the worker node to given permission\"}},\"deauthorize(address,address)\":{\"params\":{\"_dappAddresses\":\"addresses of dapps that will lose permission\",\"_workerAddress\":\"address of the proxy that will lose permission\"}},\"getOwner(address)\":{\"params\":{\"workerAddress\":\"address of the worker node\"}},\"isAuthorized(address,address)\":{\"params\":{\"_dappAddress\":\"address of the DApp\",\"_workerAddress\":\"address of the worker\"}}},\"version\":1},\"userdoc\":{\"events\":{\"Authorization(address,address,address)\":{\"notice\":\"A DApp has been authorized by a user for a worker\"},\"Deauthorization(address,address,address)\":{\"notice\":\"A DApp has been deauthorized by a user for a worker\"}},\"kind\":\"user\",\"methods\":{\"authorize(address,address)\":{\"notice\":\"Gives worker permission to act on a DApp\"},\"deauthorize(address,address)\":{\"notice\":\"Removes worker's permission to act on a DApp\"},\"getOwner(address)\":{\"notice\":\"Get the owner of the worker node\"},\"isAuthorized(address,address)\":{\"notice\":\"Returns is the dapp is authorized to be called by that worker\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/WorkerAuthManager.sol\":\"WorkerAuthManager\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/WorkerAuthManager.sol\":{\"content\":\"// Copyright 2020 Cartesi Pte. Ltd.\\n\\n// SPDX-License-Identifier: Apache-2.0\\n// Licensed under the Apache License, Version 2.0 (the \\\"License\\\"); you may not use\\n// this file except in compliance with the License. You may obtain a copy of the\\n// License at http://www.apache.org/licenses/LICENSE-2.0\\n\\n// Unless required by applicable law or agreed to in writing, software distributed\\n// under the License is distributed on an \\\"AS IS\\\" BASIS, WITHOUT WARRANTIES OR\\n// CONDITIONS OF ANY KIND, either express or implied. See the License for the\\n// specific language governing permissions and limitations under the License.\\n\\n/// @title WorkerAuthManager\\n/// @author Danilo Tuler\\npragma solidity ^0.7.0;\\n\\ninterface WorkerAuthManager {\\n    /// @notice Gives worker permission to act on a DApp\\n    /// @param _workerAddress address of the worker node to given permission\\n    /// @param _dappAddress address of the dapp that permission will be given to\\n    function authorize(address _workerAddress, address _dappAddress) external;\\n\\n    /// @notice Removes worker's permission to act on a DApp\\n    /// @param _workerAddress address of the proxy that will lose permission\\n    /// @param _dappAddresses addresses of dapps that will lose permission\\n    function deauthorize(address _workerAddress, address _dappAddresses)\\n        external;\\n\\n    /// @notice Returns is the dapp is authorized to be called by that worker\\n    /// @param _workerAddress address of the worker\\n    /// @param _dappAddress address of the DApp\\n    function isAuthorized(address _workerAddress, address _dappAddress)\\n        external\\n        view\\n        returns (bool);\\n\\n    /// @notice Get the owner of the worker node\\n    /// @param workerAddress address of the worker node\\n    function getOwner(address workerAddress) external view returns (address);\\n\\n    /// @notice A DApp has been authorized by a user for a worker\\n    event Authorization(\\n        address indexed user,\\n        address indexed worker,\\n        address indexed dapp\\n    );\\n\\n    /// @notice A DApp has been deauthorized by a user for a worker\\n    event Deauthorization(\\n        address indexed user,\\n        address indexed worker,\\n        address indexed dapp\\n    );\\n}\\n\",\"keccak256\":\"0x90ce24f4e55dc98d22355f3929981a7b85ba39607becb7602f987d057c1d10b2\",\"license\":\"Apache-2.0\"}},\"version\":1}",
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  },
+  "userdoc": {
+    "events": {
+      "Authorization(address,address,address)": {
+        "notice": "A DApp has been authorized by a user for a worker"
+      },
+      "Deauthorization(address,address,address)": {
+        "notice": "A DApp has been deauthorized by a user for a worker"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "authorize(address,address)": {
+        "notice": "Gives worker permission to act on a DApp"
+      },
+      "deauthorize(address,address)": {
+        "notice": "Removes worker's permission to act on a DApp"
+      },
+      "getOwner(address)": {
+        "notice": "Get the owner of the worker node"
+      },
+      "isAuthorized(address,address)": {
+        "notice": "Returns is the dapp is authorized to be called by that worker"
+      }
+    },
+    "version": 1
+  }
+}
