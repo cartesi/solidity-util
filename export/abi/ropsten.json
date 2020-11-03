@@ -93,35 +93,6 @@
         }
       ]
     },
-    "CartesiMath": {
-      "address": "0xAA5276E71FCb7C7fcbdB233384008672BAE20a86",
-      "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "log2ApproxTimes1M",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
     "Merkle": {
       "address": "0x28E3cf821bCce26149fE8D25AE40668EeB74fB5d",
       "abi": [

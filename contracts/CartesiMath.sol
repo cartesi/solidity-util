@@ -16,7 +16,7 @@ pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract CartesiMath {
+abstract contract CartesiMath {
     using SafeMath for uint256;
     mapping(uint256 => uint256) log2tableTimes1M;
 
