@@ -7,7 +7,6 @@ Basic solidity contracts and solidity libraries used the Cartesi on-chain code.
 Packaged as npm and published at https://www.npmjs.com/package/@cartesi/util
 
 The npm package contains `hardhat` deployment artifacts with information of deployed contracts on the following testnets:
-- Ropsten
 - Rinkeby
 - Kovan
 - Goerli
