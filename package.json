@@ -1,6 +1,6 @@
 {
   "name": "@cartesi/util",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Solidity Util Contracts",
   "scripts": {
     "build": "hardhat compile && tsc",
