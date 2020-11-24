@@ -159,7 +159,7 @@ abstract contract CartesiMath {
 
         if (_num == 1) return 0;
 
-        while (log2tableTimes1M[_num] == 0) {
+        while (_num > 128) {
            _num = _num >> 1;
            leading += 1;
        }
