@@ -154,7 +154,7 @@ describe("WorkerManagerAuthManager", async () => {
         await expect(
             instanceWorker.acceptJob(),
             "transaction should revert if worker calls acceptJob() without offer"
-        ).to.be.revertedWith("worker does not have a job offer");
+        ).to.be.revertedWith("worker not is not in pending state");
 
         // Hire worker correctly
         await instanceUser.hire(worker, {

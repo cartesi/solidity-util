@@ -105,10 +105,6 @@ contract WorkerManagerAuthManagerImpl is WorkerManager, WorkerAuthManager {
 
     function acceptJob() public override {
         require(
-            userOf[msg.sender] != address(0),
-            "worker does not have a job offer"
-        );
-        require(
             stateOf[msg.sender] == WorkerState.Pending,
             "worker not is not in pending state"
         );
@@ -143,11 +139,6 @@ contract WorkerManagerAuthManagerImpl is WorkerManager, WorkerAuthManager {
     }
 
     function cancelHire(address _workerAddress) public override {
-        require(
-            userOf[_workerAddress] != address(0),
-            "worker does not have a job offer"
-        );
-
         require(
             userOf[_workerAddress] == msg.sender,
             "only hirer can cancel the offer"
