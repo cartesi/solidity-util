@@ -29,6 +29,4 @@ interface Instantiator {
     function isConcerned(uint256 _index, address _user) external view returns (bool);
 
     function getSubInstances(uint256 _index, address) external view returns (address[] memory _addresses, uint256[] memory _indices);
-
-    function deactivate(uint256 _index) external;
 }

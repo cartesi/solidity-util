@@ -50,7 +50,7 @@ abstract contract InstantiatorImpl is Instantiator {
         return nonce[_index];
     }
 
-    function deactivate(uint256 _index) public override {
+    function deactivate(uint256 _index) internal {
         active[_index] = false;
         nonce[_index] = 0;
     }
