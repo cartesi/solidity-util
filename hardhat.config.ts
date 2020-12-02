@@ -44,6 +44,7 @@ const config: HardhatUserConfig = {
         rinkeby: infuraNetwork("rinkeby", 4, 6283185),
         kovan: infuraNetwork("kovan", 42, 6283185),
         goerli: infuraNetwork("goerli", 5, 6283185),
+        mainnet: infuraNetwork("mainnet", 1, 6283185),
         matic_testnet: {
             url: "https://rpc-mumbai.matic.today",
             chainId: 80001,
