@@ -16,7 +16,7 @@ import { deployments, ethers, getNamedAccounts } from "hardhat";
 import { solidity } from "ethereum-waffle";
 
 import { WorkerManager } from "../src/types/WorkerManager";
-import { WorkerManagerFactory } from "../src/types/WorkerManagerFactory";
+import { WorkerManager__factory } from "../src/types/factories/WorkerManager__factory";
 
 use(solidity);
 
@@ -32,8 +32,8 @@ describe("WorkerManager", async () => {
         const [user, worker] = await ethers.getSigners();
 
         const address = (await deployments.get("WorkerManagerImpl")).address;
-        instanceUser = WorkerManagerFactory.connect(address, user);
-        instanceWorker = WorkerManagerFactory.connect(address, worker);
+        instanceUser = WorkerManager__factory.connect(address, user);
+        instanceWorker = WorkerManager__factory.connect(address, worker);
     });
 
     const expectState = async (
@@ -84,7 +84,7 @@ describe("WorkerManager", async () => {
         // Worker Address cannot be 0x00
         await expect(
             instanceUser.hire(NULL_ADDRESS, {
-                value: ethers.utils.parseEther("1")
+                value: ethers.utils.parseEther("1"),
             }),
             "transaction should revert if worker address is 0x0"
         ).to.be.revertedWith("worker address can not be 0x0");
@@ -92,7 +92,7 @@ describe("WorkerManager", async () => {
         // Hiring worker correctly should emit event
         await expect(
             instanceUser.hire(worker, {
-                value: ethers.utils.parseEther("1")
+                value: ethers.utils.parseEther("1"),
             }),
             "Hiring worker correctly should emit event"
         )
@@ -117,7 +117,7 @@ describe("WorkerManager", async () => {
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
-            value: ethers.utils.parseEther("1")
+            value: ethers.utils.parseEther("1"),
         });
 
         expect(
@@ -151,7 +151,7 @@ describe("WorkerManager", async () => {
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
-            value: ethers.utils.parseEther("1")
+            value: ethers.utils.parseEther("1"),
         });
 
         expect(
@@ -190,7 +190,7 @@ describe("WorkerManager", async () => {
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
-            value: ethers.utils.parseEther("1")
+            value: ethers.utils.parseEther("1"),
         });
 
         expect(
@@ -232,7 +232,7 @@ describe("WorkerManager", async () => {
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
-            value: ethers.utils.parseEther("1")
+            value: ethers.utils.parseEther("1"),
         });
 
         // Accepts job correctly

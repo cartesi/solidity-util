@@ -16,7 +16,7 @@ import { deployments, ethers, getNamedAccounts } from "hardhat";
 import { solidity } from "ethereum-waffle";
 
 import { WorkerManagerAuthManagerImpl } from "../src/types/WorkerManagerAuthManagerImpl";
-import { WorkerManagerAuthManagerImplFactory } from "../src/types/WorkerManagerAuthManagerImplFactory";
+import { WorkerManagerAuthManagerImpl__factory } from "../src/types/factories/WorkerManagerAuthManagerImpl__factory";
 
 use(solidity);
 
@@ -33,11 +33,11 @@ describe("WorkerManagerAuthManager", async () => {
 
         const address = (await deployments.get("WorkerManagerAuthManagerImpl"))
             .address;
-        instanceUser = WorkerManagerAuthManagerImplFactory.connect(
+        instanceUser = WorkerManagerAuthManagerImpl__factory.connect(
             address,
             user
         );
-        instanceWorker = WorkerManagerAuthManagerImplFactory.connect(
+        instanceWorker = WorkerManagerAuthManagerImpl__factory.connect(
             address,
             worker
         );
