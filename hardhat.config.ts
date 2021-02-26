@@ -30,7 +30,7 @@ const infuraNetwork = (
         url: `https://${network}.infura.io/v3/${process.env.PROJECT_ID}`,
         chainId,
         gas,
-        accounts: mnemonic ? { mnemonic } : undefined
+        accounts: mnemonic ? { mnemonic } : undefined,
     };
 };
 
@@ -39,7 +39,7 @@ const config: HardhatUserConfig = {
         hardhat: mnemonic ? { accounts: { mnemonic } } : {},
         localhost: {
             url: "http://localhost:8545",
-            accounts: mnemonic ? { mnemonic } : undefined
+            accounts: mnemonic ? { mnemonic } : undefined,
         },
         rinkeby: infuraNetwork("rinkeby", 4, 6283185),
         kovan: infuraNetwork("kovan", 42, 6283185),
@@ -48,42 +48,42 @@ const config: HardhatUserConfig = {
         matic_testnet: {
             url: "https://rpc-mumbai.matic.today",
             chainId: 80001,
-            accounts: mnemonic ? { mnemonic } : undefined
+            accounts: mnemonic ? { mnemonic } : undefined,
         },
         bsc_testnet: {
             url: "https://data-seed-prebsc-1-s1.binance.org:8545",
             chainId: 97,
-            accounts: mnemonic ? { mnemonic } : undefined
-        }
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
     },
     solidity: {
         version: "0.7.4",
         settings: {
             optimizer: {
-                enabled: true
-            }
-        }
+                enabled: true,
+            },
+        },
     },
     paths: {
         artifacts: "artifacts",
         deploy: "deploy",
-        deployments: "deployments"
+        deployments: "deployments",
     },
     typechain: {
         outDir: "src/types",
-        target: "ethers-v5"
+        target: "ethers-v5",
     },
     namedAccounts: {
         deployer: {
-            default: 0
+            default: 0,
         },
         user: {
-            default: 0
+            default: 0,
         },
         worker: {
-            default: 1
-        }
-    }
+            default: 1,
+        },
+    },
 };
 
 export default config;
