@@ -3,7 +3,7 @@
   "chainId": "43113",
   "contracts": {
     "BitsManipulationLibrary": {
-      "address": "0xD82e72Aa89BF529C808860Db5C16D3d87cE4c9cA",
+      "address": "0xdecac9ff6b588642887414e85dfdde740a797f56",
       "abi": [
         {
           "inputs": [
@@ -94,7 +94,7 @@
       ]
     },
     "CartesiMath": {
-      "address": "0xCb6C058f1A5DA3632F6A295d6817FcF99A27003d",
+      "address": "0x50bEFaEfD3AAaFac11Fd936A8dfEB1050eC5Cf00",
       "abi": [
         {
           "inputs": [
@@ -137,7 +137,7 @@
       ]
     },
     "Merkle": {
-      "address": "0xc8B8E8eddEEC800363e72D7C54622fCC6ADf2A04",
+      "address": "0x89f1f1bc37Ef872ff0073bee7eE6d6B0D94Fd166",
       "abi": [
         {
           "inputs": [
@@ -280,32 +280,8 @@
         }
       ]
     },
-    "TestCartesiMath": {
-      "address": "0x4D0Daf60D03f1EF544dA39B4a202E030928E4Aba",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "getLog2TableTimes1M",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        }
-      ]
-    },
     "WorkerAuthManagerImpl": {
-      "address": "0xCe54549A6E956C0C5f47E11559C5c55F9f5695C0",
+      "address": "0x3F62ccC0e41287ea4d28dce6582a215B75bB43fd",
       "abi": [
         {
           "inputs": [
@@ -450,7 +426,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x9D1d9182598c1B9d4dB3179af3a3Fe4d4e74b1BF",
+      "address": "0x7db3A9BdA16D1C295b23B94a61808EFf82288269",
       "abi": [
         {
           "anonymous": false,
@@ -826,7 +802,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0x4A3c75E188cF0a13aB87b8514d1e02907c5c2F6D",
+      "address": "0x91E780568A1FEdd5d01E1c1E4cAed68E3a849345",
       "abi": [
         {
           "anonymous": false,

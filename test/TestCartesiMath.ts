@@ -15,7 +15,17 @@ describe("TestCartesiMath", async () => {
 
         const [user] = await ethers.getSigners();
 
-        const address = (await deployments.get("TestCartesiMath")).address;
+        const CartesiMathAddress = (await deployments.get("CartesiMath"))
+            .address;
+        const { deploy } = deployments;
+        const { address } = await deploy("TestCartesiMath", {
+            from: user.address,
+            log: true,
+            libraries: {
+                ["CartesiMath"]: CartesiMathAddress,
+            },
+        });
+
         TestCartesiMath = TestCartesiMath__factory.connect(address, user);
     });
 
@@ -151,7 +161,9 @@ describe("TestCartesiMath", async () => {
         log2tableTimes1M[128] = 7000000;
 
         for (let i = 1; i < 129; i++) {
-            expect (await TestCartesiMath.getLog2TableTimes1M(i)).to.be.equal(log2tableTimes1M[i]);
+            expect(await TestCartesiMath.getLog2TableTimes1M(i)).to.be.equal(
+                log2tableTimes1M[i]
+            );
         }
     });
 });
