@@ -13,10 +13,10 @@
 import { HardhatUserConfig } from "hardhat/config";
 import { HttpNetworkUserConfig } from "hardhat/types";
 
-import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
 import "hardhat-typechain";
 import "hardhat-deploy";
+import "hardhat-deploy-ethers";
 
 // read MNEMONIC from file or from env variable
 let mnemonic = process.env.MNEMONIC;
