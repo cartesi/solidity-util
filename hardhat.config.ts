@@ -55,6 +55,11 @@ const config: HardhatUserConfig = {
             chainId: 97,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
+        avax_testnet: {
+            url: "https://api.avax-test.network/ext/bc/C/rpc",
+            chainId: 0xa869,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
     },
     solidity: {
         version: "0.7.4",
