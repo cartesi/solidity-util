@@ -79,7 +79,7 @@ library Merkle {
         pure
         returns (bytes32)
     {
-        return EMPTY_TREE_HASHES[_index:_index * 32];
+        return EMPTY_TREE_HASHES[_index * 32 : (_index + 1) * 32];
     }
 
     function getLog2Floor(uint256 number) public pure returns (uint8) {
