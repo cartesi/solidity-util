@@ -10,13 +10,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-/// @title Test CartesiMath
+/// @title Test BitMaskLibrary
 pragma solidity ^0.7.0;
 
-import "../CartesiMath.sol";
+import "../BitMaskLibrary.sol";
 
-contract TestCartesiMath {
-    function getLog2TableTimes1M(uint256 _num) public pure returns (uint256) {
-        return CartesiMath.getLog2TableTimes1M(_num);
+contract TestBitMaskLibrary {
+    using BitMaskLibrary for uint256[];
+
+    uint256[] internal bitMask;
+
+    function setBit(uint256 _bit) public {
+        bitMask.setBit(_bit);
+    }
+
+    function getBit(uint256 _bit) public view returns (bool) {
+        return bitMask.getBit(_bit);
     }
 }
