@@ -10,13 +10,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-/// @title Test BitMaskLibrary
+/// @title Test BitmaskLibrary
 pragma solidity ^0.7.0;
 
-import "../BitMaskLibrary.sol";
+import "../BitmaskLibrary.sol";
 
-contract TestBitMaskLibrary {
-    using BitMaskLibrary for uint256[];
+contract TestBitmaskLibrary {
+    using BitmaskLibrary for uint256[];
 
     uint256[] internal bitMask;
 

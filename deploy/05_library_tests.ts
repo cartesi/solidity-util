@@ -5,13 +5,13 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const { deployments, getNamedAccounts } = hre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
-    const { BitMaskLibrary, CartesiMath } = await deployments.all();
+    const { BitmaskLibrary, CartesiMath } = await deployments.all();
 
-    await deploy("TestBitMaskLibrary", {
+    await deploy("TestBitmaskLibrary", {
         from: deployer,
         log: true,
         libraries: {
-            ["BitMaskLibrary"]: BitMaskLibrary.address
+            ["BitmaskLibrary"]: BitmaskLibrary.address
         },
     });
 
