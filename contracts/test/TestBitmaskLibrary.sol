@@ -18,17 +18,17 @@ import "../BitmaskLibrary.sol";
 contract TestBitmaskLibrary {
     using BitmaskLibrary for uint256[];
 
-    uint256[] internal bitMask;
+    uint256[] internal bitmask;
 
     function setBit(uint256 _bit) public {
-        bitMask.setBit(_bit, true);
+        bitmask.setBit(_bit, true);
     }
 
     function unsetBit(uint256 _bit) public {
-        bitMask.setBit(_bit, false);
+        bitmask.setBit(_bit, false);
     }
 
     function getBit(uint256 _bit) public view returns (bool) {
-        return bitMask.getBit(_bit);
+        return bitmask.getBit(_bit);
     }
 }

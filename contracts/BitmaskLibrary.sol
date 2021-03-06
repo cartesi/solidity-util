@@ -18,48 +18,49 @@ pragma solidity ^0.7.0;
 library BitmaskLibrary {
     /// @notice Set a bit in the bit mask
     function setBit(
-        uint256[] storage bitMask,
+        uint256[] storage bitmask,
         uint256 _bit,
         bool _value
     ) public {
-        // calculate the number of bits has been store in bitMask now
+        // calculate the number of bits has been store in bitmask now
         uint256 positionOfMask = _bit / 256;
-        if (positionOfMask >= bitMask.length) {
+        uint256 lengthOfBitmask = bitmask.length;
+        if (positionOfMask >= lengthOfBitmask) {
             // not enough bit masks to hold the _bit, append more
             for (
                 uint256 i = 0;
-                i < (positionOfMask - bitMask.length + 1);
+                i < (positionOfMask - lengthOfBitmask + 1);
                 i++
             ) {
-                bitMask.push(0);
+                bitmask.push(0);
             }
         }
         uint256 positionOfBit = _bit % 256;
 
         if (_value) {
-            bitMask[positionOfMask] =
-                bitMask[positionOfMask] |
+            bitmask[positionOfMask] =
+                bitmask[positionOfMask] |
                 (1 << positionOfBit);
         } else {
-            bitMask[positionOfMask] =
-                bitMask[positionOfMask] &
+            bitmask[positionOfMask] =
+                bitmask[positionOfMask] &
                 ~(1 << positionOfBit);
         }
     }
 
     /// @notice Get a bit in the bit mask
-    function getBit(uint256[] memory bitMask, uint256 _bit)
+    function getBit(uint256[] storage bitmask, uint256 _bit)
         public
-        pure
+        view
         returns (bool)
     {
-        // calculate the number of bits has been store in bitMask now
+        // calculate the number of bits has been store in bitmask now
         uint256 positionOfMask = _bit / 256;
-        if (positionOfMask >= bitMask.length) {
+        if (positionOfMask >= bitmask.length) {
             return false;
         }
         uint256 positionOfBit = _bit % 256;
 
-        return ((bitMask[positionOfMask] & (1 << positionOfBit)) != 0);
+        return ((bitmask[positionOfMask] & (1 << positionOfBit)) != 0);
     }
 }
