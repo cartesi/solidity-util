@@ -15,7 +15,17 @@ describe("TestBitmaskLibrary", async () => {
 
         const [user] = await ethers.getSigners();
 
-        const address = (await deployments.get("TestBitmaskLibrary")).address;
+        const BitmaskLibraryAddress = (await deployments.get("BitmaskLibrary"))
+            .address;
+        const { deploy } = deployments;
+        const { address } = await deploy("TestBitmaskLibrary", {
+            from: user.address,
+            log: true,
+            libraries: {
+                ["BitmaskLibrary"]: BitmaskLibraryAddress,
+            },
+        });
+
         TestBitmaskLibrary = TestBitmaskLibrary__factory.connect(address, user);
     });
 
