@@ -17,7 +17,11 @@ pragma solidity ^0.7.0;
 /// @notice Implements bit mask with dynamic array
 library BitmaskLibrary {
     /// @notice Set a bit in the bit mask
-    function setBit(uint256[] storage bitMask, uint256 _bit) public {
+    function setBit(
+        uint256[] storage bitMask,
+        uint256 _bit,
+        bool _value
+    ) public {
         // calculate the number of bits has been store in bitMask now
         uint256 positionOfMask = _bit / 256;
         if (positionOfMask >= bitMask.length) {
@@ -32,9 +36,15 @@ library BitmaskLibrary {
         }
         uint256 positionOfBit = _bit % 256;
 
-        bitMask[positionOfMask] =
-            bitMask[positionOfMask] |
-            (1 << positionOfBit);
+        if (_value) {
+            bitMask[positionOfMask] =
+                bitMask[positionOfMask] |
+                (1 << positionOfBit);
+        } else {
+            bitMask[positionOfMask] =
+                bitMask[positionOfMask] &
+                ~(1 << positionOfBit);
+        }
     }
 
     /// @notice Get a bit in the bit mask
@@ -50,6 +60,6 @@ library BitmaskLibrary {
         }
         uint256 positionOfBit = _bit % 256;
 
-        return (((bitMask[positionOfMask] >> positionOfBit) & 1) == 1);
+        return ((bitMask[positionOfMask] & (1 << positionOfBit)) != 0);
     }
 }

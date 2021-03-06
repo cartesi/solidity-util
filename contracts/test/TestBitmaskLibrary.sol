@@ -21,7 +21,11 @@ contract TestBitmaskLibrary {
     uint256[] internal bitMask;
 
     function setBit(uint256 _bit) public {
-        bitMask.setBit(_bit);
+        bitMask.setBit(_bit, true);
+    }
+
+    function unsetBit(uint256 _bit) public {
+        bitMask.setBit(_bit, false);
     }
 
     function getBit(uint256 _bit) public view returns (bool) {

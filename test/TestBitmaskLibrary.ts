@@ -38,6 +38,10 @@ describe("TestBitmaskLibrary", async () => {
             // set bit
             await TestBitmaskLibrary.setBit(bit);
             expect(await TestBitmaskLibrary.getBit(bit)).to.be.true;
+
+            // unset bit
+            await TestBitmaskLibrary.unsetBit(bit);
+            expect(await TestBitmaskLibrary.getBit(bit)).to.be.false;
         }
     });
 });
