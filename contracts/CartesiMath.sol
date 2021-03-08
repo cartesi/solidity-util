@@ -48,4 +48,43 @@ library CartesiMath {
 
         return uint256(uint24(result));
     }
+
+    /// @notice count trailing zeros
+    /// @param _num number you want the ctz of
+    /// @dev this a binary search implementation
+    function ctz(uint256 _num) public pure returns (uint256) {
+        if (_num == 0) return 256;
+
+        uint256 n = 0;
+        if (_num & 0x0000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF == 0) { n = n + 128; _num = _num >> 128; }
+        if (_num & 0x00000000000000000000000000000000FFFFFFFFFFFFFFFF == 0) { n = n + 64; _num = _num >> 64; }
+        if (_num & 0x0000000000000000000000000000000000000000FFFFFFFF == 0) { n = n + 32; _num = _num >> 32; }
+        if (_num & 0x00000000000000000000000000000000000000000000FFFF == 0) { n = n + 16; _num = _num >> 16; }
+        if (_num & 0x0000000000000000000000000000000000000000000000FF == 0) { n = n +  8; _num = _num >>  8; }
+        if (_num & 0x00000000000000000000000000000000000000000000000F == 0) { n = n +  4; _num = _num >>  4; }
+        if (_num & 0x000000000000000000000000000000000000000000000003 == 0) { n = n +  2; _num = _num >>  2; }
+        if (_num & 0x000000000000000000000000000000000000000000000001 == 0) { n = n +  1; }
+
+        return n;
+    }
+
+    /// @notice count leading zeros
+    /// @param _num number you want the clz of
+    /// @dev this a binary search implementation
+    function clz(uint256 _num) public pure returns (uint256) {
+        if (_num == 0) return 256;
+
+        uint256 n = 0;
+
+        if (_num & 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000 == 0) { n = n + 128; _num = _num << 128; }
+        if (_num & 0x0000000000000000FFFFFFFFFFFFFFFF0000000000000000 == 0) { n = n + 64; _num = _num << 64; }
+        if (_num & 0x0000000000000000FFFFFFFF000000000000000000000000 == 0) { n = n + 32; _num = _num << 32; }
+        if (_num & 0x0000000000000000FFFF0000000000000000000000000000 == 0) { n = n + 16; _num = _num << 16; }
+        if (_num & 0x0000000000000000FF000000000000000000000000000000 == 0) { n = n +  8; _num = _num <<  8; }
+        if (_num & 0x0000000000000000F0000000000000000000000000000000 == 0) { n = n +  4; _num = _num <<  4; }
+        if (_num & 0x0000000000000000C0000000000000000000000000000000 == 0) { n = n +  2; _num = _num <<  2; }
+        if (_num & 0x000000000000000080000000000000000000000000000000 == 0) { n = n +  1; }
+
+        return n;
+    }
 }
