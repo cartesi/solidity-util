@@ -16,9 +16,9 @@ pragma solidity ^0.7.0;
 import "../Bitmask.sol";
 
 contract TestBitmask {
-    using Bitmask for uint256[];
+    using Bitmask for mapping(uint256 => uint256);
 
-    uint256[] internal bitmask;
+    mapping(uint256 => uint256) internal bitmask;
 
     function setBit(uint256 _bit) public {
         bitmask.setBit(_bit, true);
