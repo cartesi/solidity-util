@@ -49,6 +49,8 @@ library CartesiMath {
         return uint256(uint24(result));
     }
 
+    // TODO: Fix endianess on ctz and clza
+
     /// @notice count trailing zeros
     /// @param _num number you want the ctz of
     /// @dev this a binary search implementation
