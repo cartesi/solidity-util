@@ -19,7 +19,7 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     const { deployer } = await getNamedAccounts();
 
     await deploy("BitsManipulationLibrary", { from: deployer, log: true });
-    await deploy("BitmaskLibrary", { from: deployer, log: true });
+    await deploy("Bitmask", { from: deployer, log: true });
     await deploy("CartesiMath", { from: deployer, log: true });
     await deploy("Merkle", { from: deployer, log: true });
 };

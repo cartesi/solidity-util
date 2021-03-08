@@ -15,7 +15,7 @@ pragma solidity ^0.7.0;
 /// @title Bit Mask Library
 /// @author Stephen Chen
 /// @notice Implements bit mask with dynamic array
-library BitmaskLibrary {
+library Bitmask {
     /// @notice Set a bit in the bit mask
     function setBit(
         uint256[] storage bitmask,
