@@ -18,12 +18,12 @@ pragma solidity ^0.7.0;
 library Bitmask {
     /// @notice Set a bit in the bit mask
     function setBit(
-        mapping(uint256 => uint256) storage bitmask,
+        mapping(uint248 => uint256) storage bitmask,
         uint256 _bit,
         bool _value
     ) public {
         // calculate the number of bits has been store in bitmask now
-        uint256 positionOfMask = _bit / 256;
+        uint248 positionOfMask = uint248(_bit / 256);
         uint256 positionOfBit = _bit % 256;
 
         if (_value) {
@@ -38,13 +38,13 @@ library Bitmask {
     }
 
     /// @notice Get a bit in the bit mask
-    function getBit(mapping(uint256 => uint256) storage bitmask, uint256 _bit)
+    function getBit(mapping(uint248 => uint256) storage bitmask, uint256 _bit)
         public
         view
         returns (bool)
     {
         // calculate the number of bits has been store in bitmask now
-        uint256 positionOfMask = _bit / 256;
+        uint248 positionOfMask = uint248(_bit / 256);
         uint256 positionOfBit = _bit % 256;
 
         return ((bitmask[positionOfMask] & (1 << positionOfBit)) != 0);
