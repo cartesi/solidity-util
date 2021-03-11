@@ -4,7 +4,7 @@
     "description": "Solidity Util Contracts",
     "scripts": {
         "build": "hardhat compile && tsc",
-        "clean": "rimraf artifacts && rimraf cache && rimraf deployments/localhost && rimraf src/types/*",
+        "clean": "rimraf artifacts && rimraf cache && rimraf deployments/localhost && rimraf src/types/* && rimraf dist/deploy",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist/src",
         "deploy": "run-s deploy:development",
         "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet --export export/abi/bsc_testnet.json",
