@@ -280,30 +280,6 @@
         }
       ]
     },
-    "TestCartesiMath": {
-      "address": "0x349d7a84cea379479dfe34d1a40e2b4b73c02d58",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "getLog2TableTimes1M",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        }
-      ]
-    },
     "WorkerAuthManagerImpl": {
       "address": "0x10D022307724eA0eC63f66048Ba376aE3a884F4A",
       "abi": [
