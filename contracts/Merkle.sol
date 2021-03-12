@@ -20,7 +20,7 @@ library Merkle {
     using CartesiMath for uint256;
     using SafeMath for uint256;
 
-    uint256 constant WORD_SIZE = 8; // one word contains 8 bytes
+    uint256 constant L_WORD_SIZE = 3; // word = 8 bytes, log = 3
 
     // TODO: check tree hashes hashes
     bytes constant EMPTY_TREE_HASHES =
@@ -149,26 +149,21 @@ library Merkle {
         require(_log2Size <= 64, "Cannot be bigger than the machine itself");
 
         uint256 size = 1 << uint256(_log2Size); // this is the total size of the drive
-        uint256 stack_depth = 2 + 64 - (_data.length >> 3).clz();
+        uint256 stack_depth =  1 + (64 - ((_data.length + 7) >> L_WORD_SIZE).clz());
         bytes32[] memory stack = new bytes32[](stack_depth);
 
-        // add the first word to the stack
-        stack[0] = getHashOfWordAtIndex(_data, 0);
-
-        uint256 numOfHashes = 1;
-        uint256 stackLength = 1;
+        uint256 numOfHashes;
+        uint256 stackLength;
 
         while (numOfHashes < size) {
             uint256 numOfJoins;
 
-            // TODO: there is something weird about this check
-            if (numOfHashes.mul(WORD_SIZE) < _data.length) {
+            if ((numOfHashes << L_WORD_SIZE) < _data.length) {
                 // we still have words to hash
                 stack[numOfHashes] = getHashOfWordAtIndex(_data, numOfHashes);
                 numOfHashes++;
-                stackLength++;
 
-                numOfJoins = numOfHashes.ctz();
+                numOfJoins = numOfHashes;
             } else {
                 // since padding happens in hashOfWordAtIndex function
                 // we only need to complete the stack with pre-computed
@@ -178,15 +173,18 @@ library Merkle {
                 stack[numOfHashes] = getEmptyTreeHashAtIndex(topStackLevel);
 
                 numOfHashes = numOfHashes.add(1 << topStackLevel); //Empty Tree Hash summarizes many hashes
-                stackLength++;
             }
 
-            while (numOfJoins > 0) {
+            stackLength++;
+
+            while (numOfJoins & 1 == 0) {
                 bytes32 h2 = stack[stackLength - 1];
                 bytes32 h1 = stack[stackLength - 2];
 
-                stack[stackLength - 3] = keccak256(abi.encodePacked(h1, h2));
-                stackLength = stackLength.sub(2); // remove hashes from stack
+                stack[stackLength - 2] = keccak256(abi.encodePacked(h1, h2));
+                stackLength = stackLength.sub(1); // remove hashes from stack
+
+                numOfJoins = numOfJoins >> 1;
             }
         }
         require(
@@ -201,14 +199,13 @@ library Merkle {
         bytes calldata _data,
         uint256 _wordIndex
     ) public pure returns (bytes32) {
-        uint256 start = _wordIndex.mul(WORD_SIZE);
-        uint256 end = start.add(WORD_SIZE);
+        uint256 start = _wordIndex << L_WORD_SIZE;
+        uint256 end = start.add(1 << L_WORD_SIZE);
 
         // TODO: in .lua this just returns zero, but this might be more consistent
         require(start <= _data.length, "word out of bounds");
 
         if (end <= _data.length) {
-            // TODO: make sure it is encodePacked not encode
             return keccak256(
                 abi.encodePacked(
                     _data[start : end]
