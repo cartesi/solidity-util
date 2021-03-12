@@ -30,7 +30,7 @@ describe("TestBitmask", async () => {
     });
 
     it("setting and getting bits", async () => {
-        const testBits = [510, 511, 512, 513, 0, 1, 254, 255, 256, 257]
+        const testBits = ["0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe", 510, 511, 512, 513, 0, 1, 254, 255, 256, 257]
         for (const bit of testBits) {
             // bit should not be set by default
             expect(await TestBitmask.getBit(bit)).to.be.false;
