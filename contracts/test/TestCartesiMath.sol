@@ -19,4 +19,12 @@ contract TestCartesiMath {
     function getLog2TableTimes1M(uint256 _num) public pure returns (uint256) {
         return CartesiMath.getLog2TableTimes1M(_num);
     }
+
+    function ctz(uint _num) public pure returns (uint256) {
+        return CartesiMath.ctz(_num);
+    }
+
+    function clz(uint _num) public pure returns (uint256) {
+        return CartesiMath.clz(_num);
+    }
 }
