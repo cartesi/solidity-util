@@ -4,7 +4,7 @@ import { solidity } from "ethereum-waffle";
 
 import { TestCartesiMath } from "../src/types/TestCartesiMath";
 import { TestCartesiMath__factory } from "../src/types/factories/TestCartesiMath__factory";
-
+import { BigNumber, BigNumberish } from "ethers";
 use(solidity);
 
 describe("TestCartesiMath", async () => {
@@ -14,7 +14,7 @@ describe("TestCartesiMath", async () => {
         await deployments.fixture();
 
         const [user] = await ethers.getSigners();
-
+        0;
         const CartesiMathAddress = (await deployments.get("CartesiMath"))
             .address;
         const { deploy } = deployments;
@@ -164,6 +164,51 @@ describe("TestCartesiMath", async () => {
             expect(await TestCartesiMath.getLog2TableTimes1M(i)).to.be.equal(
                 log2tableTimes1M[i]
             );
+        }
+    });
+
+    it("ctz", async () => {
+        // TODO: Implement ctz function on typescript to calculate ctz of big number
+        // so we don't have to have the second array
+        var nums: BigNumberish = [
+            0,
+            2,
+            4,
+            8,
+            9,
+            11,
+            2 ** 8,
+            110,
+            2 ** 40,
+            2 ** 50,
+        ];
+        var res = [256, 1, 2, 3, 0, 0, 8, 1, 40, 50];
+
+        for (let i = 0; i < nums.length; i++) {
+            expect(await TestCartesiMath.ctz(nums[i])).to.be.equal(res[i]);
+        }
+    });
+
+    it("clz", async () => {
+        // TODO: Implement clz function on typescript for big number
+        // so we don't have to have the second array
+        var nums: BigNumberish = [
+            0,
+            1,
+            2,
+            4,
+            8,
+            9,
+            11,
+            2 ** 8,
+            110,
+            2 ** 40,
+            2 ** 50,
+        ];
+        var res = [256, 255, 254, 253, 252, 252, 252, 247, 249, 215, 205];
+
+        for (let i = 0; i < nums.length; i++) {
+            expect(await TestCartesiMath.clz(nums[i])).to.be.equal(res[i]);
         }
     });
 });
