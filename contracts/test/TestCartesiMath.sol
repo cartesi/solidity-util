@@ -27,4 +27,12 @@ contract TestCartesiMath {
     function clz(uint _num) public pure returns (uint256) {
         return CartesiMath.clz(_num);
     }
+
+    function getLog2Floor(uint _num) public pure returns (uint256) {
+        return CartesiMath.getLog2Floor(_num);
+    }
+
+    function isPowerOf2(uint _num) public pure returns (bool) {
+        return CartesiMath.isPowerOf2(_num);
+    }
 }
