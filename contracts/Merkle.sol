@@ -103,38 +103,6 @@ library Merkle {
         return hashedZeros;
     }
 
-    function getLog2Floor(uint256 number) public pure returns (uint8) {
-        uint8 result = 0;
-
-        uint256 checkNumber = number;
-        checkNumber = checkNumber >> 1;
-        while (checkNumber > 0) {
-            ++result;
-            checkNumber = checkNumber >> 1;
-        }
-
-        return result;
-    }
-
-    function isPowerOf2(uint256 number) public pure returns (bool) {
-        uint256 checkNumber = number;
-        if (checkNumber == 0) {
-            return false;
-        }
-
-        while ((checkNumber & 1) == 0) {
-            checkNumber = checkNumber >> 1;
-        }
-
-        checkNumber = checkNumber >> 1;
-
-        if (checkNumber == 0) {
-            return true;
-        }
-
-        return false;
-    }
-
     function getMerkleRootFromBytes(
         bytes calldata _data,
         uint8 _log2Size
@@ -235,7 +203,7 @@ library Merkle {
     {
         // revert when the input is not of power of 2
         require(
-            isPowerOf2(hashes.length),
+            (hashes.length).isPowerOf2(),
             "The input array must contain power of 2 elements"
         );
 
