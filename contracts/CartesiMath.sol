@@ -49,7 +49,17 @@ library CartesiMath {
         return uint256(uint24(result));
     }
 
-    // TODO: Fix endianess on ctz and clza
+   function getLog2Floor(uint256 _num) public pure returns (uint8) {
+       require(_num != 0, "log of zero is undefined");
+
+       return uint8(255 - clz(_num));
+    }
+
+    function isPowerOf2(uint256 _num) public pure returns (bool) {
+        if (_num == 0) return false;
+
+        return _num & (_num - 1) == 0;
+    }
 
     /// @notice count trailing zeros
     /// @param _num number you want the ctz of
