@@ -170,7 +170,7 @@ describe("TestCartesiMath", async () => {
     it("ctz", async () => {
         // TODO: Implement ctz function on typescript to calculate ctz of big number
         // so we don't have to have the second array
-        var nums: BigNumberish = [
+        var nums = [
             0,
             2,
             4,
@@ -181,8 +181,16 @@ describe("TestCartesiMath", async () => {
             110,
             2 ** 40,
             2 ** 50,
+            "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "0x7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe",
+            "0x7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0",
+            "0x7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc",
+            "0x7fffffffffffffffffffffffffffffffffffffffffffffffffff000000000000",
+            "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00",
         ];
-        var res = [256, 1, 2, 3, 0, 0, 8, 1, 40, 50];
+        var res = [256, 1, 2, 3, 0, 0, 8, 1, 40, 50, 0, 0, 0, 1, 4, 2, 48, 8];
 
         for (let i = 0; i < nums.length; i++) {
             expect(await TestCartesiMath.ctz(nums[i])).to.be.equal(res[i]);
@@ -192,7 +200,7 @@ describe("TestCartesiMath", async () => {
     it("clz", async () => {
         // TODO: Implement clz function on typescript for big number
         // so we don't have to have the second array
-        var nums: BigNumberish = [
+        var nums = [
             0,
             1,
             2,
@@ -204,11 +212,100 @@ describe("TestCartesiMath", async () => {
             110,
             2 ** 40,
             2 ** 50,
+            0xffff,
+            "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "0x7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe",
+            "0x0000000000000000000000000000ffffffffffffffffffffffff000000000000",
         ];
-        var res = [256, 255, 254, 253, 252, 252, 252, 247, 249, 215, 205];
+        var res = [
+            256,
+            255,
+            254,
+            253,
+            252,
+            252,
+            252,
+            247,
+            249,
+            215,
+            205,
+            240,
+            16,
+            0,
+            1,
+            112,
+        ];
 
         for (let i = 0; i < nums.length; i++) {
             expect(await TestCartesiMath.clz(nums[i])).to.be.equal(res[i]);
         }
     });
+
+    it("isPowerOf2", async () => {
+        var nums = [1, 2, 4, 8, 9, 11, 2 ** 8, 110, 2 ** 40, 2 ** 50, 0xffff];
+
+        var bignums = [
+            0,
+            "0x1000000000000000000000000000000000000000000000000000000000000000",
+            "0x7ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe",
+            "0x1427247692705959881058285969449495136382746624",
+            "0x0000100000000000000000000000000000000000000000000000000000000000",
+            "0x7fffffffffffffffffffffffffffffffffffffffffffffffffff000000000000",
+            "0x0000000000000000000000000000000000100000000000000000000000000000",
+        ];
+        var bigres = [false, true, false, false, true, false, true];
+
+        for (let i = 0; i < nums.length; i++) {
+            expect(await TestCartesiMath.isPowerOf2(nums[i])).to.be.equal(
+                powerOf2(nums[i])
+            );
+        }
+        for (let i = 0; i < bignums.length; i++) {
+            expect(await TestCartesiMath.isPowerOf2(bignums[i])).to.be.equal(
+                bigres[i]
+            );
+        }
+    });
+
+    it("getLog2Floor", async () => {
+
+        await expect(
+            TestCartesiMath.getLog2Floor(0),
+            "log of zero should revert"
+        ).to.be.revertedWith("log of zero is undefined");
+
+        var nums = [1, 2, 4, 8, 9, 11, 2 ** 8, 110, 2 ** 40, 2 ** 50, 0xffff];
+
+        var bignums = [
+            "0x1000000000000000000000000000000000000000000000000000000000000000",
+            "0x0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe",
+            "0x1427247692705959881058285969449495136382746624",
+            "0x0000100000000000000000000000000000000000000000000000000000000000",
+            "0x7fffffffffffffffffffffffffffffffffffffffffffffffffff000000000000",
+            "0x0000000000000000000000000000000000100000000000000000000000000000",
+        ];
+
+        var bigres = [252, 251, 180, 236, 255, 116];
+
+        for (let i = 0; i < nums.length; i++) {
+            expect(await TestCartesiMath.getLog2Floor(nums[i])).to.be.equal(
+                log2F(nums[i])
+            );
+        }
+
+        for (let i = 0; i < bignums.length; i++) {
+            expect(await TestCartesiMath.getLog2Floor(bignums[i])).to.be.equal(
+                bigres[i]
+            );
+        }
+
+    });
 });
+
+function powerOf2(v: number) {
+    return v && !(v & (v - 1));
+}
+function log2F(v: number) {
+    return Math.floor(Math.log2(v));
+}
