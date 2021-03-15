@@ -26,6 +26,7 @@ library CartesiMath {
 
     /// @notice Approximates log2 * 1M
     /// @param _num number to take log2 * 1M of
+    /// @return approximate log2 times 1M
     function log2ApproxTimes1M(uint256 _num) public pure returns (uint256) {
         require(_num > 0, "Number cannot be zero");
         uint256 leading = 0;
@@ -39,6 +40,9 @@ library CartesiMath {
         return (leading.mul(uint256(1000000))).add(getLog2TableTimes1M(_num));
     }
 
+    /// @notice navigates log2tableTimes1M
+    /// @param _num number to take log2 of
+    /// @return result after table look-up
     function getLog2TableTimes1M(uint256 _num) public pure returns (uint256) {
         bytes3 result = 0;
         for (uint8 i = 0; i < 3; i++) {
@@ -49,12 +53,18 @@ library CartesiMath {
         return uint256(uint24(result));
     }
 
+    /// @notice get floor of log2 of number
+    /// @param _num number to take floor(log2) of
+    /// @return floor(log2) of _num
    function getLog2Floor(uint256 _num) public pure returns (uint8) {
        require(_num != 0, "log of zero is undefined");
 
        return uint8(255 - clz(_num));
     }
 
+    /// @notice checks if a number is Power of 2
+    /// @param _num number to check
+    /// @return true if number is power of 2, false if not
     function isPowerOf2(uint256 _num) public pure returns (bool) {
         if (_num == 0) return false;
 
