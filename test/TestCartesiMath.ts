@@ -286,7 +286,7 @@ describe("TestCartesiMath", async () => {
             "0x0000000000000000000000000000000000100000000000000000000000000000",
         ];
 
-        var bigres = [252, 251, 180, 236, 255, 116];
+        var bigres = [252, 251, 180, 236, 254, 116];
 
         for (let i = 0; i < nums.length; i++) {
             expect(await TestCartesiMath.getLog2Floor(nums[i])).to.be.equal(
