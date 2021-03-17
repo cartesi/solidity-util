@@ -20,8 +20,9 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
 
     await deploy("BitsManipulationLibrary", { from: deployer, log: true });
     await deploy("Bitmask", { from: deployer, log: true });
-    await deploy("CartesiMath", { from: deployer, log: true });
-    await deploy("Merkle", { from: deployer, log: true });
+    
+    const cMath = await deploy("CartesiMath", { from: deployer, log: true });
+    await deploy("Merkle", { from: deployer, log: true, libraries: { CartesiMath: cMath.address }});
 };
 
 export default func;
