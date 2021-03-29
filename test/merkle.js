@@ -100,6 +100,7 @@ function computeMerkleRootHashFromHashes(hashes, level, rootLevel) {
  * - Computes hashes for the entries (leaves) and recursively computes the hashes of each pair up to the root.
  * 
  * @param {Buffer} buffer data for which the Merkle root hash will be computed
+ * @param {Number} log2Size log2Size of entire drive, can be bigger than buffer length
  * @return the Merkle root hash
  */
 function computeMerkleRootHash(buffer, log2Size) {
