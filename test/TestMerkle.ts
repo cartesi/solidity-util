@@ -7,7 +7,7 @@ import { TestMerkle__factory } from "../src/types/factories/TestMerkle__factory"
 import {
     getEmptyTreeHash,
     computeMerkleRootHash,
-} from "./../test/util/merkle.js";
+} from "./../test/merkle.js";
 
 import { keccak256 } from "ethers/lib/utils";
 
