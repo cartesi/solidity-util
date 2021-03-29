@@ -167,7 +167,7 @@ describe("TestMerkle", async () => {
                         Buffer.from(testcase),
                         size
                     ),
-                    "Merkle hash of one byte should be equal to keccak of that byte"
+                    `merkle root hash of testcase ${testcase} for size ${size} didn't match`
                 ).to.equal(computeMerkleRootHash(Buffer.from(testcase), size));
             }
         }
@@ -179,7 +179,7 @@ describe("TestMerkle", async () => {
                     Buffer.from(testcases[0]),
                     size
                 ),
-                "Merkle hash of one byte should be equal to keccak of that byte"
+                `merkle root hash for small log2 size of ${size} didn't match`
             ).to.equal(computeMerkleRootHash(Buffer.from(testcases[0]), size));
         }
     });
