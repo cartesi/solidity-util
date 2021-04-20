@@ -11,9 +11,9 @@
 // specific language governing permissions and limitations under the License.
 
 /// @title Library for Merkle proofs
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./CartesiMath.sol";
 
 library Merkle {

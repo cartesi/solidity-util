@@ -12,7 +12,7 @@
 
 /// @title WorkerManager
 /// @author Danilo Tuler
-pragma solidity ^0.7.0;
+pragma solidity >=0.7.0;
 
 interface WorkerManager {
     /// @notice Returns true if worker node is available

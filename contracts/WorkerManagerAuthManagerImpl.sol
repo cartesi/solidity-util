@@ -12,7 +12,7 @@
 
 /// @title WorkerManagerAuthManagerImpl
 /// @author Danilo Tuler
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
 import "./WorkerManager.sol";
 import "./WorkerAuthManager.sol";
@@ -91,7 +91,7 @@ contract WorkerManagerAuthManagerImpl is WorkerManager, WorkerAuthManager {
         require(msg.value <= MAXIMUM_FUNDING, "funding above maximum");
 
         // set owner
-        userOf[_workerAddress] = msg.sender;
+        userOf[_workerAddress] = payable(msg.sender);
 
         // change state
         stateOf[_workerAddress] = WorkerState.Pending;
@@ -126,7 +126,7 @@ contract WorkerManagerAuthManagerImpl is WorkerManager, WorkerAuthManager {
         address payable owner = userOf[msg.sender];
 
         // reset hirer back to null
-        userOf[msg.sender] = address(0);
+        userOf[msg.sender] = payable(address(0));
 
         // change state
         stateOf[msg.sender] = WorkerState.Available;

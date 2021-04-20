@@ -1,0 +1,65 @@
+{
+  "address": "0xB52608A541C983fEEB58c1d7402393A1A783C7d8",
+  "abi": [],
+  "transactionHash": "0x31801dea24ae8f564b729e4ae5127fafa7bd3822eec7827eac5c3da4235b9efb",
+  "receipt": {
+    "to": null,
+    "from": "0x18930e8a66a1DbE21D00581216789AAB7460Afd0",
+    "contractAddress": "0xB52608A541C983fEEB58c1d7402393A1A783C7d8",
+    "transactionIndex": 0,
+    "gasUsed": "171268",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000030000000000000000000000020000000000000000000008000000000000000000000000000000000000000000000000000000000800000000000000000000100000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000004000000000000000000001000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000000024000100000",
+    "blockHash": "0x8127a8ba257ec0e2957b7b90636131630b77afefaa93f470a4290e8620d4207d",
+    "transactionHash": "0x31801dea24ae8f564b729e4ae5127fafa7bd3822eec7827eac5c3da4235b9efb",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 12943404,
+        "transactionHash": "0x31801dea24ae8f564b729e4ae5127fafa7bd3822eec7827eac5c3da4235b9efb",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x00000000000000000000000018930e8a66a1dbe21d00581216789aab7460afd0",
+          "0x000000000000000000000000f903ba9e006193c1527bfbe65fe2123704ea3f99"
+        ],
+        "data": "0x00000000000000000000000000000000000000000000000000124105290ab0000000000000000000000000000000000000000000000000001a082967132e8e000000000000000000000000000000000000000000000000484c4965108120ca9500000000000000000000000000000000000000000000000019f5e861ea23de000000000000000000000000000000000000000000000000484c5ba615aa2b7a95",
+        "logIndex": 0,
+        "blockHash": "0x8127a8ba257ec0e2957b7b90636131630b77afefaa93f470a4290e8620d4207d"
+      }
+    ],
+    "blockNumber": 12943404,
+    "cumulativeGasUsed": "171268",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "solcInputHash": "5b07a7c7918b23d3bd0429b384ba8870",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.3+commit.8d00100c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"Stephen Chen\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Bit Mask Library\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getBit(mapping(uint248 => uint256) storage,uint256)\":{\"notice\":\"Get a bit in the bit mask\"},\"setBit(mapping(uint248 => uint256) storage,uint256,bool)\":{\"notice\":\"Set a bit in the bit mask\"}},\"notice\":\"Implements bit mask with dynamic array\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Bitmask.sol\":\"Bitmask\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Bitmask.sol\":{\"content\":\"// Copyright 2021 Cartesi Pte. Ltd.\\n\\n// SPDX-License-Identifier: Apache-2.0\\n// Licensed under the Apache License, Version 2.0 (the \\\"License\\\"); you may not use\\n// this file except in compliance with the License. You may obtain a copy of the\\n// License at http://www.apache.org/licenses/LICENSE-2.0\\n\\n// Unless required by applicable law or agreed to in writing, software distributed\\n// under the License is distributed on an \\\"AS IS\\\" BASIS, WITHOUT WARRANTIES OR\\n// CONDITIONS OF ANY KIND, either express or implied. See the License for the\\n// specific language governing permissions and limitations under the License.\\n\\npragma solidity ^0.8.0;\\n\\n/// @title Bit Mask Library\\n/// @author Stephen Chen\\n/// @notice Implements bit mask with dynamic array\\nlibrary Bitmask {\\n    /// @notice Set a bit in the bit mask\\n    function setBit(\\n        mapping(uint248 => uint256) storage bitmask,\\n        uint256 _bit,\\n        bool _value\\n    ) public {\\n        // calculate the number of bits has been store in bitmask now\\n        uint248 positionOfMask = uint248(_bit / 256);\\n        uint256 positionOfBit = _bit % 256;\\n\\n        if (_value) {\\n            bitmask[positionOfMask] =\\n                bitmask[positionOfMask] |\\n                (1 << positionOfBit);\\n        } else {\\n            bitmask[positionOfMask] =\\n                bitmask[positionOfMask] &\\n                ~(1 << positionOfBit);\\n        }\\n    }\\n\\n    /// @notice Get a bit in the bit mask\\n    function getBit(mapping(uint248 => uint256) storage bitmask, uint256 _bit)\\n        public\\n        view\\n        returns (bool)\\n    {\\n        // calculate the number of bits has been store in bitmask now\\n        uint248 positionOfMask = uint248(_bit / 256);\\n        uint256 positionOfBit = _bit % 256;\\n\\n        return ((bitmask[positionOfMask] & (1 << positionOfBit)) != 0);\\n    }\\n}\\n\",\"keccak256\":\"0x69f3ae9c413903ba715139aa8c808ad7bedffdd1bad23c3944f4657f8674171f\",\"license\":\"Apache-2.0\"}},\"version\":1}",
+  "bytecode": "0x61022261003a600b82828239805160001a60731461002d57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106100405760003560e01c806361d26f481461004557806366817f0b1461006c575b600080fd5b610058610053366004610151565b61008e565b604051901515815260200160405180910390f35b81801561007857600080fd5b5061008c610087366004610172565b6100db565b005b60008061009d610100846101ae565b905060006100ad610100856101c2565b6001600160f81b03909216600090815260208690526040902054600190921b91909116151591505092915050565b60006100e9610100846101ae565b905060006100f9610100856101c2565b90508215610127576001600160f81b038216600090815260208690526040902080546001831b17905561014a565b6001600160f81b038216600090815260208690526040902080546001831b191690555b5050505050565b60008060408385031215610163578182fd5b50508035926020909101359150565b600080600060608486031215610186578081fd5b8335925060208401359150604084013580151581146101a3578182fd5b809150509250925092565b6000826101bd576101bd6101d6565b500490565b6000826101d1576101d16101d6565b500690565b634e487b7160e01b600052601260045260246000fdfea26469706673582212209638fbb04c6ba8b9fe87af5c930c7823e08e1aa1836e5c2963339b1fc59eedbe64736f6c63430008030033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600436106100405760003560e01c806361d26f481461004557806366817f0b1461006c575b600080fd5b610058610053366004610151565b61008e565b604051901515815260200160405180910390f35b81801561007857600080fd5b5061008c610087366004610172565b6100db565b005b60008061009d610100846101ae565b905060006100ad610100856101c2565b6001600160f81b03909216600090815260208690526040902054600190921b91909116151591505092915050565b60006100e9610100846101ae565b905060006100f9610100856101c2565b90508215610127576001600160f81b038216600090815260208690526040902080546001831b17905561014a565b6001600160f81b038216600090815260208690526040902080546001831b191690555b5050505050565b60008060408385031215610163578182fd5b50508035926020909101359150565b600080600060608486031215610186578081fd5b8335925060208401359150604084013580151581146101a3578182fd5b809150509250925092565b6000826101bd576101bd6101d6565b500490565b6000826101d1576101d16101d6565b500690565b634e487b7160e01b600052601260045260246000fdfea26469706673582212209638fbb04c6ba8b9fe87af5c930c7823e08e1aa1836e5c2963339b1fc59eedbe64736f6c63430008030033",
+  "devdoc": {
+    "author": "Stephen Chen",
+    "kind": "dev",
+    "methods": {},
+    "title": "Bit Mask Library",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getBit(mapping(uint248 => uint256) storage,uint256)": {
+        "notice": "Get a bit in the bit mask"
+      },
+      "setBit(mapping(uint248 => uint256) storage,uint256,bool)": {
+        "notice": "Set a bit in the bit mask"
+      }
+    },
+    "notice": "Implements bit mask with dynamic array",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

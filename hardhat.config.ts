@@ -1,4 +1,4 @@
-// Copyright 2020 Cartesi Pte. Ltd.
+// Copyright 2021 Cartesi Pte. Ltd.
 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not
 // use this file except in compliance with the License. You may obtain a copy
@@ -14,9 +14,9 @@ import { HardhatUserConfig } from "hardhat/config";
 import { HttpNetworkUserConfig } from "hardhat/types";
 
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers";
 import "hardhat-typechain";
 import "hardhat-deploy";
-import "hardhat-deploy-ethers";
 
 // read MNEMONIC from file or from env variable
 let mnemonic = process.env.MNEMONIC;
@@ -62,12 +62,16 @@ const config: HardhatUserConfig = {
         },
     },
     solidity: {
-        version: "0.7.4",
-        settings: {
-            optimizer: {
-                enabled: true,
+        compilers: [
+            {
+                version: "0.8.4",
+                settings: {
+                    optimizer: {
+                        enabled: true,
+                    },
+                },
             },
-        },
+        ],
     },
     paths: {
         artifacts: "artifacts",

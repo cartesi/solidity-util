@@ -11,7 +11,7 @@
 // specific language governing permissions and limitations under the License.
 
 /// @title Test CartesiMath
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
 import "../CartesiMath.sol";
 
@@ -20,19 +20,19 @@ contract TestCartesiMath {
         return CartesiMath.getLog2TableTimes1M(_num);
     }
 
-    function ctz(uint _num) public pure returns (uint256) {
+    function ctz(uint256 _num) public pure returns (uint256) {
         return CartesiMath.ctz(_num);
     }
 
-    function clz(uint _num) public pure returns (uint256) {
+    function clz(uint256 _num) public pure returns (uint256) {
         return CartesiMath.clz(_num);
     }
 
-    function getLog2Floor(uint _num) public pure returns (uint256) {
+    function getLog2Floor(uint256 _num) public pure returns (uint256) {
         return CartesiMath.getLog2Floor(_num);
     }
 
-    function isPowerOf2(uint _num) public pure returns (bool) {
+    function isPowerOf2(uint256 _num) public pure returns (bool) {
         return CartesiMath.isPowerOf2(_num);
     }
 }

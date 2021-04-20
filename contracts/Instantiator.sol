@@ -10,10 +10,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-
-pragma solidity ^0.7.0;
-
-
+pragma solidity >=0.7.0;
 interface Instantiator {
 
     modifier onlyInstantiated(uint256 _index) virtual;

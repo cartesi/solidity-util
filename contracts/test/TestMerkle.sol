@@ -11,16 +11,15 @@
 // specific language governing permissions and limitations under the License.
 
 /// @title Test Merkle
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
 import "../Merkle.sol";
 
 contract TestMerkle {
-    
-    function getPristineHash(uint8 _log2Size) public pure returns (bytes32) {        
+    function getPristineHash(uint8 _log2Size) public pure returns (bytes32) {
         return Merkle.getPristineHash(_log2Size);
     }
-    
+
     function getRoot(
         uint64 _position,
         bytes8 _value,
@@ -46,21 +45,19 @@ contract TestMerkle {
         return Merkle.getEmptyTreeHashAtIndex(_index);
     }
 
-    function getMerkleRootFromBytes(
-        bytes calldata _data,
-        uint8 _log2Size
-    )
-    public
-    pure
-    returns (bytes32)
+    function getMerkleRootFromBytes(bytes calldata _data, uint8 _log2Size)
+        public
+        pure
+        returns (bytes32)
     {
         return Merkle.getMerkleRootFromBytes(_data, _log2Size);
     }
 
-    function getHashOfWordAtIndex(
-        bytes calldata _data,
-        uint256 _wordIndex
-    ) public pure returns (bytes32) {
+    function getHashOfWordAtIndex(bytes calldata _data, uint256 _wordIndex)
+        public
+        pure
+        returns (bytes32)
+    {
         return Merkle.getHashOfWordAtIndex(_data, _wordIndex);
     }
 

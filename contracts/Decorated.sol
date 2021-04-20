@@ -10,8 +10,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-pragma solidity ^0.7.0;
-
+pragma solidity ^0.8.0;
 
 contract Decorated {
     // This contract defines several modifiers but does not use

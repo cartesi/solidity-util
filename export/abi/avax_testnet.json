@@ -2,8 +2,12 @@
   "name": "avax_testnet",
   "chainId": "43113",
   "contracts": {
+    "Bitmask": {
+      "address": "0xA45373c2A4162fDac0CD744b4B0a625D6218D968",
+      "abi": []
+    },
     "BitsManipulationLibrary": {
-      "address": "0xdecac9ff6b588642887414e85dfdde740a797f56",
+      "address": "0xB9e53Aba9EA0c20A82a6155EAd12aedfF56f33aB",
       "abi": [
         {
           "inputs": [
@@ -94,8 +98,65 @@
       ]
     },
     "CartesiMath": {
-      "address": "0x50bEFaEfD3AAaFac11Fd936A8dfEB1050eC5Cf00",
+      "address": "0xf8781c9Dd78AC1815a3EFCa57a9c70538985F456",
       "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "clz",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "ctz",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "getLog2Floor",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
         {
           "inputs": [
             {
@@ -123,6 +184,25 @@
               "type": "uint256"
             }
           ],
+          "name": "isPowerOf2",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
           "name": "log2ApproxTimes1M",
           "outputs": [
             {
@@ -137,7 +217,7 @@
       ]
     },
     "Merkle": {
-      "address": "0x89f1f1bc37Ef872ff0073bee7eE6d6B0D94Fd166",
+      "address": "0xc97d900c8cBC72D7512C68a8a21cC98107E0581C",
       "abi": [
         {
           "inputs": [
@@ -162,16 +242,64 @@
           "inputs": [
             {
               "internalType": "uint256",
-              "name": "number",
+              "name": "_index",
               "type": "uint256"
             }
           ],
-          "name": "getLog2Floor",
+          "name": "getEmptyTreeHashAtIndex",
           "outputs": [
             {
-              "internalType": "uint8",
+              "internalType": "bytes32",
               "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_wordIndex",
+              "type": "uint256"
+            }
+          ],
+          "name": "getHashOfWordAtIndex",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint8",
+              "name": "_log2Size",
               "type": "uint8"
+            }
+          ],
+          "name": "getMerkleRootFromBytes",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
             }
           ],
           "stateMutability": "pure",
@@ -258,30 +386,11 @@
           ],
           "stateMutability": "pure",
           "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "number",
-              "type": "uint256"
-            }
-          ],
-          "name": "isPowerOf2",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
         }
       ]
     },
     "WorkerAuthManagerImpl": {
-      "address": "0x3F62ccC0e41287ea4d28dce6582a215B75bB43fd",
+      "address": "0xA46559148B1998Cc0DdE13f875b2E1e39C3f2675",
       "abi": [
         {
           "inputs": [
@@ -426,7 +535,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x7db3A9BdA16D1C295b23B94a61808EFf82288269",
+      "address": "0x38A9ab53468302660F07a07d429912FE43c9198c",
       "abi": [
         {
           "anonymous": false,
@@ -802,7 +911,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0x91E780568A1FEdd5d01E1c1E4cAed68E3a849345",
+      "address": "0x19bCDEbeDcdBABA3993B78A9a522e1EB44BD8dE3",
       "abi": [
         {
           "anonymous": false,

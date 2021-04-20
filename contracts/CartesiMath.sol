@@ -12,9 +12,9 @@
 
 /// @title CartesiMath
 /// @author Felipe Argento
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 library CartesiMath {
     using SafeMath for uint256;
