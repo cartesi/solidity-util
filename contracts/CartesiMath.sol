@@ -14,11 +14,7 @@
 /// @author Felipe Argento
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-
 library CartesiMath {
-    using SafeMath for uint256;
-
     // mapping values are packed as bytes3 each
     // see test/TestCartesiMath.ts for decimal values
     bytes constant log2tableTimes1M =
@@ -37,7 +33,7 @@ library CartesiMath {
             _num = _num >> 1;
             leading += 1;
         }
-        return (leading.mul(uint256(1000000))).add(getLog2TableTimes1M(_num));
+        return (leading * uint256(1000000)) + (getLog2TableTimes1M(_num));
     }
 
     /// @notice navigates log2tableTimes1M
