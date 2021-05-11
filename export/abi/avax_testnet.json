@@ -6,8 +6,8 @@
       "address": "0xf43C2FDc144a35bf1432d316D71FAC8A7353E5B5",
       "abi": []
     },
-    "BitsManipulationLibrary": {
-      "address": "0x6807D667C6E5eb41663774d059A6DC09d68D0025",
+    "BitsManipulation": {
+      "address": "0x15b9aA4B4b97429B04494e1505eae8979a1efdB5",
       "abi": [
         {
           "inputs": [

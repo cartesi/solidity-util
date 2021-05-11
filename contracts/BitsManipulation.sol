@@ -15,7 +15,7 @@ pragma solidity ^0.8.0;
 /// @title Bits Manipulation Library
 /// @author Felipe Argento / Stephen Chen
 /// @notice Implements bit manipulation helper functions
-library BitsManipulationLibrary {
+library BitsManipulation {
 
     /// @notice Sign extend a shorter signed value to the full int32
     /// @param number signed number to be extended

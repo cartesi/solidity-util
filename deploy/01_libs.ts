@@ -1,4 +1,4 @@
-// Copyright 2020 Cartesi Pte. Ltd.
+// Copyright 2021 Cartesi Pte. Ltd.
 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not
 // use this file except in compliance with the License. You may obtain a copy
@@ -18,7 +18,7 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
 
-    await deploy("BitsManipulationLibrary", { from: deployer, log: true });
+    await deploy("BitsManipulation", { from: deployer, log: true });
     await deploy("Bitmask", { from: deployer, log: true });
     
     const cMath = await deploy("CartesiMath", { from: deployer, log: true });
