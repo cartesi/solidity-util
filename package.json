@@ -45,8 +45,7 @@
         "solhint": "Run solidity linter",
         "test": "Run unit tests"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "@nomiclabs/hardhat-ethers": "^2.0.2",
         "@nomiclabs/hardhat-etherscan": "^2.1.2",
@@ -54,6 +53,7 @@
         "@typechain/ethers-v5": "^7.0.0",
         "@typechain/hardhat": "^2.0.0",
         "@types/chai": "^4.2.18",
+        "@types/keccak": "^3.0.1",
         "@types/mocha": "^8.0.4",
         "@types/node": "^15.0.2",
         "chai": "^4.2.0",

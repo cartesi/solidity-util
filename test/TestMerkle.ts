@@ -16,7 +16,7 @@ import { solidity } from "ethereum-waffle";
 
 import { TestMerkle } from "../src/types/TestMerkle";
 import { TestMerkle__factory } from "../src/types/factories/TestMerkle__factory";
-import { getEmptyTreeHash, computeMerkleRootHash } from "./../test/merkle.js";
+import { getEmptyTreeHash, computeMerkleRootHash } from "../src/util/merkle";
 
 import { keccak256 } from "ethers/lib/utils";
 
