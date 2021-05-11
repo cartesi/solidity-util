@@ -3,11 +3,11 @@
   "chainId": "5",
   "contracts": {
     "Bitmask": {
-      "address": "0x915C0A72d0a9Dde3a969A1F3E8545fe19a180750",
+      "address": "0x019fF728c806ffd6adEb04C9bcf5F212256706a8",
       "abi": []
     },
     "BitsManipulationLibrary": {
-      "address": "0x771A388Fa6FE46e75a0bB92c7334c2baC5bA1389",
+      "address": "0xb6DeF62356727ACBaD38591072201D7c2141b4C9",
       "abi": [
         {
           "inputs": [
@@ -98,7 +98,7 @@
       ]
     },
     "CartesiMath": {
-      "address": "0xE664Ac61a0cE14F04f7C5b8d201907D80bBBb7B4",
+      "address": "0x24d2e7614df0065905eDA989aC26D89161923aad",
       "abi": [
         {
           "inputs": [
@@ -217,7 +217,7 @@
       ]
     },
     "Merkle": {
-      "address": "0xDc6317532F3CFA662275A99D5222e3043d1e1F20",
+      "address": "0x1D2634800a509B8606150CFaD818a0672FA8CC40",
       "abi": [
         {
           "inputs": [
@@ -390,7 +390,7 @@
       ]
     },
     "WorkerAuthManagerImpl": {
-      "address": "0x0AEbE08bEC556eC528cD1b1A762D66651cFC932C",
+      "address": "0xbF8C35218c26B0811f906827B79e43B1F7D4b53A",
       "abi": [
         {
           "inputs": [
@@ -535,7 +535,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x3817201A9d219bcD76225Be9d8732dfD99bE659a",
+      "address": "0x4b8F3618E09000D2155cB49c5bF8F1B438a32c04",
       "abi": [
         {
           "anonymous": false,
@@ -911,7 +911,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0x280C47f810C60Cb0552486eA4a2525aE82Da53D1",
+      "address": "0x001990D73898A115d4F5D3F750F9003E49E9FDFD",
       "abi": [
         {
           "anonymous": false,
