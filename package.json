@@ -46,7 +46,6 @@
         "test": "Run unit tests"
     },
     "dependencies": {
-        "@openzeppelin/contracts": "4.1.0"
     },
     "devDependencies": {
         "@nomiclabs/hardhat-ethers": "^2.0.2",
