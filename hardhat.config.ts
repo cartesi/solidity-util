@@ -15,7 +15,7 @@ import { HttpNetworkUserConfig } from "hardhat/types";
 
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-ethers";
-import "hardhat-typechain";
+import "@typechain/hardhat";
 import "hardhat-deploy";
 
 // read MNEMONIC from file or from env variable
