@@ -13,12 +13,10 @@
 /// @title Library for Merkle proofs
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./CartesiMath.sol";
 
 library Merkle {
     using CartesiMath for uint256;
-    using SafeMath for uint256;
 
     uint256 constant L_WORD_SIZE = 3; // word = 8 bytes, log = 3
 
@@ -108,8 +106,8 @@ library Merkle {
         pure
         returns (bytes32)
     {
-        uint256 start = _index.mul(32);
-        require(EMPTY_TREE_SIZE >= start.add(32), "index out of bounds");
+        uint256 start = _index * 32;
+        require(EMPTY_TREE_SIZE >= start + 32, "index out of bounds");
         bytes32 hashedZeros;
         bytes memory zeroTree = EMPTY_TREE_HASHES;
 
@@ -169,7 +167,7 @@ library Merkle {
                 stack[stackLength] = getEmptyTreeHashAtIndex(topStackLevel);
 
                 //Empty Tree Hash summarizes many hashes
-                numOfHashes = numOfHashes.add(1 << topStackLevel);
+                numOfHashes = numOfHashes + (1 << topStackLevel);
                 numOfJoins = numOfHashes >> topStackLevel;
             }
 
@@ -181,7 +179,7 @@ library Merkle {
                 bytes32 h1 = stack[stackLength - 2];
 
                 stack[stackLength - 2] = keccak256(abi.encodePacked(h1, h2));
-                stackLength = stackLength.sub(1); // remove hashes from stack
+                stackLength = stackLength - 1; // remove hashes from stack
 
                 numOfJoins = numOfJoins >> 1;
             }
@@ -204,7 +202,7 @@ library Merkle {
         returns (bytes32)
     {
         uint256 start = _wordIndex << L_WORD_SIZE;
-        uint256 end = start.add(1 << L_WORD_SIZE);
+        uint256 end = start + (1 << L_WORD_SIZE);
 
         // TODO: in .lua this just returns zero, but this might be more consistent
         require(start <= _data.length, "word out of bounds");
@@ -216,10 +214,10 @@ library Merkle {
         // word is incomplete
         // fill paddedSlice with incomplete words - the rest is going to be bytes(0)
         bytes memory paddedSlice = new bytes(8);
-        uint256 remaining = _data.length.sub(start);
+        uint256 remaining = _data.length - start;
 
         for (uint256 i = 0; i < remaining; i++) {
-            paddedSlice[i] = _data[start.add(i)];
+            paddedSlice[i] = _data[start + i];
         }
 
         return keccak256(paddedSlice);
