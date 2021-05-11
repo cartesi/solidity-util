@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [CartesiMath] Gas optimization
 - [Merkle] Bug fixes
 - [Merkle] Using CartesiMath as library
+- Removed `mainnet` deployment (will be back in a future release)
 
 ### Added
 
