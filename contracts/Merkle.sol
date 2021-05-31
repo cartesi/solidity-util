@@ -74,28 +74,50 @@ library Merkle {
         bytes32 _drive,
         bytes32[] memory siblings
     ) public pure returns (bytes32) {
-        require(_logOfSize >= 3, "Must be at least a word");
-        require(_logOfSize <= 64, "Cannot be bigger than the machine itself");
+        // treating the full 2**64 machine as a drive
+        return getRootAfterReplacementInDrive(
+            _position,
+            _logOfSize,
+            64,
+            _drive,
+            siblings
+        );
+    }
 
-        uint64 size = uint64(2)**_logOfSize;
+    /// @notice Gets merkle root hash of drive with a replacement
+    /// @param _position position of _drive
+    /// @param _logSizeOfReplacement log2 of size the replacement
+    /// @param _logSizeOfFullDrive log2 of size the full drive, which can be the entire machine
+    /// @param _replacement hash of the replacement
+    /// @param siblings of replacement that merkle root can be calculated
+    function getRootAfterReplacementInDrive(
+        uint64 _position,
+        uint8 _logSizeOfReplacement,
+        uint8 _logSizeOfFullDrive,
+        bytes32 _replacement,
+        bytes32[] memory siblings
+    ) public pure returns (bytes32) {
+        require(_logSizeOfFullDrive >= _logSizeOfReplacement, "Replacement bigger than original drive");
+        require(_logSizeOfReplacement >= 3, "Replacement must be at least one word");
+        require(_logSizeOfFullDrive <= 64, "Full drive can't be bigger than the machine itself");
+
+        uint64 size = uint64(1) << _logSizeOfReplacement;
 
         require(((size - 1) & _position) == 0, "Position is not aligned");
         require(
-            siblings.length == 64 - _logOfSize,
+            siblings.length == _logSizeOfFullDrive - _logSizeOfReplacement,
             "Proof length does not match"
         );
 
-        bytes32 drive = _drive;
-
         for (uint64 i = 0; i < siblings.length; i++) {
             if ((_position & (size << i)) == 0) {
-                drive = keccak256(abi.encodePacked(drive, siblings[i]));
+                _replacement = keccak256(abi.encodePacked(_replacement, siblings[i]));
             } else {
-                drive = keccak256(abi.encodePacked(siblings[i], drive));
+                _replacement = keccak256(abi.encodePacked(siblings[i], _replacement));
             }
         }
 
-        return drive;
+        return _replacement;
     }
 
     /// @notice Gets precomputed hash of zero in empty tree hashes
