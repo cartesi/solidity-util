@@ -60,7 +60,13 @@ library Merkle {
     ) public pure returns (bytes32) {
         bytes32 runningHash = keccak256(abi.encodePacked(_value));
 
-        return getRootWithDrive(_position, 3, runningHash, proof);
+        return getRootAfterReplacementInDrive(
+            _position,
+            3,
+            64,
+            runningHash,
+            proof
+        );
     }
 
     /// @notice Gets merkle root hash of machine with drive _drive
