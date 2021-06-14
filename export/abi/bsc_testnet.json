@@ -217,7 +217,7 @@
       ]
     },
     "Merkle": {
-      "address": "0x25273575e86D9DC56F813f5F21D4C5b9d3982283",
+      "address": "0x96A164F172398Fa65D92CF592FE44AF6C4b36991",
       "abi": [
         {
           "inputs": [
@@ -343,6 +343,45 @@
             }
           ],
           "name": "getRoot",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint64",
+              "name": "_position",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint8",
+              "name": "_logSizeOfReplacement",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "_logSizeOfFullDrive",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "_replacement",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32[]",
+              "name": "siblings",
+              "type": "bytes32[]"
+            }
+          ],
+          "name": "getRootAfterReplacementInDrive",
           "outputs": [
             {
               "internalType": "bytes32",
