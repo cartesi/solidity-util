@@ -36,7 +36,7 @@
         "deploy:goerli": "Deploy contracts to goerli. Requires two environment variables: PROJECT_ID and MNEMONIC.",
         "deploy:kovan": "Deploy contracts to kovan. Requires two environment variables: PROJECT_ID and MNEMONIC.",
         "deploy:mainnet": "Deploy contracts to mainnet.",
-        "deploy:matic_testnet": "Deploy contracts to matic_testnet.",
+        "deploy:matic_testnet": "Deploy contracts to matic_testnet. Requires two environment variables: PROJECT_ID and MNEMONIC.",
         "deploy:avax_testnet": "Deploy contracts to avax_testnet.",
         "deploy:rinkeby": "Deploy contracts to rinkeby. Requires two environment variables: PROJECT_ID and MNEMONIC.",
         "deploy:ropsten": "Deploy contracts to ropsten. Requires two environment variables: PROJECT_ID and MNEMONIC.",
