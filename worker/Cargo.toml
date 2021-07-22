@@ -7,11 +7,11 @@ edition = "2018"
 
 [dependencies]
 async-trait = "0.1"
-block_subscriber = { path = "../dispatcher-v2/block_subscriber"}
-dispatcher = { path = "../dispatcher-v2/dispatcher"}
-middleware_factory = { path = "../dispatcher-v2/middleware_factory"}
-transaction_manager = { path = "../dispatcher-v2/transaction_manager"}
-ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "66a503d" }
+block-subscriber = { git = "https://github.com/cartesi/offchain-utils", rev = "bcab565" }
+offchain-core = { git = "https://github.com/cartesi/offchain-utils", rev = "bcab565" }
+state-fold = { git = "https://github.com/cartesi/state-fold", rev = "ace5480" }
+tx-manager = { git = "https://github.com/cartesi/tx-manager", rev = "a6a2d1f" }
+ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
 ethabi = { version = "14.0.0", default-features = false }
 futures = "0.3"
 im = "15.0"
@@ -20,5 +20,5 @@ snafu = "0.6"
 tokio = { version = "^1", features = ["sync", "rt-multi-thread", "macros"] }
 
 [build-dependencies]
-ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "66a503d" }
+ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
 serde_json = "1.0"

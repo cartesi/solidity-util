@@ -22,3 +22,4 @@
 #![warn(unused_extern_crates)]
 pub mod fold;
 pub mod worker_lib;
+pub mod worker_logic;

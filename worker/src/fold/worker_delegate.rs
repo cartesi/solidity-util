@@ -2,13 +2,13 @@ use crate::worker_lib::WorkerStatus;
 
 use super::contracts::worker_contract;
 
-use dispatcher::state_fold::{
+use offchain_core::types::Block;
+use state_fold::{
     delegate_access::{FoldAccess, SyncAccess},
     error::*,
     types::*,
     utils as fold_utils,
 };
-use dispatcher::types::Block;
 
 use async_trait::async_trait;
 use ethers::types::Address;
@@ -65,8 +65,6 @@ impl StateFoldDelegate for WorkerFoldDelegate {
                 err: "Error querying for worker events",
             })?;
 
-        println!("Sync events {:?}", events);
-
         let last_event = events
             .into_iter()
             .filter(|e| match e {
@@ -116,8 +114,6 @@ impl StateFoldDelegate for WorkerFoldDelegate {
             .context(FoldContractError {
                 err: "Error querying for worker events",
             })?;
-
-        println!("Fold events {:?}", events);
 
         let last_event = events
             .into_iter()
