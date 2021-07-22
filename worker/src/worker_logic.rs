@@ -26,8 +26,10 @@ impl WorkerStatus {
         PF: ProviderFactory + Send + Sync + 'static,
         BS: NewBlockSubscriber + Send + Sync + 'static,
     {
-        let contract =
-            worker_contract::WorkerManagerAuthManagerImpl::new(worker_manager_address, client);
+        let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
+            worker_manager_address,
+            client,
+        );
 
         match self {
             WorkerStatus::Pending(user_address) => {

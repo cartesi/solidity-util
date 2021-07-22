@@ -27,7 +27,10 @@ pub struct WorkerFoldDelegate {
 }
 
 impl WorkerFoldDelegate {
-    pub fn new(worker_manager_address: Address, worker_address: Address) -> Self {
+    pub fn new(
+        worker_manager_address: Address,
+        worker_address: Address,
+    ) -> Self {
         WorkerFoldDelegate {
             worker_manager_address,
             worker_address,
