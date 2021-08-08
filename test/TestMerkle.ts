@@ -16,7 +16,11 @@ import { solidity } from "ethereum-waffle";
 
 import { TestMerkle } from "../src/types/TestMerkle";
 import { TestMerkle__factory } from "../src/types/factories/TestMerkle__factory";
-import { getEmptyTreeHash, computeMerkleRootHash } from "../src/util/merkle";
+import {
+    getEmptyTreeHash,
+    computeMerkleRootHash,
+    computeMerkleRootHashFromHashes,
+} from "../src/util/merkle";
 
 import { keccak256 } from "ethers/lib/utils";
 
@@ -97,25 +101,26 @@ describe("TestMerkle", async () => {
         TestMerkle = TestMerkle__factory.connect(address, user);
     });
 
-    it("getPristineHash", async () => {
-        await expect(
-            TestMerkle.getPristineHash(2),
-            "pristine hash should revert if log2size is <3"
-        ).to.be.reverted;
+    // This function `getPristineHash` is deprecated
+    // it("getPristineHash", async () => {
+    //     await expect(
+    //         TestMerkle.getPristineHash(2),
+    //         "pristine hash should revert if log2size is <3"
+    //     ).to.be.reverted;
 
-        await expect(
-            TestMerkle.getPristineHash(65),
-            "pristine hash should revert if log2size is > 64"
-        ).to.be.reverted;
+    //     await expect(
+    //         TestMerkle.getPristineHash(65),
+    //         "pristine hash should revert if log2size is > 64"
+    //     ).to.be.reverted;
 
-        for (let i = 0; i < 61; i++) {
-            var pristine = await TestMerkle.getPristineHash(i + 3);
+    //     for (let i = 0; i < 61; i++) {
+    //         var pristine = await TestMerkle.getPristineHash(i + 3);
 
-            expect(pristine).to.be.equal(
-                "0x" + getEmptyTreeHash(i).toString("hex")
-            );
-        }
-    });
+    //         expect(pristine).to.be.equal(
+    //             "0x" + getEmptyTreeHash(i).toString("hex")
+    //         );
+    //     }
+    // });
 
     it("getEmptyTreeHash", async () => {
         await expect(
@@ -155,7 +160,7 @@ describe("TestMerkle", async () => {
             expect(
                 await TestMerkle.getMerkleRootFromBytes([], i),
                 "empyt data should return pristine hash"
-            ).to.equal(await TestMerkle.getPristineHash(i));
+            ).to.equal(zeroMerkle[i - 3]);
         }
 
         // different inputs
@@ -222,6 +227,300 @@ describe("TestMerkle", async () => {
         await expect(
             TestMerkle.getHashOfWordAtIndex(fullstring, fullstring.length + 1),
             "hash lookup after index should revert"
+        ).to.be.reverted;
+    });
+
+    it("getRootAfterReplacementInDrive", async () => {
+        // simulate test cases in OutputImpl.ts
+        // *** test case 1 ***
+        let position = 0;
+        let logSizeOfReplacement = 5;
+        let logSizeOfFullDrive = 21;
+        // the value of replacement should be '0x8753642e49d77fee978f980a21debd480e8243a4b5f5732ac7bd07b851911847' calculated from keccak
+        let replacement = await TestMerkle.getMerkleRootFromBytes(
+            "0x506fd6f6d63fb8676828b1a34518656754450a35c72cfcbc1d5514d954a3aea9",
+            logSizeOfReplacement
+        );
+        // siblings from bottom up
+        let siblings = [
+            "0xae39ce8537aca75e2eff3e38c98011dfe934e700a0967732fc07b430dd656a23",
+            "0x3fc9a15f5b4869c872f81087bb6104b7d63e6f9ab47f2c43f3535eae7172aa7f",
+            "0x17d2dd614cddaa4d879276b11e0672c9560033d3e8453a1d045339d34ba601b9",
+            "0xc37b8b13ca95166fb7af16988a70fcc90f38bf9126fd833da710a47fb37a55e6",
+            "0x8e7a427fa943d9966b389f4f257173676090c6e95f43e2cb6d65f8758111e309",
+            "0x30b0b9deb73e155c59740bacf14a6ff04b64bb8e201a506409c3fe381ca4ea90",
+            "0xcd5deac729d0fdaccc441d09d7325f41586ba13c801b7eccae0f95d8f3933efe",
+            "0xd8b96e5b7f6f459e9cb6a2f41bf276c7b85c10cd4662c04cbbb365434726c0a0",
+            "0xc9695393027fb106a8153109ac516288a88b28a93817899460d6310b71cf1e61",
+            "0x63e8806fa0d4b197a259e8c3ac28864268159d0ac85f8581ca28fa7d2c0c03eb",
+            "0x91e3eee5ca7a3da2b3053c9770db73599fb149f620e3facef95e947c0ee860b7",
+            "0x2122e31e4bbd2b7c783d79cc30f60c6238651da7f0726f767d22747264fdb046",
+            "0xf7549f26cc70ed5e18baeb6c81bb0625cb95bb4019aeecd40774ee87ae29ec51",
+            "0x7a71f6ee264c5d761379b3d7d617ca83677374b49d10aec50505ac087408ca89",
+            "0x2b573c267a712a52e1d06421fe276a03efb1889f337201110fdc32a81f8e1524",
+            "0x99af665835aabfdc6740c7e2c3791a31c3cdc9f5ab962f681b12fc092816a62f",
+        ];
+
+        expect(
+            await TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                logSizeOfReplacement,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            ),
+            "test case 1"
+        ).to.equal(
+            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9"
+        );
+
+        // *** test case 2 ***
+        position = 1 << logSizeOfReplacement; // index 1
+        logSizeOfFullDrive = 37;
+        replacement = keccak256(
+            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9"
+        );
+        siblings = [
+            "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
+            "0x633dc4d7da7256660a892f8f1604a44b5432649cc8ec5cb3ced4c4e6ac94dd1d",
+            "0x890740a8eb06ce9be422cb8da5cdafc2b58c0a5e24036c578de2a433c828ff7d",
+            "0x3b8ec09e026fdc305365dfc94e189a81b38c7597b3d941c279f042e8206e0bd8",
+            "0xecd50eee38e386bd62be9bedb990706951b65fe053bd9d8a521af753d139e2da",
+            "0xdefff6d330bb5403f63b14f33b578274160de3a50df4efecf0e0db73bcdd3da5",
+            "0x617bdd11f7c0a11f49db22f629387a12da7596f9d1704d7465177c63d88ec7d7",
+            "0x292c23a9aa1d8bea7e2435e555a4a60e379a5a35f3f452bae60121073fb6eead",
+            "0xe1cea92ed99acdcb045a6726b2f87107e8a61620a232cf4d7d5b5766b3952e10",
+            "0x7ad66c0a68c72cb89e4fb4303841966e4062a76ab97451e3b9fb526a5ceb7f82",
+            "0xe026cc5a4aed3c22a58cbd3d2ac754c9352c5436f638042dca99034e83636516",
+            "0x3d04cffd8b46a874edf5cfae63077de85f849a660426697b06a829c70dd1409c",
+            "0xad676aa337a485e4728a0b240d92b3ef7b3c372d06d189322bfd5f61f1e7203e",
+            "0xa2fca4a49658f9fab7aa63289c91b7c7b6c832a6d0e69334ff5b0a3483d09dab",
+            "0x4ebfd9cd7bca2505f7bef59cc1c12ecc708fff26ae4af19abe852afe9e20c862",
+            "0x2def10d13dd169f550f578bda343d9717a138562e0093b380a1120789d53cf10",
+            "0x776a31db34a1a0a7caaf862cffdfff1789297ffadc380bd3d39281d340abd3ad",
+            "0xe2e7610b87a5fdf3a72ebe271287d923ab990eefac64b6e59d79f8b7e08c46e3",
+            "0x504364a5c6858bf98fff714ab5be9de19ed31a976860efbd0e772a2efe23e2e0",
+            "0x4f05f4acb83f5b65168d9fef89d56d4d77b8944015e6b1eed81b0238e2d0dba3",
+            "0x44a6d974c75b07423e1d6d33f481916fdd45830aea11b6347e700cd8b9f0767c",
+            "0xedf260291f734ddac396a956127dde4c34c0cfb8d8052f88ac139658ccf2d507",
+            "0x6075c657a105351e7f0fce53bc320113324a522e8fd52dc878c762551e01a46e",
+            "0x6ca6a3f763a9395f7da16014725ca7ee17e4815c0ff8119bf33f273dee11833b",
+            "0x1c25ef10ffeb3c7d08aa707d17286e0b0d3cbcb50f1bd3b6523b63ba3b52dd0f",
+            "0xfffc43bd08273ccf135fd3cacbeef055418e09eb728d727c4d5d5c556cdea7e3",
+            "0xc5ab8111456b1f28f3c7a0a604b4553ce905cb019c463ee159137af83c350b22",
+            "0x0ff273fcbf4ae0f2bd88d6cf319ff4004f8d7dca70d4ced4e74d2c74139739e6",
+            "0x7fa06ba11241ddd5efdc65d4e39c9f6991b74fd4b81b62230808216c876f827c",
+            "0x7e275adf313a996c7e2950cac67caba02a5ff925ebf9906b58949f3e77aec5b9",
+            "0x8f6162fa308d2b3a15dc33cffac85f13ab349173121645aedf00f471663108be",
+            "0x78ccaaab73373552f207a63599de54d7d8d0c1805f86ce7da15818d09f4cff62",
+        ];
+
+        expect(
+            await TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                logSizeOfReplacement,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            ),
+            "test case 2"
+        ).to.equal(
+            "0x29a43b498006128f0fd6026242662f4a6f47412f027954cd3973e3419e531adf"
+        );
+
+        // *** test exceptions ***
+        await expect(
+            TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                logSizeOfFullDrive + 1,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            )
+        ).to.be.reverted;
+        // ).to.be.revertedWith(
+        //     "Replacement bigger than original drive"
+        // );
+
+        await expect(
+            TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                2,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            )
+        ).to.be.reverted;
+        // ).to.be.revertedWith(
+        //     "Replacement must be at least one word"
+        // );
+
+        siblings = [
+            "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
+        ];
+        await expect(
+            TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                logSizeOfReplacement,
+                65,
+                replacement,
+                siblings
+            )
+        ).to.be.reverted;
+        // ).to.be.revertedWith(
+        //     "Full drive can't be bigger than the machine itself"
+        // );
+
+        await expect(
+            TestMerkle.getRootAfterReplacementInDrive(
+                position + 1,
+                logSizeOfReplacement,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            )
+        ).to.be.reverted;
+        // ).to.be.revertedWith(
+        //     "Position is not aligned"
+        // );
+
+        await expect(
+            TestMerkle.getRootAfterReplacementInDrive(
+                position,
+                logSizeOfReplacement,
+                logSizeOfFullDrive,
+                replacement,
+                siblings
+            )
+        ).to.be.reverted;
+        // ).to.be.revertedWith(
+        //     "Position is not aligned"
+        // );
+    });
+
+    it("calculateRootFromPowerOfTwo", async () => {
+        // *** test case 1 ***
+        let power2hashes = [
+            "0xae39ce8537aca75e2eff3e38c98011dfe934e700a0967732fc07b430dd656a23",
+            "0x3fc9a15f5b4869c872f81087bb6104b7d63e6f9ab47f2c43f3535eae7172aa7f",
+            "0x17d2dd614cddaa4d879276b11e0672c9560033d3e8453a1d045339d34ba601b9",
+            "0xc37b8b13ca95166fb7af16988a70fcc90f38bf9126fd833da710a47fb37a55e6",
+            "0x8e7a427fa943d9966b389f4f257173676090c6e95f43e2cb6d65f8758111e309",
+            "0x30b0b9deb73e155c59740bacf14a6ff04b64bb8e201a506409c3fe381ca4ea90",
+            "0xcd5deac729d0fdaccc441d09d7325f41586ba13c801b7eccae0f95d8f3933efe",
+            "0xd8b96e5b7f6f459e9cb6a2f41bf276c7b85c10cd4662c04cbbb365434726c0a0",
+            "0xc9695393027fb106a8153109ac516288a88b28a93817899460d6310b71cf1e61",
+            "0x63e8806fa0d4b197a259e8c3ac28864268159d0ac85f8581ca28fa7d2c0c03eb",
+            "0x91e3eee5ca7a3da2b3053c9770db73599fb149f620e3facef95e947c0ee860b7",
+            "0x2122e31e4bbd2b7c783d79cc30f60c6238651da7f0726f767d22747264fdb046",
+            "0xf7549f26cc70ed5e18baeb6c81bb0625cb95bb4019aeecd40774ee87ae29ec51",
+            "0x7a71f6ee264c5d761379b3d7d617ca83677374b49d10aec50505ac087408ca89",
+            "0x2b573c267a712a52e1d06421fe276a03efb1889f337201110fdc32a81f8e1524",
+            "0x99af665835aabfdc6740c7e2c3791a31c3cdc9f5ab962f681b12fc092816a62f",
+        ];
+        let bufferHashes = [];
+        for (let i = 0; i < power2hashes.length; i++) {
+            bufferHashes.push(
+                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+            );
+        }
+        expect(
+            await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
+            "test case 1"
+        ).to.equal(
+            ethers.utils.hexlify(
+                computeMerkleRootHashFromHashes(
+                    bufferHashes,
+                    0,
+                    Math.log2(power2hashes.length)
+                )
+            )
+        );
+
+        // *** test case 2 ***
+        power2hashes = [
+            "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
+            "0x633dc4d7da7256660a892f8f1604a44b5432649cc8ec5cb3ced4c4e6ac94dd1d",
+            "0x890740a8eb06ce9be422cb8da5cdafc2b58c0a5e24036c578de2a433c828ff7d",
+            "0x3b8ec09e026fdc305365dfc94e189a81b38c7597b3d941c279f042e8206e0bd8",
+            "0xecd50eee38e386bd62be9bedb990706951b65fe053bd9d8a521af753d139e2da",
+            "0xdefff6d330bb5403f63b14f33b578274160de3a50df4efecf0e0db73bcdd3da5",
+            "0x617bdd11f7c0a11f49db22f629387a12da7596f9d1704d7465177c63d88ec7d7",
+            "0x292c23a9aa1d8bea7e2435e555a4a60e379a5a35f3f452bae60121073fb6eead",
+            "0xe1cea92ed99acdcb045a6726b2f87107e8a61620a232cf4d7d5b5766b3952e10",
+            "0x7ad66c0a68c72cb89e4fb4303841966e4062a76ab97451e3b9fb526a5ceb7f82",
+            "0xe026cc5a4aed3c22a58cbd3d2ac754c9352c5436f638042dca99034e83636516",
+            "0x3d04cffd8b46a874edf5cfae63077de85f849a660426697b06a829c70dd1409c",
+            "0xad676aa337a485e4728a0b240d92b3ef7b3c372d06d189322bfd5f61f1e7203e",
+            "0xa2fca4a49658f9fab7aa63289c91b7c7b6c832a6d0e69334ff5b0a3483d09dab",
+            "0x4ebfd9cd7bca2505f7bef59cc1c12ecc708fff26ae4af19abe852afe9e20c862",
+            "0x2def10d13dd169f550f578bda343d9717a138562e0093b380a1120789d53cf10",
+            "0x776a31db34a1a0a7caaf862cffdfff1789297ffadc380bd3d39281d340abd3ad",
+            "0xe2e7610b87a5fdf3a72ebe271287d923ab990eefac64b6e59d79f8b7e08c46e3",
+            "0x504364a5c6858bf98fff714ab5be9de19ed31a976860efbd0e772a2efe23e2e0",
+            "0x4f05f4acb83f5b65168d9fef89d56d4d77b8944015e6b1eed81b0238e2d0dba3",
+            "0x44a6d974c75b07423e1d6d33f481916fdd45830aea11b6347e700cd8b9f0767c",
+            "0xedf260291f734ddac396a956127dde4c34c0cfb8d8052f88ac139658ccf2d507",
+            "0x6075c657a105351e7f0fce53bc320113324a522e8fd52dc878c762551e01a46e",
+            "0x6ca6a3f763a9395f7da16014725ca7ee17e4815c0ff8119bf33f273dee11833b",
+            "0x1c25ef10ffeb3c7d08aa707d17286e0b0d3cbcb50f1bd3b6523b63ba3b52dd0f",
+            "0xfffc43bd08273ccf135fd3cacbeef055418e09eb728d727c4d5d5c556cdea7e3",
+            "0xc5ab8111456b1f28f3c7a0a604b4553ce905cb019c463ee159137af83c350b22",
+            "0x0ff273fcbf4ae0f2bd88d6cf319ff4004f8d7dca70d4ced4e74d2c74139739e6",
+            "0x7fa06ba11241ddd5efdc65d4e39c9f6991b74fd4b81b62230808216c876f827c",
+            "0x7e275adf313a996c7e2950cac67caba02a5ff925ebf9906b58949f3e77aec5b9",
+            "0x8f6162fa308d2b3a15dc33cffac85f13ab349173121645aedf00f471663108be",
+            "0x78ccaaab73373552f207a63599de54d7d8d0c1805f86ce7da15818d09f4cff62",
+        ];
+        bufferHashes = [];
+        for (let i = 0; i < power2hashes.length; i++) {
+            bufferHashes.push(
+                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+            );
+        }
+        expect(
+            await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
+            "test case 2"
+        ).to.equal(
+            ethers.utils.hexlify(
+                computeMerkleRootHashFromHashes(
+                    bufferHashes,
+                    0,
+                    Math.log2(power2hashes.length)
+                )
+            )
+        );
+
+        // *** test case 3 ***
+        power2hashes = [
+            "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
+        ];
+        bufferHashes = [];
+        bufferHashes.push(Buffer.from(power2hashes[0].substr(2, 64), "hex"));
+        expect(
+            await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
+            "test case 3"
+        ).to.equal(
+            ethers.utils.hexlify(
+                computeMerkleRootHashFromHashes(bufferHashes, 0, 0)
+            )
+        );
+
+        // *** test exceptions ***
+        power2hashes = [
+            "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
+            "0x633dc4d7da7256660a892f8f1604a44b5432649cc8ec5cb3ced4c4e6ac94dd1d",
+            "0x890740a8eb06ce9be422cb8da5cdafc2b58c0a5e24036c578de2a433c828ff7d",
+        ];
+        bufferHashes = [];
+        for (let i = 0; i < power2hashes.length; i++) {
+            bufferHashes.push(
+                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+            );
+        }
+        await expect(
+            TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
+            "not power of 2"
         ).to.be.reverted;
     });
 });

@@ -16,25 +16,21 @@ pragma solidity ^0.8.0;
 import "../Merkle.sol";
 
 contract TestMerkle {
-    function getPristineHash(uint8 _log2Size) public pure returns (bytes32) {
-        return Merkle.getPristineHash(_log2Size);
-    }
-
-    function getRoot(
-        uint64 _position,
-        bytes8 _value,
-        bytes32[] memory proof
-    ) public pure returns (bytes32) {
-        return Merkle.getRoot(_position, _value, proof);
-    }
-
-    function getRootWithDrive(
-        uint64 _position,
-        uint8 _logOfSize,
-        bytes32 _drive,
+    function getRootAfterReplacementInDrive(
+        uint256 _position,
+        uint256 _logSizeOfReplacement,
+        uint256 _logSizeOfFullDrive,
+        bytes32 _replacement,
         bytes32[] memory siblings
     ) public pure returns (bytes32) {
-        return Merkle.getRootWithDrive(_position, _logOfSize, _drive, siblings);
+        return
+            Merkle.getRootAfterReplacementInDrive(
+                _position,
+                _logSizeOfReplacement,
+                _logSizeOfFullDrive,
+                _replacement,
+                siblings
+            );
     }
 
     function getEmptyTreeHashAtIndex(uint256 _index)
@@ -45,7 +41,7 @@ contract TestMerkle {
         return Merkle.getEmptyTreeHashAtIndex(_index);
     }
 
-    function getMerkleRootFromBytes(bytes calldata _data, uint8 _log2Size)
+    function getMerkleRootFromBytes(bytes calldata _data, uint256 _log2Size)
         public
         pure
         returns (bytes32)
