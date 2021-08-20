@@ -18,38 +18,36 @@ use snafu::ResultExt;
 #[derive(Clone, Debug)]
 pub struct WorkerState {
     pub status: WorkerStatus,
+    pub worker_address: Address,
 }
 
 /// Worker StateFold Delegate, which implements `sync` and `fold`.
 pub struct WorkerFoldDelegate {
     worker_manager_address: Address,
-    worker_address: Address,
 }
 
 impl WorkerFoldDelegate {
-    pub fn new(
-        worker_manager_address: Address,
-        worker_address: Address,
-    ) -> Self {
+    pub fn new(worker_manager_address: Address) -> Self {
         WorkerFoldDelegate {
             worker_manager_address,
-            worker_address,
         }
     }
 }
 
 #[async_trait]
 impl StateFoldDelegate for WorkerFoldDelegate {
-    type InitialState = ();
+    type InitialState = Address;
     type Accumulator = WorkerState;
     type State = BlockState<Self::Accumulator>;
 
     async fn sync<A: SyncAccess + Send + Sync>(
         &self,
-        _initial_state: &Self::InitialState,
+        initial_state: &Self::InitialState,
         block: &Block,
         access: &A,
     ) -> SyncResult<Self::Accumulator, A> {
+        let worker_address = *initial_state;
+
         let contract = access
             .build_sync_contract(
                 self.worker_manager_address,
@@ -61,7 +59,7 @@ impl StateFoldDelegate for WorkerFoldDelegate {
         // get last worker status transition event
         let events = contract
             .events()
-            .topic1(self.worker_address)
+            .topic1(worker_address)
             .query()
             .await
             .context(SyncContractError {
@@ -83,6 +81,7 @@ impl StateFoldDelegate for WorkerFoldDelegate {
 
         Ok(WorkerState {
             status: compute_state(last_event, WorkerStatus::Available),
+            worker_address,
         })
     }
 
@@ -92,10 +91,12 @@ impl StateFoldDelegate for WorkerFoldDelegate {
         block: &Block,
         access: &A,
     ) -> FoldResult<Self::Accumulator, A> {
+        let worker_address = previous_state.worker_address;
+
         // Check if there was (possibly) some log emited on this block.
         let bloom = block.logs_bloom;
         if !(fold_utils::contains_address(&bloom, &self.worker_manager_address)
-            && fold_utils::contains_topic(&bloom, &self.worker_address))
+            && fold_utils::contains_topic(&bloom, &worker_address))
         {
             return Ok(previous_state.clone());
         }
@@ -111,7 +112,7 @@ impl StateFoldDelegate for WorkerFoldDelegate {
         // get last status transition event
         let events = contract
             .events()
-            .topic1(self.worker_address)
+            .topic1(worker_address)
             .query()
             .await
             .context(FoldContractError {
@@ -133,6 +134,7 @@ impl StateFoldDelegate for WorkerFoldDelegate {
 
         Ok(WorkerState {
             status: compute_state(last_event, previous_state.status.clone()),
+            worker_address,
         })
     }
 
