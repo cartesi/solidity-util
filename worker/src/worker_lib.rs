@@ -1,6 +1,7 @@
 use ethers::types::Address;
+use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum WorkerStatus {
     Available,
     Pending(Address),
