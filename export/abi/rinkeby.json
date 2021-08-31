@@ -3,7 +3,7 @@
   "chainId": "4",
   "contracts": {
     "Bitmask": {
-      "address": "0xC0597f4F01a2b38520ad063f3c845A02d7734a0a",
+      "address": "0x2D049568dcecBaEFA948108Cd26Cede9cF512a67",
       "abi": []
     },
     "BitsManipulation": {
@@ -217,7 +217,7 @@
       ]
     },
     "Merkle": {
-      "address": "0xebd366c1ba67aa943f90fb29476E08F12608f3EE",
+      "address": "0xd7BB11DaA00c737d113D9a8E2E217926905Fb01B",
       "abi": [
         {
           "inputs": [
@@ -289,9 +289,9 @@
               "type": "bytes"
             },
             {
-              "internalType": "uint8",
+              "internalType": "uint256",
               "name": "_log2Size",
-              "type": "uint8"
+              "type": "uint256"
             }
           ],
           "name": "getMerkleRootFromBytes",
@@ -308,67 +308,19 @@
         {
           "inputs": [
             {
-              "internalType": "uint8",
-              "name": "_log2Size",
-              "type": "uint8"
-            }
-          ],
-          "name": "getPristineHash",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint64",
+              "internalType": "uint256",
               "name": "_position",
-              "type": "uint64"
+              "type": "uint256"
             },
             {
-              "internalType": "bytes8",
-              "name": "_value",
-              "type": "bytes8"
-            },
-            {
-              "internalType": "bytes32[]",
-              "name": "proof",
-              "type": "bytes32[]"
-            }
-          ],
-          "name": "getRoot",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint64",
-              "name": "_position",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint8",
+              "internalType": "uint256",
               "name": "_logSizeOfReplacement",
-              "type": "uint8"
+              "type": "uint256"
             },
             {
-              "internalType": "uint8",
+              "internalType": "uint256",
               "name": "_logSizeOfFullDrive",
-              "type": "uint8"
+              "type": "uint256"
             },
             {
               "internalType": "bytes32",
@@ -391,45 +343,11 @@
           ],
           "stateMutability": "pure",
           "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint64",
-              "name": "_position",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint8",
-              "name": "_logOfSize",
-              "type": "uint8"
-            },
-            {
-              "internalType": "bytes32",
-              "name": "_drive",
-              "type": "bytes32"
-            },
-            {
-              "internalType": "bytes32[]",
-              "name": "siblings",
-              "type": "bytes32[]"
-            }
-          ],
-          "name": "getRootWithDrive",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
         }
       ]
     },
     "WorkerAuthManagerImpl": {
-      "address": "0x28eEA70F271983444f71bb26839a71938f85df4C",
+      "address": "0xD5A18C0B79eb833bDF60ef9E2e17905f41115e73",
       "abi": [
         {
           "inputs": [
@@ -574,7 +492,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x4562391BDd881E7344E28f0De765cf1074dD0dd3",
+      "address": "0xF3Db74539b63822E1b46aB6254DFA2ae588e11dD",
       "abi": [
         {
           "anonymous": false,
@@ -950,7 +868,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0xe0628c74D08aC5880883C85566057F284FBDf323",
+      "address": "0x0936708cd91d185C257e33ad9Ca1E48dd1a8a6C7",
       "abi": [
         {
           "anonymous": false,
