@@ -138,7 +138,12 @@ describe("WorkerManagerAuthManager", async () => {
             "cancelHire should revert if msg.sender is not hirer"
         ).to.be.revertedWith("only hirer can cancel the offer");
 
-        await instanceUser.cancelHire(worker);
+        await expect(
+            instanceUser.cancelHire(worker),
+            "cancelHire worker correctly should emit event"
+        )
+            .to.emit(instanceUser, "Retired")
+            .withArgs(worker, user);
 
         expect(
             await instanceUser.getUser(worker),
