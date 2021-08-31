@@ -6,6 +6,7 @@ coverage*
 deployments/localhost
 dist
 node_modules
+src/proto/stateserver*
 src/types
 test/*/
 .mnemonic

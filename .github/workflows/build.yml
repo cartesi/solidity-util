@@ -5,6 +5,9 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+                  token: ${{ secrets.CI_TOKEN }}
             - uses: actions/setup-node@v1
               with:
                   node-version: "16"

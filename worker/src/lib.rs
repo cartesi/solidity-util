@@ -25,3 +25,4 @@
 pub mod fold;
 pub mod worker_lib;
 pub mod worker_logic;
+pub mod worker_server;

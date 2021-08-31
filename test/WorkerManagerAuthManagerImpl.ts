@@ -17,10 +17,15 @@ import { solidity } from "ethereum-waffle";
 
 import { WorkerManagerAuthManagerImpl } from "../src/types/WorkerManagerAuthManagerImpl";
 import { WorkerManagerAuthManagerImpl__factory } from "../src/types/factories/WorkerManagerAuthManagerImpl__factory";
+import { getState } from "./getState";
 
 use(solidity);
 
 describe("WorkerManagerAuthManager", async () => {
+    let enableDelegate = process.env["DELEGATE_TEST"];
+
+    let initialState: string;
+
     let instanceUser: WorkerManagerAuthManagerImpl;
     let instanceWorker: WorkerManagerAuthManagerImpl;
 
@@ -41,6 +46,10 @@ describe("WorkerManagerAuthManager", async () => {
             address,
             worker
         );
+
+        if (enableDelegate) {
+            initialState = JSON.stringify({worker_address: worker.address, worker_manager_address: address});
+        }
     });
 
     const expectState = async (
@@ -73,6 +82,14 @@ describe("WorkerManagerAuthManager", async () => {
     it("initial state", async () => {
         const { worker } = await getNamedAccounts();
         await expectState(instanceUser, worker, true, false, false, false);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker should start Available"
+            ).to.equal("Available");
+        }
     });
 
     it("hire", async () => {
@@ -83,10 +100,26 @@ describe("WorkerManagerAuthManager", async () => {
             "hiring worker without sending ether should revert"
         ).to.be.revertedWith("funding below minimum");
 
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker should remain Available if hire doesn't send ether"
+            ).to.equal("Available");
+        }
+
         await expect(
             instanceUser.hire(worker, { value: ethers.utils.parseEther("15") }),
             "claiming worker while sending too much ether should revert"
         ).to.be.revertedWith("funding above maximum");
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker should remain Available if hire sends too much ether"
+            ).to.equal("Available");
+        }
 
         // Worker Address cannot be 0x00
         await expect(
@@ -95,6 +128,15 @@ describe("WorkerManagerAuthManager", async () => {
             }),
             "transaction should revert if worker address is 0x0"
         ).to.be.revertedWith("worker address can not be 0x0");
+
+        if (enableDelegate) {
+            let falseInitialState = JSON.stringify({worker_address: NULL_ADDRESS, worker_manager_address: instanceWorker.address});
+            let state = JSON.parse(await getState(falseInitialState));
+
+            expect (state,
+                "Worker 0x0 cannot be hired"
+            ).to.equal("Available");
+        }
 
         // Hiring worker correctly should emit event
         await expect(
@@ -117,6 +159,14 @@ describe("WorkerManagerAuthManager", async () => {
             await instanceUser.getOwner(worker),
             "worker's owner only changes after it accepts the new user"
         ).to.equal(NULL_ADDRESS);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Pending.toUpperCase(),
+                "Worker state should be Pending after successul hire"
+            ).to.equal(user.toUpperCase());
+        }
     });
 
     it("cancelHire", async () => {
@@ -133,10 +183,26 @@ describe("WorkerManagerAuthManager", async () => {
         ).to.equal(user);
         await expectState(instanceUser, worker, false, true, false, false);
 
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Pending.toUpperCase(),
+                "Worker state should be Pending after successul hire"
+            ).to.equal(user.toUpperCase());
+        }
+
         await expect(
             instanceWorker.cancelHire(worker),
             "cancelHire should revert if msg.sender is not hirer"
         ).to.be.revertedWith("only hirer can cancel the offer");
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Pending.toUpperCase(),
+                "Worker state should remain Pending when cancelHire fails"
+            ).to.equal(user.toUpperCase());
+        }
 
         await expect(
             instanceUser.cancelHire(worker),
@@ -151,6 +217,14 @@ describe("WorkerManagerAuthManager", async () => {
         ).to.equal(user);
 
         await expectState(instanceUser, worker, false, false, false, true);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Retired.toUpperCase(),
+                "Worker state should become Retired after successful cancelHire"
+            ).to.equal(user.toUpperCase());
+        }
     });
 
     it("acceptJob", async () => {
@@ -160,6 +234,14 @@ describe("WorkerManagerAuthManager", async () => {
             instanceWorker.acceptJob(),
             "transaction should revert if worker calls acceptJob() without offer"
         ).to.be.revertedWith("worker not is not in pending state");
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker state should remain Available when acceptJob called without offer"
+            ).to.equal("Available");
+        }
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
@@ -176,6 +258,14 @@ describe("WorkerManagerAuthManager", async () => {
             "worker's owner only change after it accepts the new user"
         ).to.equal(NULL_ADDRESS);
 
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Pending.toUpperCase(),
+                "Worker state should be Pending after successul hire"
+            ).to.equal(user.toUpperCase());
+        }
+
         // worker accepts job
         await expect(
             instanceWorker.acceptJob(),
@@ -190,6 +280,14 @@ describe("WorkerManagerAuthManager", async () => {
         ).to.equal(user);
 
         await expectState(instanceUser, worker, false, false, true, false);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Owned.toUpperCase(),
+                "Worker state should be Owned after the job is accepted"
+            ).to.equal(user.toUpperCase());
+        }
     });
 
     it("authorize", async () => {
@@ -232,6 +330,14 @@ describe("WorkerManagerAuthManager", async () => {
             "rejectJob() should revert if there is no offer"
         ).to.be.revertedWith("worker does not have a job offer");
 
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker state should remain Available when rejectJob called without offer"
+            ).to.equal("Available");
+        }
+
         // Hire worker correctly
         await instanceUser.hire(worker, {
             value: ethers.utils.parseEther("1"),
@@ -246,6 +352,14 @@ describe("WorkerManagerAuthManager", async () => {
             await instanceUser.getOwner(worker),
             "worker's user will only change after it accepts the new user"
         ).to.equal(NULL_ADDRESS);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Pending.toUpperCase(),
+                "Worker state should be Pending after successul hire"
+            ).to.equal(user.toUpperCase());
+        }
 
         // worker rejects job, should trigger change in balance
         // TODO: fix to.changeBalances call
@@ -264,6 +378,14 @@ describe("WorkerManagerAuthManager", async () => {
         ).to.not.equal(user);
 
         await expectState(instanceUser, worker, true, false, false, false);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker state should become Available after successful rejectJob"
+            ).to.equal("Available");
+        }
     });
 
     it("retire", async () => {
@@ -273,6 +395,14 @@ describe("WorkerManagerAuthManager", async () => {
             instanceUser.retire(worker),
             "retire worker with not owned must revert"
         ).to.be.revertedWith("worker not owned");
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state,
+                "Worker state should remain Available when retire called without offer"
+            ).to.equal("Available");
+        }
 
         // Hire worker correctly
         await instanceUser.hire(worker, {
@@ -287,6 +417,14 @@ describe("WorkerManagerAuthManager", async () => {
             "retire worker when user does not own worker should revert"
         ).to.be.revertedWith("only owner can retire worker");
 
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Owned.toUpperCase(),
+                "Worker should remain Owned if retired not called by owner"
+            ).to.equal(user.toUpperCase());
+        }
+
         await expect(
             instanceUser.retire(worker),
             "requesting termination should emit event"
@@ -295,5 +433,13 @@ describe("WorkerManagerAuthManager", async () => {
             .withArgs(worker, user);
 
         await expectState(instanceUser, worker, false, false, false, true);
+
+        if (enableDelegate) {
+            let state = JSON.parse(await getState(initialState));
+
+            expect (state.Retired.toUpperCase(),
+                "Worker state should become Retired after successful retire"
+            ).to.equal(user.toUpperCase());
+        }
     });
 });
