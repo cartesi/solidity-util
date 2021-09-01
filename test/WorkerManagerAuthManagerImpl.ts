@@ -48,7 +48,10 @@ describe("WorkerManagerAuthManager", async () => {
         );
 
         if (enableDelegate) {
-            initialState = JSON.stringify({worker_address: worker.address, worker_manager_address: address});
+            initialState = JSON.stringify({
+                worker_address: worker.address,
+                worker_manager_address: address,
+            });
         }
     });
 
@@ -86,9 +89,9 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
-                "Worker should start Available"
-            ).to.equal("Available");
+            expect(state, "Worker should start Available").to.equal(
+                "Available"
+            );
         }
     });
 
@@ -103,7 +106,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker should remain Available if hire doesn't send ether"
             ).to.equal("Available");
         }
@@ -116,7 +120,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker should remain Available if hire sends too much ether"
             ).to.equal("Available");
         }
@@ -130,12 +135,13 @@ describe("WorkerManagerAuthManager", async () => {
         ).to.be.revertedWith("worker address can not be 0x0");
 
         if (enableDelegate) {
-            let falseInitialState = JSON.stringify({worker_address: NULL_ADDRESS, worker_manager_address: instanceWorker.address});
+            let falseInitialState = JSON.stringify({
+                worker_address: NULL_ADDRESS,
+                worker_manager_address: instanceWorker.address,
+            });
             let state = JSON.parse(await getState(falseInitialState));
 
-            expect (state,
-                "Worker 0x0 cannot be hired"
-            ).to.equal("Available");
+            expect(state, "Worker 0x0 cannot be hired").to.equal("Available");
         }
 
         // Hiring worker correctly should emit event
@@ -163,7 +169,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Pending.toUpperCase(),
+            expect(
+                state.Pending.toUpperCase(),
                 "Worker state should be Pending after successul hire"
             ).to.equal(user.toUpperCase());
         }
@@ -186,7 +193,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Pending.toUpperCase(),
+            expect(
+                state.Pending.toUpperCase(),
                 "Worker state should be Pending after successul hire"
             ).to.equal(user.toUpperCase());
         }
@@ -199,7 +207,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Pending.toUpperCase(),
+            expect(
+                state.Pending.toUpperCase(),
                 "Worker state should remain Pending when cancelHire fails"
             ).to.equal(user.toUpperCase());
         }
@@ -221,7 +230,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Retired.toUpperCase(),
+            expect(
+                state.Retired.toUpperCase(),
                 "Worker state should become Retired after successful cancelHire"
             ).to.equal(user.toUpperCase());
         }
@@ -238,7 +248,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker state should remain Available when acceptJob called without offer"
             ).to.equal("Available");
         }
@@ -261,7 +272,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Pending.toUpperCase(),
+            expect(
+                state.Pending.toUpperCase(),
                 "Worker state should be Pending after successul hire"
             ).to.equal(user.toUpperCase());
         }
@@ -284,7 +296,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Owned.toUpperCase(),
+            expect(
+                state.Owned.toUpperCase(),
                 "Worker state should be Owned after the job is accepted"
             ).to.equal(user.toUpperCase());
         }
@@ -333,7 +346,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker state should remain Available when rejectJob called without offer"
             ).to.equal("Available");
         }
@@ -356,7 +370,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Pending.toUpperCase(),
+            expect(
+                state.Pending.toUpperCase(),
                 "Worker state should be Pending after successul hire"
             ).to.equal(user.toUpperCase());
         }
@@ -382,7 +397,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker state should become Available after successful rejectJob"
             ).to.equal("Available");
         }
@@ -399,7 +415,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state,
+            expect(
+                state,
                 "Worker state should remain Available when retire called without offer"
             ).to.equal("Available");
         }
@@ -420,7 +437,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Owned.toUpperCase(),
+            expect(
+                state.Owned.toUpperCase(),
                 "Worker should remain Owned if retired not called by owner"
             ).to.equal(user.toUpperCase());
         }
@@ -437,7 +455,8 @@ describe("WorkerManagerAuthManager", async () => {
         if (enableDelegate) {
             let state = JSON.parse(await getState(initialState));
 
-            expect (state.Retired.toUpperCase(),
+            expect(
+                state.Retired.toUpperCase(),
                 "Worker state should become Retired after successful retire"
             ).to.equal(user.toUpperCase());
         }
