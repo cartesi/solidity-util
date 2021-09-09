@@ -14,7 +14,6 @@ DELEGATE_TEST=1 npx hardhat test test/WorkerManagerAuthManagerImpl.ts --network 
 
 # kill worker server
 kill "$server_pid"
-sleep 5
 
 ## end testing worker delegate
 
