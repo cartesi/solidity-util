@@ -17,7 +17,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let access = Access::new(Arc::clone(&provider), U64::from(0), vec![], 4);
 
     let worker_delegate =
-        worker::fold::worker_delegate::WorkerFoldDelegate::new();
+        worker::fold::worker_delegate::WorkerFoldDelegate::default();
     let worker_fold = StateFold::new(worker_delegate, Arc::new(access), 0);
 
     let (shutdown_tx, shutdown_rx) = oneshot::channel();

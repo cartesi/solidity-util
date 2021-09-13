@@ -11,11 +11,11 @@ name = "worker_server_main"
 path = "src/worker_server_main.rs"
 
 [dependencies]
-block-subscriber = { git = "https://github.com/cartesi/offchain-utils", rev = "bcab565" }
-offchain-core = { git = "https://github.com/cartesi/offchain-utils", rev = "bcab565" }
-state-fold = { git = "https://github.com/cartesi/state-fold", rev = "ace5480" }
-state-server-grpc = { path = "../../state-fold/state-server-grpc" }
-tx-manager = { git = "https://github.com/cartesi/tx-manager", rev = "a6a2d1f" }
+block-subscriber = { git = "https://github.com/cartesi/offchain-utils", rev = "f43b889" }
+offchain-core = { git = "https://github.com/cartesi/offchain-utils", rev = "f43b889" }
+state-fold = { git = "https://github.com/cartesi/state-fold", rev = "f6f06a1" }
+state-server-grpc = { git = "https://github.com/cartesi/state-fold", rev = "f6f06a1" }
+tx-manager = { git = "https://github.com/cartesi/tx-manager", rev = "fc3712f" }
 
 async-trait = "0.1"
 ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
@@ -31,6 +31,3 @@ tonic = "0.4"
 [build-dependencies]
 ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
 serde_json = "1.0"
-
-[patch."https://github.com/cartesi/state-fold"]
-state-fold = { path = "../../state-fold/state-fold" }

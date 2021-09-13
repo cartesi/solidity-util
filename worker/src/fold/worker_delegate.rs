@@ -23,13 +23,8 @@ pub struct WorkerState {
 }
 
 /// Worker StateFold Delegate, which implements `sync` and `fold`.
+#[derive(Default)]
 pub struct WorkerFoldDelegate {}
-
-impl WorkerFoldDelegate {
-    pub fn new() -> Self {
-        WorkerFoldDelegate {}
-    }
-}
 
 #[async_trait]
 impl StateFoldDelegate for WorkerFoldDelegate {
