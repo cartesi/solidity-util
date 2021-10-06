@@ -11,15 +11,17 @@ name = "worker_server_main"
 path = "src/worker_server_main.rs"
 
 [dependencies]
-block-subscriber = { git = "https://github.com/cartesi/offchain-utils", rev = "f43b889" }
-offchain-core = { git = "https://github.com/cartesi/offchain-utils", rev = "f43b889" }
-state-fold = { git = "https://github.com/cartesi/state-fold", rev = "f6f06a1" }
-state-server-grpc = { git = "https://github.com/cartesi/state-fold", rev = "f6f06a1" }
-tx-manager = { git = "https://github.com/cartesi/tx-manager", rev = "fc3712f" }
+block-subscriber = { git = "https://github.com/cartesi/offchain-utils", rev = "38342b0" }
+offchain-core = { git = "https://github.com/cartesi/offchain-utils", rev = "38342b0" }
+state-fold = { git = "https://github.com/cartesi/state-fold", rev = "64f9c0e" }
+state-server-grpc = { git = "https://github.com/cartesi/state-fold", rev = "64f9c0e" }
+tx-manager = { git = "https://github.com/cartesi/tx-manager", rev = "29a1abf" }
 
 async-trait = "0.1"
-ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
-ethabi = { version = "14.0.0", default-features = false }
+ethers = { version = "0.5.3", features = [ "legacy", "ws" ] }
+ethers-core = { version = "^0.5.0", features = [ "legacy" ] }
+ethers-contract = { version = "^0.5.0", features = [ "legacy" ] }
+ethers-providers = { version = "^0.5.0", features = [ "ws" ] }
 futures = "0.3"
 im = "15.0"
 serde = "1.0"
@@ -29,5 +31,5 @@ tokio = { version = "^1", features = ["sync", "rt-multi-thread", "macros"] }
 tonic = "0.4"
 
 [build-dependencies]
-ethers = { git = "https://github.com/gakonst/ethers-rs", rev = "4690f8e" }
+ethers = { version = "0.5.3", features = [ "legacy", "ws" ] }
 serde_json = "1.0"
