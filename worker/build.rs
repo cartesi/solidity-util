@@ -26,7 +26,7 @@ fn main() {
     )];
 
     for (name, file, rs) in contracts {
-        let path = format!("../artifacts/contracts/{}.sol/{}.json", file, name);
+        let path = format!("../export/artifacts/{}.json", file);
         let destination = format!("./src/fold/contracts/{}", rs);
         write_contract(name, &path, &destination);
     }
