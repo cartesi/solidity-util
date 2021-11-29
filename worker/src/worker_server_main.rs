@@ -1,5 +1,5 @@
 #![warn(unused_extern_crates)]
-use state_fold::{Access, StateFold};
+use state_fold::StateFoldEnvironment;
 use state_server_grpc::{serve_delegate_manager, wait_for_signal};
 
 use ethers::providers::{Http, Provider};
@@ -13,12 +13,13 @@ static HTTP_URL: &'static str = "http://localhost:8545";
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let provider = Arc::new(Provider::<Http>::try_from(HTTP_URL).unwrap());
-
-    let access = Access::new(Arc::clone(&provider), U64::from(0), vec![], 4);
-
-    let worker_delegate =
-        worker::fold::worker_delegate::WorkerFoldDelegate::default();
-    let worker_fold = StateFold::new(worker_delegate, Arc::new(access), 0);
+    let env = StateFoldEnvironment::new(
+        Arc::clone(&provider),
+        0,
+        U64::from(0),
+        vec![],
+        4,
+    );
 
     let (shutdown_tx, shutdown_rx) = oneshot::channel();
 
@@ -26,7 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     serve_delegate_manager(
         "[::1]:50051",
-        worker::worker_server::WorkerDelegateManager { fold: worker_fold },
+        worker::worker_server::WorkerDelegateManager { env: Arc::new(env) },
         shutdown_rx,
     )
     .await

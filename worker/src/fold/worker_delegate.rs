@@ -4,15 +4,22 @@ use super::contracts::worker_contract;
 
 use offchain_core::types::Block;
 use state_fold::{
-    delegate_access::{FoldAccess, SyncAccess},
-    error::*,
-    types::*,
-    utils as fold_utils,
+    utils as fold_utils, FoldMiddleware, Foldable, StateFoldEnvironment,
+    SyncMiddleware,
 };
 
 use async_trait::async_trait;
+use ethers::providers::Middleware;
 use ethers::types::Address;
-use snafu::ResultExt;
+use snafu::Snafu;
+use std::sync::Arc;
+
+#[derive(Debug, Snafu)]
+#[snafu(visibility = "pub")]
+pub enum WorkerError {
+    #[snafu(display("Requested worker unavailable"))]
+    WorkerUnavailable { err: String },
+}
 
 /// Worker state, to be passed to and returned by fold.
 #[derive(Clone, Debug)]
@@ -22,31 +29,23 @@ pub struct WorkerState {
     pub worker_address: Address,
 }
 
-/// Worker StateFold Delegate, which implements `sync` and `fold`.
-#[derive(Default)]
-pub struct WorkerFoldDelegate {}
-
 #[async_trait]
-impl StateFoldDelegate for WorkerFoldDelegate {
+impl Foldable for WorkerState {
     type InitialState = (Address, Address);
-    type Accumulator = WorkerState;
-    type State = BlockState<Self::Accumulator>;
+    type Error = WorkerError;
 
-    async fn sync<A: SyncAccess + Send + Sync>(
-        &self,
+    async fn sync<M: Middleware + 'static>(
         initial_state: &Self::InitialState,
-        block: &Block,
-        access: &A,
-    ) -> SyncResult<Self::Accumulator, A> {
+        _block: &Block,
+        _env: &StateFoldEnvironment<M>,
+        access: Arc<SyncMiddleware<M>>,
+    ) -> std::result::Result<Self, Self::Error> {
         let (worker_address, worker_manager_address) = *initial_state;
 
-        let contract = access
-            .build_sync_contract(
-                worker_manager_address,
-                block.number,
-                worker_contract::WorkerManagerAuthManagerImpl::new,
-            )
-            .await;
+        let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
+            worker_manager_address,
+            access,
+        );
 
         // get last worker status transition event
         let events = contract
@@ -54,8 +53,11 @@ impl StateFoldDelegate for WorkerFoldDelegate {
             .topic1(worker_address)
             .query()
             .await
-            .context(SyncContractError {
-                err: "Error querying for worker events",
+            .map_err(|e| {
+                WorkerUnavailable {
+                    err: format!("Error querying for worker events: {}", e),
+                }
+                .build()
             })?;
 
         let last_event = events
@@ -78,12 +80,12 @@ impl StateFoldDelegate for WorkerFoldDelegate {
         })
     }
 
-    async fn fold<A: FoldAccess + Send + Sync>(
-        &self,
-        previous_state: &Self::Accumulator,
+    async fn fold<M: Middleware + 'static>(
+        previous_state: &Self,
         block: &Block,
-        access: &A,
-    ) -> FoldResult<Self::Accumulator, A> {
+        _env: &StateFoldEnvironment<M>,
+        access: Arc<FoldMiddleware<M>>,
+    ) -> std::result::Result<Self, Self::Error> {
         let worker_address = previous_state.worker_address;
         let worker_manager_address = previous_state.worker_manager_address;
 
@@ -95,13 +97,10 @@ impl StateFoldDelegate for WorkerFoldDelegate {
             return Ok(previous_state.clone());
         }
 
-        let contract = access
-            .build_fold_contract(
-                worker_manager_address,
-                block.hash,
-                worker_contract::WorkerManagerAuthManagerImpl::new,
-            )
-            .await;
+        let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
+            worker_manager_address,
+            access,
+        );
 
         // get last status transition event
         let events = contract
@@ -109,8 +108,11 @@ impl StateFoldDelegate for WorkerFoldDelegate {
             .topic1(worker_address)
             .query()
             .await
-            .context(FoldContractError {
-                err: "Error querying for worker events",
+            .map_err(|e| {
+                WorkerUnavailable {
+                    err: format!("Error querying for worker events: {}", e),
+                }
+                .build()
             })?;
 
         let last_event = events
@@ -131,10 +133,6 @@ impl StateFoldDelegate for WorkerFoldDelegate {
             worker_address,
             worker_manager_address,
         })
-    }
-
-    fn convert(&self, state: &BlockState<Self::Accumulator>) -> Self::State {
-        state.clone()
     }
 }
 

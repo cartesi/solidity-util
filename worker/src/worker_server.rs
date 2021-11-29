@@ -1,17 +1,17 @@
-use state_fold::{Access, StateFold};
+use crate::fold::worker_delegate::WorkerState;
+
+use state_fold::{types::QueryBlock, Foldable, StateFoldEnvironment};
 use state_server_grpc::state_server::delegate_manager_server::DelegateManager;
 use state_server_grpc::state_server::{GetStateRequest, GetStateResponse};
 
 use ethers::core::types::Address;
 use ethers::providers::{Http, Provider};
 use serde::{Deserialize, Serialize};
+use std::sync::Arc;
 use tonic::{Code, Request, Response, Status};
 
 pub struct WorkerDelegateManager {
-    pub fold: StateFold<
-        crate::fold::worker_delegate::WorkerFoldDelegate,
-        Access<Provider<Http>>,
-    >,
+    pub env: Arc<StateFoldEnvironment<Provider<Http>>>,
 }
 
 #[derive(Deserialize, Serialize)]
@@ -39,18 +39,17 @@ impl DelegateManager for WorkerDelegateManager {
                 Status::new(Code::InvalidArgument, format!("{}", e))
             })?;
 
-        let contract_state = self
-            .fold
-            .get_state_for_block(
-                &(
-                    initial_state.worker_address,
-                    initial_state.worker_manager_address,
-                ),
-                None,
-            )
-            .await
-            .map_err(|e| Status::new(Code::Unavailable, format!("{}", e)))?
-            .state;
+        let contract_state = WorkerState::get_state_for_block(
+            &(
+                initial_state.worker_address,
+                initial_state.worker_manager_address,
+            ),
+            QueryBlock::Latest,
+            &self.env,
+        )
+        .await
+        .map_err(|e| Status::new(Code::Unavailable, format!("{}", e)))?
+        .state;
 
         let reply = GetStateResponse {
             json_state: serde_json::to_string(&contract_state.status)
