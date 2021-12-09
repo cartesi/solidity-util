@@ -11,14 +11,18 @@ use state_fold::{
 use async_trait::async_trait;
 use ethers::providers::Middleware;
 use ethers::types::Address;
+use snafu::ResultExt;
 use snafu::Snafu;
 use std::sync::Arc;
 
 #[derive(Debug, Snafu)]
 #[snafu(visibility = "pub")]
 pub enum WorkerError {
-    #[snafu(display("Requested worker unavailable"))]
-    WorkerUnavailable { err: String },
+    #[snafu(display("Middleware error `{}`: {} ", source, err))]
+    WorkerUnavailable {
+        source: Box<dyn std::error::Error>,
+        err: String,
+    },
 }
 
 /// Worker state, to be passed to and returned by fold.
@@ -53,11 +57,9 @@ impl Foldable for WorkerState {
             .topic1(worker_address)
             .query()
             .await
-            .map_err(|e| {
-                WorkerUnavailable {
-                    err: format!("Error querying for worker events: {}", e),
-                }
-                .build()
+            .map_err(|e| e.into())
+            .context(WorkerUnavailable {
+                err: format!("Error querying for worker events"),
             })?;
 
         let last_event = events
@@ -108,11 +110,9 @@ impl Foldable for WorkerState {
             .topic1(worker_address)
             .query()
             .await
-            .map_err(|e| {
-                WorkerUnavailable {
-                    err: format!("Error querying for worker events: {}", e),
-                }
-                .build()
+            .map_err(|e| e.into())
+            .context(WorkerUnavailable {
+                err: format!("Error querying for worker events"),
             })?;
 
         let last_event = events
