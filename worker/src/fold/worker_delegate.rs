@@ -46,40 +46,13 @@ impl Foldable for WorkerState {
     ) -> std::result::Result<Self, Self::Error> {
         let (worker_address, worker_manager_address) = *initial_state;
 
-        let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
-            worker_manager_address,
+        compute_state(
             access,
-        );
-
-        // get last worker status transition event
-        let events = contract
-            .events()
-            .topic1(worker_address)
-            .query()
-            .await
-            .map_err(|e| e.into())
-            .context(WorkerUnavailable {
-                err: format!("Error querying for worker events"),
-            })?;
-
-        let last_event = events
-            .into_iter()
-            .filter(|e| match e {
-                // filter out the AuthManager events
-                worker_contract::WorkerManagerAuthManagerImplEvents::AuthorizationFilter(_)
-                | worker_contract::WorkerManagerAuthManagerImplEvents::DeauthorizationFilter(_) => {
-                    false
-                }
-                _ => true,
-            })
-            .last()
-            .map(|t| t.clone());
-
-        Ok(WorkerState {
-            status: compute_state(last_event, WorkerStatus::Available),
+            WorkerStatus::Available,
             worker_address,
             worker_manager_address,
-        })
+        )
+        .await
     }
 
     async fn fold<M: Middleware + 'static>(
@@ -99,49 +72,53 @@ impl Foldable for WorkerState {
             return Ok(previous_state.clone());
         }
 
-        let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
-            worker_manager_address,
+        compute_state(
             access,
-        );
-
-        // get last status transition event
-        let events = contract
-            .events()
-            .topic1(worker_address)
-            .query()
-            .await
-            .map_err(|e| e.into())
-            .context(WorkerUnavailable {
-                err: format!("Error querying for worker events"),
-            })?;
-
-        let last_event = events
-            .into_iter()
-            .filter(|e| match e {
-                // filter out the AuthManager events
-                worker_contract::WorkerManagerAuthManagerImplEvents::AuthorizationFilter(_)
-                | worker_contract::WorkerManagerAuthManagerImplEvents::DeauthorizationFilter(_) => {
-                    false
-                }
-                _ => true,
-            })
-            .last()
-            .map(|t| t.clone());
-
-        Ok(WorkerState {
-            status: compute_state(last_event, previous_state.status.clone()),
+            previous_state.status.clone(),
             worker_address,
             worker_manager_address,
-        })
+        )
+        .await
     }
 }
 
 /// Computes the state from the last event emission
-fn compute_state(
-    last_event: Option<worker_contract::WorkerManagerAuthManagerImplEvents>,
+async fn compute_state<M: Middleware + 'static>(
+    access: Arc<M>,
     previous_status: WorkerStatus,
-) -> WorkerStatus {
-    match last_event {
+    worker_address: Address,
+    worker_manager_address: Address,
+) -> std::result::Result<WorkerState, WorkerError> {
+    let contract = worker_contract::WorkerManagerAuthManagerImpl::new(
+        worker_manager_address,
+        access,
+    );
+
+    // get last status transition event
+    let events = contract
+        .events()
+        .topic1(worker_address)
+        .query()
+        .await
+        .map_err(|e| e.into())
+        .context(WorkerUnavailable {
+            err: format!("Error querying for worker events"),
+        })?;
+
+    let last_event = events
+        .into_iter()
+        .filter(|e| match e {
+            // filter out the AuthManager events
+            worker_contract::WorkerManagerAuthManagerImplEvents::AuthorizationFilter(_)
+            | worker_contract::WorkerManagerAuthManagerImplEvents::DeauthorizationFilter(_) => {
+                false
+            }
+            _ => true,
+        })
+        .last()
+        .map(|t| t.clone());
+
+    let status = match last_event {
         // no relevant event
         None => previous_status,
         Some(event) => match event {
@@ -160,5 +137,11 @@ fn compute_state(
             // shoudn't get here, authenticator events should be filter out already
             _ => previous_status,
         },
-    }
+    };
+
+    Ok(WorkerState {
+        status,
+        worker_address,
+        worker_manager_address,
+    })
 }
