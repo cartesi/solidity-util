@@ -148,7 +148,7 @@ contract WorkerManagerAuthManagerImpl is WorkerManager, WorkerAuthManager {
         stateOf[_workerAddress] = WorkerState.Retired;
 
         // emit event
-        emit Retired(_workerAddress, msg.sender);
+        emit JobRejected(_workerAddress, msg.sender);
     }
 
     function retire(address payable _workerAddress) public override {

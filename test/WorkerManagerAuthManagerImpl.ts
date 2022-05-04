@@ -217,7 +217,7 @@ describe("WorkerManagerAuthManager", async () => {
             instanceUser.cancelHire(worker),
             "cancelHire worker correctly should emit event"
         )
-            .to.emit(instanceUser, "Retired")
+            .to.emit(instanceUser, "JobRejected")
             .withArgs(worker, user);
 
         expect(
