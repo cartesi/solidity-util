@@ -33,35 +33,19 @@ contract TestMerkle {
             );
     }
 
-    function getEmptyTreeHashAtIndex(uint256 _index)
-        public
-        pure
-        returns (bytes32)
-    {
+    function getEmptyTreeHashAtIndex(uint256 _index) public pure returns (bytes32) {
         return Merkle.getEmptyTreeHashAtIndex(_index);
     }
 
-    function getMerkleRootFromBytes(bytes calldata _data, uint256 _log2Size)
-        public
-        pure
-        returns (bytes32)
-    {
+    function getMerkleRootFromBytes(bytes calldata _data, uint256 _log2Size) public pure returns (bytes32) {
         return Merkle.getMerkleRootFromBytes(_data, _log2Size);
     }
 
-    function getHashOfWordAtIndex(bytes calldata _data, uint256 _wordIndex)
-        public
-        pure
-        returns (bytes32)
-    {
+    function getHashOfWordAtIndex(bytes calldata _data, uint256 _wordIndex) public pure returns (bytes32) {
         return Merkle.getHashOfWordAtIndex(_data, _wordIndex);
     }
 
-    function calculateRootFromPowerOfTwo(bytes32[] memory hashes)
-        public
-        pure
-        returns (bytes32)
-    {
+    function calculateRootFromPowerOfTwo(bytes32[] memory hashes) public pure returns (bytes32) {
         return Merkle.calculateRootFromPowerOfTwo(hashes);
     }
 }

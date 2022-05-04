@@ -64,6 +64,7 @@
         "@types/node": "^16.7.10",
         "chai": "^4.3.4",
         "copyfiles": "^2.4.1",
+        "decimal.js": "^10.3.1",
         "ethereum-waffle": "^3.4.0",
         "ethers": "^5.4.6",
         "grpc-tools": "^1.11.2",
