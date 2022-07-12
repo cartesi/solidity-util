@@ -3,11 +3,11 @@
   "chainId": "80001",
   "contracts": {
     "Bitmask": {
-      "address": "0x6Fc1eACde8ec4898711Ec3b03bbCc666361A136A",
+      "address": "0xe547b035582E250cD6667799D32C1BabCf5e62e9",
       "abi": []
     },
     "BitsManipulation": {
-      "address": "0xa5e4CbdF1767f0406ec5dee4aDb8125F4a637C64",
+      "address": "0x371945aF3E52452161574D1521aAe2Cadc02Ae8a",
       "abi": [
         {
           "inputs": [
@@ -98,7 +98,7 @@
       ]
     },
     "CartesiMath": {
-      "address": "0x3f8B458Dd717DE4c625b227eD2f62c1DB2589BF0",
+      "address": "0xcacE06faF7Aa8bb3232f9AD3Ad652338dbe58558",
       "abi": [
         {
           "inputs": [
@@ -217,7 +217,7 @@
       ]
     },
     "Merkle": {
-      "address": "0xDA9aafbDcda3a5DDFE0D1372ebd6201efE7F2324",
+      "address": "0xF674C2A0411899a1A6fB0657e581B109A2a1958F",
       "abi": [
         {
           "inputs": [
@@ -347,7 +347,7 @@
       ]
     },
     "WorkerAuthManagerImpl": {
-      "address": "0x7A488CCc689D8596fcdd599868Df8053806EE60e",
+      "address": "0x9DC887e8e4CFCd02cD0D46f5A3E0DE01A7ddEC35",
       "abi": [
         {
           "inputs": [
@@ -492,7 +492,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x2c3C02219dc8be4E63e357467f1Ba8Ac77c5bfdb",
+      "address": "0x4fB14d3291Ac5F3dd7b29AcE7f332fF7Ba1d5DC4",
       "abi": [
         {
           "anonymous": false,
@@ -868,7 +868,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0x02dABCbC3886A72b39C3Ea88F8979B66F56b892B",
+      "address": "0xDdC5da145F14235E13aF1367fCB6Fe2593F8C681",
       "abi": [
         {
           "anonymous": false,
@@ -1111,6 +1111,30 @@
           "name": "retire",
           "outputs": [],
           "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
+    "UnrolledCordic": {
+      "address": "0x8a43989648F8b86349A4FE58Aa2470261e4CfdfA",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "val",
+              "type": "uint256"
+            }
+          ],
+          "name": "log2Times1e18",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
           "type": "function"
         }
       ]

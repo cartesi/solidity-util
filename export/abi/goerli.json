@@ -1114,6 +1114,30 @@
           "type": "function"
         }
       ]
+    },
+    "UnrolledCordic": {
+      "address": "0x296D3fDEb68cABa7EFED48D5c312cD56e098cDf8",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "val",
+              "type": "uint256"
+            }
+          ],
+          "name": "log2Times1e18",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        }
+      ]
     }
   }
 }

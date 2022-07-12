@@ -347,7 +347,7 @@
       ]
     },
     "WorkerAuthManagerImpl": {
-      "address": "0xD5A18C0B79eb833bDF60ef9E2e17905f41115e73",
+      "address": "0xe547b035582E250cD6667799D32C1BabCf5e62e9",
       "abi": [
         {
           "inputs": [
@@ -492,7 +492,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0xF3Db74539b63822E1b46aB6254DFA2ae588e11dD",
+      "address": "0xcacE06faF7Aa8bb3232f9AD3Ad652338dbe58558",
       "abi": [
         {
           "anonymous": false,
@@ -868,7 +868,7 @@
       ]
     },
     "WorkerManagerImpl": {
-      "address": "0x0936708cd91d185C257e33ad9Ca1E48dd1a8a6C7",
+      "address": "0x371945aF3E52452161574D1521aAe2Cadc02Ae8a",
       "abi": [
         {
           "anonymous": false,
@@ -1111,6 +1111,30 @@
           "name": "retire",
           "outputs": [],
           "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
+    "UnrolledCordic": {
+      "address": "0xF674C2A0411899a1A6fB0657e581B109A2a1958F",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "val",
+              "type": "uint256"
+            }
+          ],
+          "name": "log2Times1e18",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
           "type": "function"
         }
       ]
