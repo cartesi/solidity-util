@@ -14,8 +14,8 @@ import { expect, use } from "chai";
 import { deployments, ethers } from "hardhat";
 import { solidity } from "ethereum-waffle";
 
-import { TestCartesiMath } from "../src/types/TestCartesiMath";
-import { TestCartesiMath__factory } from "../src/types/factories/TestCartesiMath__factory";
+import { TestCartesiMath } from "../src/types/test/TestCartesiMath";
+import { TestCartesiMath__factory } from "../src/types/factories/test/TestCartesiMath__factory";
 use(solidity);
 
 describe("TestCartesiMath", async () => {
