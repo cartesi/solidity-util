@@ -346,6 +346,30 @@
         }
       ]
     },
+    "UnrolledCordic": {
+      "address": "0x7F07bf8A79d91478Fe7EAA4c39935b26F3A13980",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "val",
+              "type": "uint256"
+            }
+          ],
+          "name": "log2Times1e18",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        }
+      ]
+    },
     "WorkerAuthManagerImpl": {
       "address": "0x348468341AC575A2B57958da27A4d5F54f3A0AC6",
       "abi": [
@@ -1111,30 +1135,6 @@
           "name": "retire",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "UnrolledCordic": {
-      "address": "0x7F07bf8A79d91478Fe7EAA4c39935b26F3A13980",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "val",
-              "type": "uint256"
-            }
-          ],
-          "name": "log2Times1e18",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
           "type": "function"
         }
       ]
