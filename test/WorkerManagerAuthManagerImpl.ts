@@ -11,15 +11,12 @@
 // under the License.
 
 import { describe } from "mocha";
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers, getNamedAccounts } from "hardhat";
-import { solidity } from "ethereum-waffle";
 
 import { WorkerManagerAuthManagerImpl } from "../src/types/WorkerManagerAuthManagerImpl";
 import { WorkerManagerAuthManagerImpl__factory } from "../src/types/factories/WorkerManagerAuthManagerImpl__factory";
 import { getState } from "./getState";
-
-use(solidity);
 
 describe("WorkerManagerAuthManager", async () => {
     let enableDelegate = process.env["DELEGATE_TEST"];

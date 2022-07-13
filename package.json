@@ -58,9 +58,9 @@
     "devDependencies": {
         "@grpc/grpc-js": "^1.6.7",
         "@grpc/proto-loader": "^0.6.13",
+        "@nomicfoundation/hardhat-chai-matchers": "^1.0.1",
         "@nomiclabs/hardhat-ethers": "^2.1.0",
         "@nomiclabs/hardhat-etherscan": "^3.1.0",
-        "@nomiclabs/hardhat-waffle": "^2.0.3",
         "@typechain/ethers-v5": "^10.1.0",
         "@typechain/hardhat": "^6.1.2",
         "@types/chai": "^4.3.1",
@@ -71,7 +71,6 @@
         "chai": "^4.3.6",
         "copyfiles": "^2.4.1",
         "decimal.js": "^10.3.1",
-        "ethereum-waffle": "^3.4.4",
         "ethers": "^5.6.9",
         "hardhat": "^2.10.0",
         "hardhat-deploy": "0.11.11",

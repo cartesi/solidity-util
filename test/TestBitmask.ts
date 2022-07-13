@@ -10,14 +10,11 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers } from "hardhat";
-import { solidity } from "ethereum-waffle";
 
 import { TestBitmask } from "../src/types/test/TestBitmask";
 import { TestBitmask__factory } from "../src/types/factories/test/TestBitmask__factory";
-
-use(solidity);
 
 describe("TestBitmask", async () => {
     let TestBitmask: TestBitmask;

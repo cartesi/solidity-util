@@ -10,13 +10,11 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers } from "hardhat";
-import { solidity } from "ethereum-waffle";
 
 import { TestCartesiMath } from "../src/types/test/TestCartesiMath";
 import { TestCartesiMath__factory } from "../src/types/factories/test/TestCartesiMath__factory";
-use(solidity);
 
 describe("TestCartesiMath", async () => {
     let TestCartesiMath: TestCartesiMath;

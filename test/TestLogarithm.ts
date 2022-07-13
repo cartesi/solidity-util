@@ -13,15 +13,13 @@
 global.crypto = require("crypto");
 
 import { BigNumber } from "ethers";
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers } from "hardhat";
-import { solidity } from "ethereum-waffle";
 import Decimal from "decimal.js";
 
 import { UnrolledCordic } from "../src/types/UnrolledCordic";
 import { UnrolledCordic__factory } from "../src/types/factories/UnrolledCordic__factory";
 
-use(solidity);
 Decimal.set({ precision: 120 });
 
 const groundTruthRaw = require("./ground-truth.json");

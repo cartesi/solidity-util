@@ -10,9 +10,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers } from "hardhat";
-import { solidity } from "ethereum-waffle";
 
 import { TestMerkle } from "../src/types/test/TestMerkle";
 import { TestMerkle__factory } from "../src/types/factories/test/TestMerkle__factory";
@@ -22,8 +21,6 @@ import {
 } from "../src/util/merkle";
 
 import { keccak256 } from "ethers/lib/utils";
-
-use(solidity);
 
 describe("TestMerkle", async () => {
     let TestMerkle: TestMerkle;

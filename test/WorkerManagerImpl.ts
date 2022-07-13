@@ -11,14 +11,11 @@
 // under the License.
 
 import { describe } from "mocha";
-import { expect, use } from "chai";
+import { expect } from "chai";
 import { deployments, ethers, getNamedAccounts } from "hardhat";
-import { solidity } from "ethereum-waffle";
 
 import { WorkerManager } from "../src/types/WorkerManager";
 import { WorkerManager__factory } from "../src/types/factories/WorkerManager__factory";
-
-use(solidity);
 
 describe("WorkerManager", async () => {
     let instanceUser: WorkerManager;
