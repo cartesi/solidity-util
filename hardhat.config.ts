@@ -44,7 +44,6 @@ const config: HardhatUserConfig = {
         },
         ropsten: infuraNetwork("ropsten", 3, 6283185),
         rinkeby: infuraNetwork("rinkeby", 4, 6283185),
-        kovan: infuraNetwork("kovan", 42, 6283185),
         goerli: infuraNetwork("goerli", 5, 6283185),
         mainnet: infuraNetwork("mainnet", 1, 6283185),
         matic_testnet: infuraNetwork("polygon-mumbai", 80001),
