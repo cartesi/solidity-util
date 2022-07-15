@@ -1,4 +1,4 @@
-// Copyright 2020 Cartesi Pte. Ltd.
+// Copyright 2021 Cartesi Pte. Ltd.
 
 // Licensed under the Apache License, Version 2.0 (the "License"); you may not
 // use this file except in compliance with the License. You may obtain a copy
@@ -13,13 +13,21 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 
-const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
-    const { deployments, getNamedAccounts } = hre;
+const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
+    const { deployments, getNamedAccounts } = bre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
 
-    await deploy("WorkerManagerAuthManagerImpl", { from: deployer, log: true });
+    await deploy("BitsManipulation", { from: deployer, log: true });
+    await deploy("Bitmask", { from: deployer, log: true });
+
+    const cMath = await deploy("CartesiMathV2", { from: deployer, log: true });
+    await deploy("MerkleV2", {
+        from: deployer,
+        log: true,
+        libraries: { CartesiMath: cMath.address },
+    });
 };
 
 export default func;
-export const tags = ["WorkerManagerAuthManager"];
+export const tags = ["LibsV2"];

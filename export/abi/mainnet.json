@@ -1,9 +1,9 @@
 {
-  "name": "bsc_testnet",
-  "chainId": "97",
+  "name": "mainnet",
+  "chainId": "1",
   "contracts": {
     "BitsManipulationLibrary": {
-      "address": "0xc411FDBCac6537051A4339FD30823467D573bE64",
+      "address": "0x18e9d6aB59C571Edf1446980b851Cb750a8A8276",
       "abi": [
         {
           "inputs": [
@@ -94,7 +94,7 @@
       ]
     },
     "Merkle": {
-      "address": "0xD47860593fe40b3D0E04460e54bFE0b84E1E6922",
+      "address": "0x79e7c21D530d73C256353eb142e6C745A235C394",
       "abi": [
         {
           "inputs": [
@@ -237,8 +237,256 @@
         }
       ]
     },
+    "WorkerManagerImpl": {
+      "address": "0x7326F8ECFccEF78696E0F8Cd5937e95283932e24",
+      "abi": [
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "worker",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            }
+          ],
+          "name": "JobAccepted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "worker",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            }
+          ],
+          "name": "JobOffer",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "worker",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            }
+          ],
+          "name": "JobRejected",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "worker",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            }
+          ],
+          "name": "Retired",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "acceptJob",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "cancelHire",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "getOwner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "getUser",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address payable",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "hire",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "isAvailable",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "isOwned",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "isPending",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "isRetired",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "rejectJob",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address payable",
+              "name": "_workerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "retire",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
     "WorkerAuthManagerImpl": {
-      "address": "0x85C1929cC1794dd7c25d16d095a09318Cc57d174",
+      "address": "0x7F3A2AB61c0DD79632Eac14F7B160C16060a6DFf",
       "abi": [
         {
           "inputs": [
@@ -383,7 +631,7 @@
       ]
     },
     "WorkerManagerAuthManagerImpl": {
-      "address": "0x4b637E2957C96BA8892A6C51259F35C803Dd913F",
+      "address": "0x832D9f06970ddAc7BA49Be5a2cCad8f89Df74C13",
       "abi": [
         {
           "anonymous": false,
@@ -658,254 +906,6 @@
             }
           ],
           "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "isAvailable",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "isOwned",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "isPending",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "isRetired",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "rejectJob",
-          "outputs": [],
-          "stateMutability": "payable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address payable",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "retire",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "WorkerManagerImpl": {
-      "address": "0x767F4294434be981447B6d23f9565d02A6858fF2",
-      "abi": [
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "worker",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            }
-          ],
-          "name": "JobAccepted",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "worker",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            }
-          ],
-          "name": "JobOffer",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "worker",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            }
-          ],
-          "name": "JobRejected",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "worker",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            }
-          ],
-          "name": "Retired",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "acceptJob",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "cancelHire",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getOwner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "getUser",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address payable",
-              "name": "_workerAddress",
-              "type": "address"
-            }
-          ],
-          "name": "hire",
-          "outputs": [],
-          "stateMutability": "payable",
           "type": "function"
         },
         {
