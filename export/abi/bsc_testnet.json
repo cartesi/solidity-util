@@ -3,11 +3,11 @@
   "chainId": "97",
   "contracts": {
     "Bitmask": {
-      "address": "0x8FC01070Bc3A31507966d872c68b61D0581BFE93",
+      "address": "0x4633fA726c0Fcd577c69c6a04183b054B1C0f152",
       "abi": []
     },
     "BitsManipulation": {
-      "address": "0x0841814cbb21f1944f7DB3dbD1902e126446Dd94",
+      "address": "0xd0A1b4C8ec55d34208445f12F00Ff5E8e3ED272d",
       "abi": [
         {
           "inputs": [
@@ -307,6 +307,125 @@
         }
       ]
     },
+    "CartesiMathV2": {
+      "address": "0x3e14312A256d14C415DFA231176999727aD89Aec",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "clz",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "ctz",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "getLog2Floor",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "getLog2TableTimes1M",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "isPowerOf2",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_num",
+              "type": "uint256"
+            }
+          ],
+          "name": "log2ApproxTimes1M",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        }
+      ]
+    },
     "Merkle": {
       "address": "0xD47860593fe40b3D0E04460e54bFE0b84E1E6922",
       "abi": [
@@ -451,8 +570,138 @@
         }
       ]
     },
+    "MerkleV2": {
+      "address": "0x9bAaBaa4a2da13e5b9735b8c1c8D0B2C3eb75Dc0",
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32[]",
+              "name": "hashes",
+              "type": "bytes32[]"
+            }
+          ],
+          "name": "calculateRootFromPowerOfTwo",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_index",
+              "type": "uint256"
+            }
+          ],
+          "name": "getEmptyTreeHashAtIndex",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_wordIndex",
+              "type": "uint256"
+            }
+          ],
+          "name": "getHashOfWordAtIndex",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "_data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_log2Size",
+              "type": "uint256"
+            }
+          ],
+          "name": "getMerkleRootFromBytes",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_position",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_logSizeOfReplacement",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_logSizeOfFullDrive",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "_replacement",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32[]",
+              "name": "siblings",
+              "type": "bytes32[]"
+            }
+          ],
+          "name": "getRootAfterReplacementInDrive",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        }
+      ]
+    },
     "UnrolledCordic": {
-      "address": "0xcacE06faF7Aa8bb3232f9AD3Ad652338dbe58558",
+      "address": "0xb6DeF62356727ACBaD38591072201D7c2141b4C9",
       "abi": [
         {
           "inputs": [
@@ -1240,255 +1489,6 @@
           "name": "retire",
           "outputs": [],
           "stateMutability": "nonpayable",
-          "type": "function"
-        }
-      ]
-    },
-    "CartesiMathV2": {
-      "address": "0xC94581224DDCD07e334Eb64825A990650f0e1715",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "clz",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "ctz",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "getLog2Floor",
-          "outputs": [
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "getLog2TableTimes1M",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "isPowerOf2",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_num",
-              "type": "uint256"
-            }
-          ],
-          "name": "log2ApproxTimes1M",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        }
-      ]
-    },
-    "MerkleV2": {
-      "address": "0x423123593D44ce54d249b7cA3F2125478c0DC715",
-      "abi": [
-        {
-          "inputs": [
-            {
-              "internalType": "bytes32[]",
-              "name": "hashes",
-              "type": "bytes32[]"
-            }
-          ],
-          "name": "calculateRootFromPowerOfTwo",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_index",
-              "type": "uint256"
-            }
-          ],
-          "name": "getEmptyTreeHashAtIndex",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_wordIndex",
-              "type": "uint256"
-            }
-          ],
-          "name": "getHashOfWordAtIndex",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "bytes",
-              "name": "_data",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_log2Size",
-              "type": "uint256"
-            }
-          ],
-          "name": "getMerkleRootFromBytes",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_position",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_logSizeOfReplacement",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_logSizeOfFullDrive",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bytes32",
-              "name": "_replacement",
-              "type": "bytes32"
-            },
-            {
-              "internalType": "bytes32[]",
-              "name": "siblings",
-              "type": "bytes32[]"
-            }
-          ],
-          "name": "getRootAfterReplacementInDrive",
-          "outputs": [
-            {
-              "internalType": "bytes32",
-              "name": "",
-              "type": "bytes32"
-            }
-          ],
-          "stateMutability": "pure",
           "type": "function"
         }
       ]

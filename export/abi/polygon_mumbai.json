@@ -3,11 +3,11 @@
   "chainId": "80001",
   "contracts": {
     "Bitmask": {
-      "address": "0xe547b035582E250cD6667799D32C1BabCf5e62e9",
+      "address": "0x598b68c8234F201aC984Bd33D7678D2E3aC8f179",
       "abi": []
     },
     "BitsManipulation": {
-      "address": "0x371945aF3E52452161574D1521aAe2Cadc02Ae8a",
+      "address": "0x9fB2a46ca249b56E89F9956d8552E5Df1161E340",
       "abi": [
         {
           "inputs": [
@@ -308,7 +308,7 @@
       ]
     },
     "CartesiMathV2": {
-      "address": "0x0F3D7Dbaf7125885D8dd80dA4327feF54A030fe5",
+      "address": "0x627bF4558cb62028fA3d398Aa6bBEF5B5AAFE2ad",
       "abi": [
         {
           "inputs": [
@@ -571,7 +571,7 @@
       ]
     },
     "MerkleV2": {
-      "address": "0x2dC8b1A27F7Ccd071559b9B10077EfA6bE0AA7B8",
+      "address": "0x381e64Cb649A98E2B2FBb440E528A44D21B5B9c0",
       "abi": [
         {
           "inputs": [
@@ -701,7 +701,7 @@
       ]
     },
     "UnrolledCordic": {
-      "address": "0x8a43989648F8b86349A4FE58Aa2470261e4CfdfA",
+      "address": "0x82a2fac7211cE5b0D44B7BC63C09716e1c4fF3D6",
       "abi": [
         {
           "inputs": [
