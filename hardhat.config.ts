@@ -15,6 +15,7 @@ import { HttpNetworkUserConfig } from "hardhat/types";
 
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-etherscan";
 import "@typechain/hardhat";
 import "hardhat-deploy";
 import "solidity-coverage";
@@ -85,6 +86,9 @@ const config: HardhatUserConfig = {
     typechain: {
         outDir: "src/types",
         target: "ethers-v5",
+    },
+    etherscan: {
+        apiKey: process.env.ETHERSCAN_API_KEY,
     },
     namedAccounts: {
         deployer: {
