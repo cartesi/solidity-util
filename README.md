@@ -8,7 +8,6 @@ Packaged as npm and published at https://www.npmjs.com/package/@cartesi/util
 
 The npm package contains `hardhat` deployment artifacts with information of deployed contracts on the following testnets:
 
-- Rinkeby
 - Goerli
 - Matic Testnet
 - Binance Smart Chain Testnet
