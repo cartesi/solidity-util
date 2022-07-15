@@ -44,6 +44,7 @@ const config: HardhatUserConfig = {
             accounts: mnemonic ? { mnemonic } : undefined,
         },
         goerli: infuraNetwork("goerli", 5, 6283185),
+        sepolia: infuraNetwork("sepolia", 11155111, 6283185),
         mainnet: infuraNetwork("mainnet", 1, 6283185),
         polygon_mumbai: infuraNetwork("polygon-mumbai", 80001),
         arbitrum_goerli: infuraNetwork("arbitrum-goerli", 421613),
