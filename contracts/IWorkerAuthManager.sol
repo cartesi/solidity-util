@@ -12,9 +12,9 @@
 
 /// @title WorkerAuthManager
 /// @author Danilo Tuler
-pragma solidity ^0.7.0;
+pragma solidity >=0.7.0;
 
-interface WorkerAuthManager {
+interface IWorkerAuthManager {
     /// @notice Gives worker permission to act on a DApp
     /// @param _workerAddress address of the worker node to given permission
     /// @param _dappAddress address of the dapp that permission will be given to
@@ -23,32 +23,20 @@ interface WorkerAuthManager {
     /// @notice Removes worker's permission to act on a DApp
     /// @param _workerAddress address of the proxy that will lose permission
     /// @param _dappAddresses addresses of dapps that will lose permission
-    function deauthorize(address _workerAddress, address _dappAddresses)
-        external;
+    function deauthorize(address _workerAddress, address _dappAddresses) external;
 
     /// @notice Returns is the dapp is authorized to be called by that worker
     /// @param _workerAddress address of the worker
     /// @param _dappAddress address of the DApp
-    function isAuthorized(address _workerAddress, address _dappAddress)
-        external
-        view
-        returns (bool);
+    function isAuthorized(address _workerAddress, address _dappAddress) external view returns (bool);
 
     /// @notice Get the owner of the worker node
     /// @param workerAddress address of the worker node
     function getOwner(address workerAddress) external view returns (address);
 
     /// @notice A DApp has been authorized by a user for a worker
-    event Authorization(
-        address indexed user,
-        address indexed worker,
-        address indexed dapp
-    );
+    event Authorization(address indexed user, address indexed worker, address indexed dapp);
 
     /// @notice A DApp has been deauthorized by a user for a worker
-    event Deauthorization(
-        address indexed user,
-        address indexed worker,
-        address indexed dapp
-    );
+    event Deauthorization(address indexed user, address indexed worker, address indexed dapp);
 }

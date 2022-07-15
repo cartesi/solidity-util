@@ -12,9 +12,9 @@
 
 /// @title WorkerManager
 /// @author Danilo Tuler
-pragma solidity ^0.7.0;
+pragma solidity >=0.7.0;
 
-interface WorkerManager {
+interface IWorkerManager {
     /// @notice Returns true if worker node is available
     /// @param workerAddress address of the worker node
     function isAvailable(address workerAddress) external view returns (bool);

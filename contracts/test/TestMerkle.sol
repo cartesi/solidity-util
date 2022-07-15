@@ -13,7 +13,7 @@
 /// @title Test Merkle
 pragma solidity ^0.8.0;
 
-import "../Merkle.sol";
+import "../MerkleV2.sol";
 
 contract TestMerkle {
     function getRootAfterReplacementInDrive(
@@ -24,7 +24,7 @@ contract TestMerkle {
         bytes32[] memory siblings
     ) public pure returns (bytes32) {
         return
-            Merkle.getRootAfterReplacementInDrive(
+            MerkleV2.getRootAfterReplacementInDrive(
                 _position,
                 _logSizeOfReplacement,
                 _logSizeOfFullDrive,
@@ -34,18 +34,18 @@ contract TestMerkle {
     }
 
     function getEmptyTreeHashAtIndex(uint256 _index) public pure returns (bytes32) {
-        return Merkle.getEmptyTreeHashAtIndex(_index);
+        return MerkleV2.getEmptyTreeHashAtIndex(_index);
     }
 
     function getMerkleRootFromBytes(bytes calldata _data, uint256 _log2Size) public pure returns (bytes32) {
-        return Merkle.getMerkleRootFromBytes(_data, _log2Size);
+        return MerkleV2.getMerkleRootFromBytes(_data, _log2Size);
     }
 
     function getHashOfWordAtIndex(bytes calldata _data, uint256 _wordIndex) public pure returns (bytes32) {
-        return Merkle.getHashOfWordAtIndex(_data, _wordIndex);
+        return MerkleV2.getHashOfWordAtIndex(_data, _wordIndex);
     }
 
     function calculateRootFromPowerOfTwo(bytes32[] memory hashes) public pure returns (bytes32) {
-        return Merkle.calculateRootFromPowerOfTwo(hashes);
+        return MerkleV2.calculateRootFromPowerOfTwo(hashes);
     }
 }

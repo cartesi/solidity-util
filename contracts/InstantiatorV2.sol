@@ -10,19 +10,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-pragma solidity ^0.7.0;
+pragma solidity >=0.7.0;
 
+interface InstantiatorV2 {
+    function isActive(uint256 _index) external view returns (bool);
 
-contract Decorated {
-    // This contract defines several modifiers but does not use
-    // them - they will be used in derived contracts.
-    modifier onlyBy(address user) {
-        require(msg.sender == user, "Cannot be called by user");
-        _;
-    }
+    function getNonce(uint256 _index) external view returns (uint256);
 
-    modifier onlyAfter(uint256 time) {
-        require(block.timestamp > time, "Cannot be called now");
-        _;
-    }
+    function isConcerned(uint256 _index, address _user) external view returns (bool);
+
+    function getSubInstances(uint256 _index, address)
+        external
+        view
+        returns (address[] memory _addresses, uint256[] memory _indices);
 }

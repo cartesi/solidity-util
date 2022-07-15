@@ -92,7 +92,7 @@ describe("TestMerkle", async () => {
     beforeEach(async () => {
         await deployments.fixture();
         const [user] = await ethers.getSigners();
-        const address = (await deployments.get("Merkle")).address;
+        const address = (await deployments.get("MerkleV2")).address;
 
         TestMerkle = TestMerkle__factory.connect(address, user);
     });

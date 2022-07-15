@@ -13,26 +13,26 @@
 /// @title Test CartesiMath
 pragma solidity ^0.8.0;
 
-import "../CartesiMath.sol";
+import "../CartesiMathV2.sol";
 
 contract TestCartesiMath {
     function getLog2TableTimes1M(uint256 _num) public pure returns (uint256) {
-        return CartesiMath.getLog2TableTimes1M(_num);
+        return CartesiMathV2.getLog2TableTimes1M(_num);
     }
 
     function ctz(uint256 _num) public pure returns (uint256) {
-        return CartesiMath.ctz(_num);
+        return CartesiMathV2.ctz(_num);
     }
 
     function clz(uint256 _num) public pure returns (uint256) {
-        return CartesiMath.clz(_num);
+        return CartesiMathV2.clz(_num);
     }
 
     function getLog2Floor(uint256 _num) public pure returns (uint256) {
-        return CartesiMath.getLog2Floor(_num);
+        return CartesiMathV2.getLog2Floor(_num);
     }
 
     function isPowerOf2(uint256 _num) public pure returns (bool) {
-        return CartesiMath.isPowerOf2(_num);
+        return CartesiMathV2.isPowerOf2(_num);
     }
 }

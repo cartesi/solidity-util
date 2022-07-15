@@ -10,43 +10,37 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.0;
 
-import "./Instantiator.sol";
+import "./InstantiatorV2.sol";
 
-abstract contract InstantiatorImpl is Instantiator {
+abstract contract InstantiatorImplV2 is InstantiatorV2 {
     uint256 public currentIndex = 0;
 
     mapping(uint256 => bool) internal active;
     mapping(uint256 => uint256) internal nonce;
 
-    modifier onlyInstantiated(uint256 _index) override {
+    modifier onlyInstantiated(uint256 _index) {
         require(currentIndex > _index, "Index not instantiated");
         _;
     }
 
-    modifier onlyActive(uint256 _index) override {
+    modifier onlyActive(uint256 _index) {
         require(currentIndex > _index, "Index not instantiated");
         require(isActive(_index), "Index inactive");
         _;
     }
 
-    modifier increasesNonce(uint256 _index) override {
+    modifier increasesNonce(uint256 _index) {
         nonce[_index]++;
         _;
     }
 
-    function isActive(uint256 _index) public override view returns (bool) {
+    function isActive(uint256 _index) public view override returns (bool) {
         return (active[_index]);
     }
 
-    function getNonce(uint256 _index)
-        public
-        override
-        view
-        onlyActive(_index)
-        returns (uint256 currentNonce)
-    {
+    function getNonce(uint256 _index) public view override onlyActive(_index) returns (uint256 currentNonce) {
         return nonce[_index];
     }
 

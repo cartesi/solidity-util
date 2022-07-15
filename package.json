@@ -55,6 +55,9 @@
         "test": "Run unit tests",
         "test:coverage": "Run test coverage report"
     },
+    "dependencies": {
+        "@openzeppelin/contracts": "3.2.1-solc-0.7"
+    },
     "devDependencies": {
         "@grpc/grpc-js": "^1.6.7",
         "@grpc/proto-loader": "^0.6.13",

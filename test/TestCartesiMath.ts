@@ -23,15 +23,14 @@ describe("TestCartesiMath", async () => {
         await deployments.fixture();
 
         const [user] = await ethers.getSigners();
-        0;
-        const CartesiMathAddress = (await deployments.get("CartesiMath"))
+        const CartesiMathAddress = (await deployments.get("CartesiMathV2"))
             .address;
         const { deploy } = deployments;
         const { address } = await deploy("TestCartesiMath", {
             from: user.address,
             log: true,
             libraries: {
-                ["CartesiMath"]: CartesiMathAddress,
+                ["CartesiMathV2"]: CartesiMathAddress,
             },
         });
 
