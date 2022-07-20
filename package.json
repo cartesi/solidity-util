@@ -52,7 +52,7 @@
         "test:coverage": "Run test coverage report"
     },
     "dependencies": {
-        "@openzeppelin/contracts": "3.2.1-solc-0.7"
+        "@openzeppelin/contracts": "4.4.2"
     },
     "devDependencies": {
         "@grpc/grpc-js": "^1.6.7",
