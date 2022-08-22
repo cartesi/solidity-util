@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
+## [4.1.0] - 2022-08-22
+
+### Added
+
+- Deployment to arbitrum_goerli
+
 ## [4.0.0] - 2022-07-19
 
 ### Added

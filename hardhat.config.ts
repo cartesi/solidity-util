@@ -46,6 +46,7 @@ const config: HardhatUserConfig = {
         goerli: infuraNetwork("goerli", 5, 6283185),
         mainnet: infuraNetwork("mainnet", 1, 6283185),
         polygon_mumbai: infuraNetwork("polygon-mumbai", 80001),
+        arbitrum_goerli: infuraNetwork("arbitrum-goerli", 421613),
         optimism_goerli: infuraNetwork("optimism-goerli", 420),
         bsc_testnet: {
             url: "https://data-seed-prebsc-1-s1.binance.org:8545",
