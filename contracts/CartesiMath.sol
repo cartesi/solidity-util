@@ -154,15 +154,15 @@ abstract contract CartesiMath {
     /// @notice Approximates log2 * 1M
     /// @param _num number to take log2 * 1M of
     function log2ApproxTimes1M(uint256 _num) public view returns (uint256) {
-        require(_num > 0, "Number cannot be zero");
+        require (_num > 0, "Number cannot be zero");
         uint256 leading = 0;
 
         if (_num == 1) return 0;
 
         while (_num > 128) {
-            _num = _num >> 1;
-            leading += 1;
-        }
-        return (leading.mul(uint256(1000000))).add(log2tableTimes1M[_num]);
+           _num = _num >> 1;
+           leading += 1;
+       }
+       return (leading.mul(uint256(1000000))).add(log2tableTimes1M[_num]);
     }
 }
