@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "description": "Solidity Util Contracts",
     "scripts": {
         "build": "run-s compile export",
