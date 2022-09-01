@@ -989,10 +989,10 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@grpc/grpc-js@^1.6.10":
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.6.10.tgz#b6584c59ef90aa76d878ac92c21785e602f247ff"
-  integrity sha512-XTX5z/P5kH802MDoVm/rqOil0UwYEOEjf9+NPgfmm5UINIxDzwYaXfVR6z8svCBG8Hlbu/FzkXqhP8J5xaWzSQ==
+"@grpc/grpc-js@^1.6.12":
+  version "1.6.12"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.6.12.tgz#20f710d8a8c5c396b2ae9530ba6c06b984614fdf"
+  integrity sha512-JmvQ03OTSpVd9JTlj/K3IWHSz4Gk/JMLUTtW7Zb0KvO1LcOYGATh5cNuRYzCAeDR3O8wq+q8FZe97eO9MBrkUw==
   dependencies:
     "@grpc/proto-loader" "^0.7.0"
     "@types/node" ">=12.12.47"
@@ -1455,10 +1455,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.21.tgz#575e91f59c2e79318c2d39a48286c6954e484fd5"
   integrity sha512-Qk7rOvV2A4vNgXNS88vEvbJE1NDFPCQ8AU+pNElrU2bA4yrRDef3fg3SUe+xkwyin3Bpg/Xh5JkNWTlsOcS2tA==
 
-"@types/node@^18.7.9":
-  version "18.7.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.9.tgz#180bfc495c91dc62573967edf047e15dbdce1491"
-  integrity sha512-0N5Y1XAdcl865nDdjbO0m3T6FdmQ4ijE89/urOHLREyTXbpMWbSafx9y7XIsgWGtwUP2iYTinLyyW3FatAxBLQ==
+"@types/node@^18.7.14":
+  version "18.7.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.14.tgz#0fe081752a3333392d00586d815485a17c2cf3c9"
+  integrity sha512-6bbDaETVi8oyIARulOE9qF1/Qdi/23z6emrUh0fNJRUmjznqrixD4MpGDdgOFk5Xb0m2H6Xu42JGdvAxaJR/wA==
 
 "@types/pbkdf2@^3.0.0":
   version "3.1.0"
@@ -6720,10 +6720,10 @@ typescript@^4.3.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
   integrity sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==
 
-typescript@^4.7.4:
-  version "4.7.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+typescript@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
+  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
 
 typical@^4.0.0:
   version "4.0.0"

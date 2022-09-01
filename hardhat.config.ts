@@ -58,6 +58,11 @@ const config: HardhatUserConfig = {
             chainId: 0xa869,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
+        iotex_testnet: {
+            url: "https://babel-api.testnet.iotex.io",
+            chainId: 4690,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
     },
     solidity: {
         compilers: [
