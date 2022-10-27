@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
+### Added
+
+- Deployment to gnosis chiado (gnosis testnet)
+
 ## [4.2.0] - 2022-09-01
 
 ### Changes
