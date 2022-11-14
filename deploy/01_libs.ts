@@ -22,5 +22,5 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     await deploy("Merkle", { from: deployer, log: true });
 };
 
+func.tags = ["Libs"];
 export default func;
-export const tags = ["Libs"];

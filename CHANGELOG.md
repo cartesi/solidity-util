@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
+## [5.0.1] - 2022-11-14
+
+### Changed
+
+- Fix definition of tags and dependencies in deploy scripts
+
 ## [5.0.0] - 2022-11-02
 
 ### Changes

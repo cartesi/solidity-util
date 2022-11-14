@@ -21,7 +21,10 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     await deploy("BitsManipulation", { from: deployer, log: true });
     await deploy("Bitmask", { from: deployer, log: true });
 
-    const CartesiMathV2 = await deploy("CartesiMathV2", { from: deployer, log: true });
+    const CartesiMathV2 = await deploy("CartesiMathV2", {
+        from: deployer,
+        log: true,
+    });
     await deploy("MerkleV2", {
         from: deployer,
         log: true,
@@ -29,5 +32,5 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     });
 };
 
+func.tags = ["LibsV2"];
 export default func;
-export const tags = ["LibsV2"];

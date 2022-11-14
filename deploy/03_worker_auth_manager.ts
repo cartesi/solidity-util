@@ -22,10 +22,10 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     await deploy("WorkerAuthManagerImpl", {
         from: deployer,
         args: [WorkerManagerImpl.address],
-        log: true
+        log: true,
     });
 };
 
+func.tags = ["WorkerAuthManager"];
+func.dependencies = ["WorkerManager"];
 export default func;
-export const tags = ["WorkerAuthManager"];
-export const dependencies = ["WorkerManager"];

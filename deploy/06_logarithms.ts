@@ -24,5 +24,5 @@ const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
     });
 };
 
+func.tags = ["Logarithms"];
 export default func;
-export const tags = ["Logarithms"];
