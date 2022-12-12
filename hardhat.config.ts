@@ -63,7 +63,7 @@ const config: HardhatUserConfig = {
             chainId: 4690,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        gnosis_chiado: {
+        chiado: {
             url: "https://rpc.chiadochain.net",
             chainId: 10200,
             gasPrice: 1000000000,
