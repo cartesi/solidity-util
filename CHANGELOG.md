@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.2] - 2023-01-05
+
 ### Changes
 
 - Rename network gnosis_chiado to just chiado
