@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes
 
 - Rename network gnosis_chiado to just chiado
+- Rename network avax_testnet to avalanche_fuji
 
 ## [5.0.1] - 2022-11-14
 

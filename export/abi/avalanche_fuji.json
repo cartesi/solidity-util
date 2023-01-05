@@ -1,5 +1,5 @@
 {
-  "name": "avax_testnet",
+  "name": "avalanche_fuji",
   "chainId": "43113",
   "contracts": {
     "Bitmask": {

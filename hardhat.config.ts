@@ -53,7 +53,7 @@ const config: HardhatUserConfig = {
             chainId: 97,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        avax_testnet: {
+        avalanche_fuji: {
             url: "https://api.avax-test.network/ext/bc/C/rpc",
             chainId: 0xa869,
             accounts: mnemonic ? { mnemonic } : undefined,
