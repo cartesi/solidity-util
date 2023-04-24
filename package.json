@@ -7,8 +7,6 @@
         "clean:ignored": "rimraf artifacts cache coverage deployments/localhost dist generated-src src/types/*",
         "clean:hardhat": "hardhat clean",
         "clean": "run-s clean:hardhat clean:ignored",
-        "codegen": "run-p codegen:protoc",
-        "codegen:protoc": "proto-loader-gen-types --grpcLib @grpc/grpc-js --outDir src/proto grpc-interfaces/stateserver.proto",
         "compile": "hardhat compile",
         "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist/src",
         "deploy": "run-s deploy:development",
@@ -26,7 +24,6 @@
         "deploy:testnet": "run-s deploy:goerli deploy:sepolia deploy:polygon_mumbai deploy:arbitrum_goerli deploy:optimism_goerli deploy:bsc_testnet deploy:avalanche_fuji deploy:iotex_testnet deploy:chiado",
         "export": "hardhat export-artifacts export/artifacts --hide-sources --including-empty-bytecode --including-no-public-functions",
         "info": "npm-scripts-info",
-        "prebuild": "run-s codegen",
         "prepack": "run-s build tsc copy-dts",
         "prettier": "prettier --check src/**/*.ts test/**/*.ts contracts/**/*.sol",
         "solhint": "solhint contracts/**/*.sol",
@@ -62,8 +59,6 @@
         "@openzeppelin/contracts": "3.2.1-solc-0.7"
     },
     "devDependencies": {
-        "@grpc/grpc-js": "^1.8.1",
-        "@grpc/proto-loader": "^0.7.4",
         "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
         "@nomiclabs/hardhat-ethers": "^2.1.1",
         "@nomiclabs/hardhat-etherscan": "^3.1.4",
