@@ -1,0 +1,26 @@
+{
+    "name": "@cartesi/util-ethers-v5",
+    "version": "6.0.0-alpha.0",
+    "description": "Cartesi Solidity Util Typechain Ethers V5",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "author": "Danilo Tuler",
+    "license": "Apache-2.0",
+    "scripts": {
+        "codegen": "typechain --target=ethers-v5 '../contracts/export/artifacts/**/*.json'",
+        "compile": "tsc",
+        "build": "run-s codegen compile",
+        "prepack": "run-s build"
+    },
+    "dependencies": {
+        "@cartesi/util": "6.0.0-alpha.0",
+        "ethers": "^5.7.2"
+    },
+    "devDependencies": {
+        "@typechain/ethers-v5": "^10.2.0",
+        "npm-run-all": "^4.1.5",
+        "tsconfig": "*",
+        "typechain": "^8.1.1",
+        "typescript": "^5.0.4"
+    }
+}
