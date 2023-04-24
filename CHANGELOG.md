@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0-alpha.0] - 2023-04-25
+
 ### Changes
 
 - Delete unused code of offchain worker handling
+- Migration to monorepo
+- Separation of contracts/deployments from bindings libraries
 
 ## [5.0.2] - 2023-01-10
 
