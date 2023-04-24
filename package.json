@@ -1,111 +1,24 @@
 {
-    "name": "@cartesi/util",
-    "version": "5.0.2",
-    "description": "Solidity Util Contracts",
+    "name": "@cartesi/solidity-util-monorepo",
+    "version": "0.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
-        "build": "run-s compile export",
-        "clean:ignored": "rimraf artifacts cache coverage deployments/localhost dist generated-src src/types/*",
-        "clean:hardhat": "hardhat clean",
-        "clean": "run-s clean:hardhat clean:ignored",
-        "compile": "hardhat compile",
-        "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist/src",
-        "deploy": "run-s deploy:development",
-        "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet --export export/abi/bsc_testnet.json",
-        "deploy:development": "hardhat deploy --network localhost",
-        "deploy:goerli": "hardhat deploy --network goerli --export export/abi/goerli.json",
-        "deploy:sepolia": "hardhat deploy --network sepolia --export export/abi/sepolia.json",
-        "deploy:mainnet": "hardhat deploy --network mainnet --export export/abi/mainnet.json",
-        "deploy:polygon_mumbai": "hardhat deploy --network polygon_mumbai --export export/abi/polygon_mumbai.json",
-        "deploy:arbitrum_goerli": "hardhat deploy --network arbitrum_goerli --export export/abi/arbitrum_goerli.json",
-        "deploy:optimism_goerli": "hardhat deploy --network optimism_goerli --export export/abi/optimism_goerli.json",
-        "deploy:avalanche_fuji": "hardhat deploy --network avalanche_fuji --export export/abi/avalanche_fuji.json",
-        "deploy:iotex_testnet": "hardhat deploy --network iotex_testnet --export export/abi/iotex_testnet.json",
-        "deploy:chiado": "hardhat deploy --network chiado --export export/abi/chiado.json",
-        "deploy:testnet": "run-s deploy:goerli deploy:sepolia deploy:polygon_mumbai deploy:arbitrum_goerli deploy:optimism_goerli deploy:bsc_testnet deploy:avalanche_fuji deploy:iotex_testnet deploy:chiado",
-        "export": "hardhat export-artifacts export/artifacts --hide-sources --including-empty-bytecode --including-no-public-functions",
-        "info": "npm-scripts-info",
-        "prepack": "run-s build tsc copy-dts",
-        "prettier": "prettier --check src/**/*.ts test/**/*.ts contracts/**/*.sol",
-        "solhint": "solhint contracts/**/*.sol",
-        "start": "hardhat node",
-        "test": "hardhat test",
-        "test:coverage": "hardhat coverage",
-        "tsc": "tsc"
-    },
-    "scripts-info": {
-        "build": "Build contracts and typescript code",
-        "copy-dts": "Copy TypeChain type definition files to typescript output dir",
-        "clean": "Clean build artifacts, including contracts local deployment information",
-        "deploy": "Deploy contracts to local node. Requires node running on localhost:8545",
-        "deploy:bsc_testnet": "Deploy contracts to bsc_testnet. Requires one environment variable: MNEMONIC.",
-        "deploy:development": "Deploy contracts to local node. Requires node running on localhost:8545",
-        "deploy:goerli": "Deploy contracts to goerli. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "deploy:sepolia": "Deploy contracts to sepolia. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "deploy:mainnet": "Deploy contracts to mainnet.",
-        "deploy:polygon_mumbai": "Deploy contracts to polygon_mumbai. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "deploy:arbitrum_goerli": "Deploy contracts to arbitrum_goerli. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "deploy:optimism_goerli": "Deploy contracts to optimism_goerli. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "deploy:avalanche_fuji": "Deploy contracts to avalanche_fuji. Requires one environment variable: MNEMONIC.",
-        "deploy:iotex_testnet": "Deploy contracts to iotex_testnet. Requires one environment variable: MNEMONIC.",
-        "deploy:testnet": "Deploy contracts to all supported testnets. Requires two environment variables: PROJECT_ID and MNEMONIC.",
-        "export": "Export artifacts in a simpler format",
-        "info": "Displays information about the scripts.",
-        "prettier": "Check code style",
-        "solhint": "Run solidity linter",
-        "test": "Run unit tests",
-        "test:coverage": "Run test coverage report"
-    },
-    "dependencies": {
-        "@openzeppelin/contracts": "3.2.1-solc-0.7"
+        "build": "turbo run build",
+        "dev": "turbo run dev --parallel",
+        "lint": "turbo run lint",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
     },
     "devDependencies": {
-        "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
-        "@nomiclabs/hardhat-ethers": "^2.2.3",
-        "@nomiclabs/hardhat-etherscan": "^3.1.7",
-        "@typechain/ethers-v5": "^10.2.0",
-        "@typechain/hardhat": "^6.1.5",
-        "@types/chai": "^4.3.3",
-        "@types/google-protobuf": "^3.15.6",
-        "@types/keccak": "^3.0.1",
-        "@types/mocha": "^10.0.1",
-        "@types/node": "^18.16.0",
-        "chai": "^4.3.6",
-        "copyfiles": "^2.4.1",
-        "decimal.js": "^10.4.3",
-        "ethers": "^5.7.0",
-        "hardhat": "^2.14.0",
-        "hardhat-deploy": "0.11.26",
-        "mocha": "^10.2.0",
-        "npm-run-all": "^4.1.5",
-        "npm-scripts-info": "^0.3.9",
-        "prettier": "^2.8.8",
-        "prettier-plugin-solidity": "^1.1.3",
-        "rimraf": "^5.0.0",
-        "solhint": "^3.4.1",
-        "solhint-plugin-prettier": "^0.0.5",
-        "solidity-coverage": "^0.8.2",
-        "ts-generator": "^0.1.1",
-        "ts-node": "^10.9.1",
-        "typechain": "^8.1.1",
-        "typescript": "^5.0.4"
+        "eslint-config-custom": "*",
+        "prettier": "latest",
+        "turbo": "latest"
     },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/cartesi/solidity-util.git"
+    "engines": {
+        "node": ">=14.0.0"
     },
-    "keywords": [
-        "cartesi"
-    ],
-    "files": [
-        "contracts",
-        "deployments/*/*.json",
-        "deployments/*/.chainid",
-        "dist/src/types",
-        "dist/deploy/*.js",
-        "export"
-    ],
-    "main": "./dist/src/types/index.js",
-    "types": "./dist/src/types/index.d.ts",
-    "author": "Danilo Tuler <danilo@cartesi.io>",
-    "license": "Apache-2.0"
+    "dependencies": {},
+    "packageManager": "yarn@1.22.19"
 }
