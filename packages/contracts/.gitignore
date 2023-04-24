@@ -1,0 +1,16 @@
+/artifacts
+bin
+cache
+coverage*
+**/solcInputs
+deployments/localhost
+dist
+node_modules
+src/proto/stateserver*
+src/types
+test/*/
+.mnemonic
+.vscode
+.node*
+*.bin
+*.abi

@@ -1,16 +1,3 @@
-/artifacts
-bin
-cache
-coverage*
-**/solcInputs
-deployments/localhost
-dist
 node_modules
-src/proto/stateserver*
-src/types
-test/*/
-.mnemonic
+.turbo
 .vscode
-.node*
-*.bin
-*.abi
