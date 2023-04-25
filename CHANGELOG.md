@@ -11,23 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
-- Delete unused code of offchain worker handling
-- Migration to monorepo
-- Separation of contracts/deployments from bindings libraries
+-   Delete unused code of offchain worker handling
+-   Migration to monorepo
+-   Separation of contracts/deployments from bindings libraries
 
 ## [5.0.2] - 2023-01-10
 
 ### Changes
 
-- Rename network gnosis_chiado to just chiado
-- Rename network avax_testnet to avalanche_fuji
-- Add sepolia testnet
+-   Rename network gnosis_chiado to just chiado
+-   Rename network avax_testnet to avalanche_fuji
+-   Add sepolia testnet
 
 ## [5.0.1] - 2022-11-14
 
 ### Changed
 
-- Fix definition of tags and dependencies in deploy scripts
+-   Fix definition of tags and dependencies in deploy scripts
 
 ## [5.0.0] - 2022-11-02
 
@@ -35,202 +35,202 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Deployment to mainnet
-- Deployment to gnosis chiado (gnosis testnet)
+-   Deployment to mainnet
+-   Deployment to gnosis chiado (gnosis testnet)
 
 ## [4.2.0] - 2022-09-01
 
 ### Changes
 
-- Restore original CartesiMath contract to not trigger redeploy (formatting changes only)
+-   Restore original CartesiMath contract to not trigger redeploy (formatting changes only)
 
 ### Added
 
-- Deployment to iotex_testnet
+-   Deployment to iotex_testnet
 
 ## [4.1.0] - 2022-08-22
 
 ### Added
 
-- Deployment to arbitrum_goerli
+-   Deployment to arbitrum_goerli
 
 ## [4.0.0] - 2022-07-19
 
 ### Added
 
-- Deployment to optimism_goerli
+-   Deployment to optimism_goerli
 
 ### Changes
 
-- Upgrade solidity compiler to 0.8.15
-- Update dependencies and project configuration
-- Deprecating support for kovan, ropsten, rinkeby
-- Restoring compatilibity with version 1.0.0 to keep contracts deployed to mainnet alive
-- Rename deployment matic_testnet to polygon_mumbai
+-   Upgrade solidity compiler to 0.8.15
+-   Update dependencies and project configuration
+-   Deprecating support for kovan, ropsten, rinkeby
+-   Restoring compatilibity with version 1.0.0 to keep contracts deployed to mainnet alive
+-   Rename deployment matic_testnet to polygon_mumbai
 
 ## [3.1.2] - 2021-09-01
 
 ### Changes
 
-- Optimization of Merkle
-- Optimization of Bitmask
+-   Optimization of Merkle
+-   Optimization of Bitmask
 
 ## [3.1.1] - 2021-06-28
 
 ### Added
 
-- Deploy to ropsten
+-   Deploy to ropsten
 
 ## [3.1.0] - 2021-06-13
 
 ### Added
 
-- Add intra drive replacement function to Merkle
+-   Add intra drive replacement function to Merkle
 
 ## [3.0.0] - 2021-05-11
 
 ### Changed
 
-- Migration to solidity 0.8
-- Removing SafeMath and OpenZeppelin
-- Removing "Library" suffix from library contracts names
-- [CartesiMath] New `ctz` and `clz` functions
-- [CartesiMath] Gas optimization
-- [Merkle] Bug fixes
-- [Merkle] Using CartesiMath as library
-- Removed `mainnet` deployment (will be back in a future release)
+-   Migration to solidity 0.8
+-   Removing SafeMath and OpenZeppelin
+-   Removing "Library" suffix from library contracts names
+-   [CartesiMath] New `ctz` and `clz` functions
+-   [CartesiMath] Gas optimization
+-   [Merkle] Bug fixes
+-   [Merkle] Using CartesiMath as library
+-   Removed `mainnet` deployment (will be back in a future release)
 
 ### Added
 
-- [Bitmask] New library for keeping a bit mask efficiently
+-   [Bitmask] New library for keeping a bit mask efficiently
 
 ## [2.0.1] - 2021-03-11
 
 ### Changed
 
-- Fix packaging procedure
+-   Fix packaging procedure
 
 ## [2.0.0] - 2021-02-26
 
 ### Added
 
-- Deployment to Avalanche
+-   Deployment to Avalanche
 
 ### Changed
 
-- [CartesiMath] Convert to library
+-   [CartesiMath] Convert to library
 
 ## [1.0.0] - 2020-12-02
 
 ### Changed
 
-- [Instantiator] Remove deactivate method
+-   [Instantiator] Remove deactivate method
 
 ### Added
 
-- Deployment to mainnet
+-   Deployment to mainnet
 
 ## [0.7.0] - 2020-11-26
 
 ### Added
 
-- [WorkerManagerAuthManagerImpl] New implementation of WorkerManager and WorkerAuthManager in a single contract
+-   [WorkerManagerAuthManagerImpl] New implementation of WorkerManager and WorkerAuthManager in a single contract
 
 ## [0.6.2] - 2020-11-24
 
 ### Changed
 
-- [CartesiMath] Update outdated artifact
+-   [CartesiMath] Update outdated artifact
 
 ## [0.6.1] - 2020-11-02
 
 ### Changed
 
-- [CartesiMath] Update outdated artifact
+-   [CartesiMath] Update outdated artifact
 
 ## [0.6.0] - 2020-11-02
 
 ### Changed
 
-- [CartesiMath] Turning CartesiMath into an abstract contract
-- Dropping support for ropsten
+-   [CartesiMath] Turning CartesiMath into an abstract contract
+-   Dropping support for ropsten
 
 ## [0.5.2] - 2020-11-02
 
 ### Added
 
-- Add TypeChain typings to npm package content
+-   Add TypeChain typings to npm package content
 
 ## [0.5.1] - 2020-11-02
 
 ### Added
 
-- Add hardhat-deploy artifacts and lightweight abi
+-   Add hardhat-deploy artifacts and lightweight abi
 
 ## [0.5.0] - 2020-10-28
 
 ### Changed
 
-- Migration to hardhat
+-   Migration to hardhat
 
 ## [0.4.2] - 2020-09-15
 
 ### Changed
 
-- [WorkerManager] Add isPending method
+-   [WorkerManager] Add isPending method
 
 ## [0.4.1] - 2020-09-11
 
 ### Added
 
-- Deployment to goerli
+-   Deployment to goerli
 
 ## [0.4.0] - 2020-09-11
 
 ### Changed
 
-- Migrate to solidity 0.7
+-   Migrate to solidity 0.7
 
 ### Added
 
-- [WorkerManager] First implementation
-- Deployment to BSC
+-   [WorkerManager] First implementation
+-   Deployment to BSC
 
 ## [0.3.0] - 2020-06-09
 
 ### Changed
 
-- Migrate to solidity 0.6
-- Using OpenZeppelin and SafeMath
-- [CartesiMath] First implementation
+-   Migrate to solidity 0.6
+-   Using OpenZeppelin and SafeMath
+-   [CartesiMath] First implementation
 
 ### Added
 
-- CI build
+-   CI build
 
 ## [0.2.1] - 2020-03-31
 
 ### Change
 
-- Adjust network gas configuration
+-   Adjust network gas configuration
 
 ## [0.2.0] - 2020-03-19
 
 ### Added
 
-- Deployment to Matic
+-   Deployment to Matic
 
 ## [0.1.1] - 2019-12-12
 
 ### Changed
 
-- Cleanup project dependencies
+-   Cleanup project dependencies
 
 ## [0.1.0] - 2019-12-09
 
 ### Added
 
-- First public release
+-   First public release
 
 [unreleased]: https://github.com/cartesi/solidity-util/compare/v4.2.0...HEAD
 [4.2.0]: https://github.com/cartesi/solidity-util/compare/v4.1.0...v4.2.0
