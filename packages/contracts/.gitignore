@@ -28,3 +28,5 @@ docs/
 
 # Dotenv file
 .env
+
+packages/contracts/lib/forge-std/*
