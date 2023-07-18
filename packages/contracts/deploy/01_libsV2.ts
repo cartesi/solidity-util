@@ -25,7 +25,6 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
         log: true,
     };
 
-    await deploy("BitsManipulation", opts);
     await deploy("Bitmask", opts);
 
     const CartesiMathV2 = await deploy("CartesiMathV2", opts);
