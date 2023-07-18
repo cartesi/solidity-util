@@ -11,23 +11,28 @@
 // under the License.
 
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { DeployFunction } from "hardhat-deploy/types";
+import { DeployFunction, DeployOptions } from "hardhat-deploy/types";
 
-const func: DeployFunction = async (bre: HardhatRuntimeEnvironment) => {
-    const { deployments, getNamedAccounts } = bre;
+const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
+    const { deployments, getNamedAccounts, network } = hre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
 
-    await deploy("BitsManipulation", { from: deployer, log: true });
-    await deploy("Bitmask", { from: deployer, log: true });
+    // IoTeX does not support the deterministic deployment through the contract used by hardhat-deploy
+    const deterministicDeployment = network.name !== "iotex_testnet";
 
-    const CartesiMathV2 = await deploy("CartesiMathV2", {
+    const opts: DeployOptions = {
+        deterministicDeployment,
         from: deployer,
         log: true,
-    });
+    };
+
+    await deploy("BitsManipulation", opts);
+    await deploy("Bitmask", opts);
+
+    const CartesiMathV2 = await deploy("CartesiMathV2", opts);
     await deploy("MerkleV2", {
-        from: deployer,
-        log: true,
+        ...opts,
         libraries: { CartesiMathV2: CartesiMathV2.address },
     });
 };
