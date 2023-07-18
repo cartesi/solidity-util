@@ -3,11 +3,11 @@
   "chainId": "420",
   "contracts": {
     "Bitmask": {
-      "address": "0xdB96468910d81BA6085eb9FE258f0DEF3cA8aA9A",
+      "address": "0x6D4651D8325C651C26f9cfACc097EfE32D9c4bB2",
       "abi": []
     },
     "CartesiMathV2": {
-      "address": "0x63065568DceFf08e02f99534cabaBaC1B301766b",
+      "address": "0x7B982810a2af69Ad2BC407Ad89ceFBb53d8497D4",
       "abi": [
         {
           "inputs": [
@@ -126,7 +126,7 @@
       ]
     },
     "MerkleV2": {
-      "address": "0x5eacED599B1cDfc5D7b119Fc52cA1B13396861f9",
+      "address": "0x1dF64Dfc2A61C060a778CFF8faaE6eA3216B5369",
       "abi": [
         {
           "inputs": [
@@ -256,7 +256,7 @@
       ]
     },
     "UnrolledCordic": {
-      "address": "0x15F864DF20E87D7c2fb8004d2cFa53A5BD570E2a",
+      "address": "0x664DE3410E089126A07c763ea2DA81994C4C3cae",
       "abi": [
         {
           "inputs": [
