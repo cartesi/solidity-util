@@ -106,13 +106,7 @@ const config: HardhatUserConfig = {
     namedAccounts: {
         deployer: {
             default: 0,
-        },
-        user: {
-            default: 0,
-        },
-        worker: {
-            default: 1,
-        },
+        }
     },
 };
 
