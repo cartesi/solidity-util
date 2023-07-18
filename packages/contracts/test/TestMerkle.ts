@@ -11,6 +11,7 @@
 // under the License.
 
 import { expect } from "chai";
+import { keccak256 } from "ethers";
 import { deployments, ethers } from "hardhat";
 
 import { TestMerkle } from "../src/types/test/TestMerkle";
@@ -19,8 +20,6 @@ import {
     computeMerkleRootHash,
     computeMerkleRootHashFromHashes,
 } from "../src/util/merkle";
-
-import { keccak256 } from "ethers/lib/utils";
 
 describe("TestMerkle", async () => {
     let TestMerkle: TestMerkle;
@@ -154,7 +153,7 @@ describe("TestMerkle", async () => {
         // empty data
         for (var i = 3; i < 64; i++) {
             expect(
-                await TestMerkle.getMerkleRootFromBytes([], i),
+                await TestMerkle.getMerkleRootFromBytes(new Uint8Array(), i),
                 "empyt data should return pristine hash"
             ).to.equal(zeroMerkle[i - 3]);
         }
@@ -424,13 +423,11 @@ describe("TestMerkle", async () => {
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
             "test case 1"
         ).to.equal(
-            ethers.utils.hexlify(
-                computeMerkleRootHashFromHashes(
-                    bufferHashes,
-                    0,
-                    Math.log2(power2hashes.length)
-                )
-            )
+            `0x${computeMerkleRootHashFromHashes(
+                bufferHashes,
+                0,
+                Math.log2(power2hashes.length)
+            ).toString("hex")}`
         );
 
         // *** test case 2 ***
@@ -478,13 +475,11 @@ describe("TestMerkle", async () => {
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
             "test case 2"
         ).to.equal(
-            ethers.utils.hexlify(
-                computeMerkleRootHashFromHashes(
-                    bufferHashes,
-                    0,
-                    Math.log2(power2hashes.length)
-                )
-            )
+            `0x${computeMerkleRootHashFromHashes(
+                bufferHashes,
+                0,
+                Math.log2(power2hashes.length)
+            ).toString("hex")}`
         );
 
         // *** test case 3 ***
@@ -497,9 +492,9 @@ describe("TestMerkle", async () => {
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
             "test case 3"
         ).to.equal(
-            ethers.utils.hexlify(
-                computeMerkleRootHashFromHashes(bufferHashes, 0, 0)
-            )
+            `0x${computeMerkleRootHashFromHashes(bufferHashes, 0, 0).toString(
+                "hex"
+            )}`
         );
 
         // *** test exceptions ***
