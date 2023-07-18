@@ -40,7 +40,7 @@ const config: HardhatUserConfig = {
     networks: {
         hardhat: mnemonic ? { accounts: { mnemonic } } : {},
         localhost: {
-            url: "http://localhost:8545",
+            url: process.env.RPC_URL || "http://localhost:8545",
             accounts: mnemonic ? { mnemonic } : undefined,
         },
         goerli: infuraNetwork("goerli", 5, 6283185),
