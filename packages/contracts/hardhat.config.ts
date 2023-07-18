@@ -44,12 +44,25 @@ const config: HardhatUserConfig = {
         goerli: infuraNetwork("goerli", 5, 6283185),
         sepolia: infuraNetwork("sepolia", 11155111, 6283185),
         mainnet: infuraNetwork("mainnet", 1, 6283185),
+        polygon: infuraNetwork("polygon", 137, 6283185),
         polygon_mumbai: infuraNetwork("polygon-mumbai", 80001),
+        arbitrum: infuraNetwork("arbitrum", 42161),
         arbitrum_goerli: infuraNetwork("arbitrum-goerli", 421613),
+        optimism: infuraNetwork("optimism", 10),
         optimism_goerli: infuraNetwork("optimism-goerli", 420),
+        bsc: {
+            url: "https://bsc-dataseed1.binance.org:8545",
+            chainId: 56,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
         bsc_testnet: {
             url: "https://data-seed-prebsc-1-s1.binance.org:8545",
             chainId: 97,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
+        avalanche: {
+            url: "https://rpc.ankr.com/avalanche",
+            chainId: 43114,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
         avalanche_fuji: {
@@ -57,9 +70,20 @@ const config: HardhatUserConfig = {
             chainId: 0xa869,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
+        iotex: {
+            url: "https://rpc.ankr.com/iotex",
+            chainId: 4689,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
         iotex_testnet: {
             url: "https://babel-api.testnet.iotex.io",
             chainId: 4690,
+            accounts: mnemonic ? { mnemonic } : undefined,
+        },
+        gnosis: {
+            url: "https://rpc.gnosischain.com",
+            chainId: 100,
+            gasPrice: 1000000000,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
         chiado: {
