@@ -55,8 +55,7 @@
         "test": "Run unit tests",
         "test:coverage": "Run test coverage report"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "@nomicfoundation/hardhat-chai-matchers": "^2",
         "@nomicfoundation/hardhat-ethers": "^3",
