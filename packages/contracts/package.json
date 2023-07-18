@@ -56,7 +56,6 @@
         "test:coverage": "Run test coverage report"
     },
     "dependencies": {
-        "@openzeppelin/contracts": "3.2.1-solc-0.7"
     },
     "devDependencies": {
         "@nomicfoundation/hardhat-chai-matchers": "^2",
