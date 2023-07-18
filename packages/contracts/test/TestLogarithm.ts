@@ -10,9 +10,9 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-import { BigNumber } from "ethers";
 import { expect } from "chai";
 import { deployments, ethers } from "hardhat";
+import { MaxUint256 } from "ethers";
 import Decimal from "decimal.js";
 
 import { UnrolledCordic } from "../src/types/UnrolledCordic";
@@ -26,8 +26,8 @@ const groundTruth = groundTruthRaw.map(([first, second]: [string, string]) => [
     new Decimal(second),
 ]);
 
-const decToBN = (v: Decimal) => BigNumber.from(v.floor().toFixed());
-const bnToDec = (v: BigNumber) => new Decimal(v.toString());
+const decToBN = (v: Decimal) => BigInt(v.floor().toFixed());
+const bnToDec = (v: bigint) => new Decimal(v.toString());
 
 const baseMultiplierDec = new Decimal("1e+18");
 const baseMultiplierBN = decToBN(baseMultiplierDec);
@@ -45,16 +45,16 @@ describe("Test Logarithms Algorithms", async () => {
 
     it("Check ground truth logs for Cordic", async () => {
         let max_err = new Decimal(0);
-        let max_gas = BigNumber.from(0);
-        let min_gas = BigNumber.from(ethers.constants.MaxUint256);
+        let max_gas = 0n;
+        let min_gas = MaxUint256;
         const tasks = groundTruth.map(async ([x, logx]: [string, Decimal]) => {
             const raw = await cordic.log2Times1e18(x);
-            const gas = await cordic.estimateGas.log2Times1e18(x);
+            const gas = await cordic.log2Times1e18.estimateGas(x);
             const result = bnToDec(raw).dividedBy("1e18");
             const err = Decimal.abs(result.minus(logx));
             if (err.greaterThan(max_err)) max_err = err;
-            if (gas.gt(max_gas)) max_gas = gas;
-            if (gas.lt(min_gas)) min_gas = gas;
+            if (gas > max_gas) max_gas = gas;
+            if (gas < min_gas) min_gas = gas;
         });
         await Promise.all(tasks);
         let errString = max_err.toSignificantDigits(10);
@@ -69,18 +69,18 @@ describe("Test Logarithms Algorithms", async () => {
 
     it("Check random logs in 2^i, i =[0,255], for Cordic", async () => {
         let max_err = new Decimal(0);
-        let max_gas = BigNumber.from(0);
-        let min_gas = BigNumber.from(ethers.constants.MaxUint256);
+        let max_gas = 0n;
+        let min_gas = MaxUint256;
         const tasks = [...Array(255).keys()].map(async (i) => {
             const x = Decimal.pow(2, Decimal.random().add(i)).floor();
-            const gas = await cordic.estimateGas.log2Times1e18(x.toFixed());
+            const gas = await cordic.log2Times1e18.estimateGas(x.toFixed());
             const raw = await cordic.log2Times1e18(x.toFixed());
             const result = bnToDec(raw).dividedBy("1e18");
             const logx = Decimal.log2(x);
             const err = Decimal.abs(result.minus(logx));
             if (err.greaterThan(max_err)) max_err = err;
-            if (gas.gt(max_gas)) max_gas = gas;
-            if (gas.lt(min_gas)) min_gas = gas;
+            if (gas > max_gas) max_gas = gas;
+            if (gas < min_gas) min_gas = gas;
         });
         await Promise.all(tasks);
         let errString = max_err.toSignificantDigits(10);

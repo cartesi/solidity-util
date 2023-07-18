@@ -20,7 +20,7 @@ import createKeccakHash from "keccak";
  */
 const emptyDataHashes = [
     Buffer.from(
-        ethers.utils.arrayify(
+        ethers.getBytes(
             "0x011b4d03dd8c01f1049143cf9c4c817e4b167f1d1b83e5c6f0f10d89ba1e7bce"
         )
     ),
@@ -149,5 +149,5 @@ export function computeMerkleRootHash(buffer: Buffer, log2Size: number) {
 
     // calculates merkle root hash by recursively computing the keccak256 of the concatenation of each data entry pair
     const rootHash = computeMerkleRootHashFromHashes(hashes, 0, rootLevel);
-    return ethers.utils.hexlify(rootHash);
+    return `0x${rootHash.toString("hex")}`;
 }

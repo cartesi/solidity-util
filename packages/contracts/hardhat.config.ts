@@ -98,7 +98,7 @@ const config: HardhatUserConfig = {
     },
     typechain: {
         outDir: "src/types",
-        target: "ethers-v5",
+        target: "ethers-v6",
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
@@ -106,6 +106,9 @@ const config: HardhatUserConfig = {
     namedAccounts: {
         deployer: {
             default: 0,
+        },
+        user: {
+            default: 1,
         }
     },
 };
