@@ -52,7 +52,7 @@ library BitsManipulationLibrary {
         return uNumber;
     }
 
-    /// @notice Swap byte order of unsigned ints with 64 bytes
+    /// @notice Swap byte order of unsigned ints with 64 bits
     /// @param num number to have bytes swapped
     function uint64SwapEndian(uint64 num) public pure returns(uint64) {
         uint64 output = ((num & 0x00000000000000ff) << 56)|
@@ -67,7 +67,7 @@ library BitsManipulationLibrary {
         return output;
     }
 
-    /// @notice Swap byte order of unsigned ints with 32 bytes
+    /// @notice Swap byte order of unsigned ints with 32 bits
     /// @param num number to have bytes swapped
     function uint32SwapEndian(uint32 num) public pure returns(uint32) {
         uint32 output = ((num >> 24) & 0xff) | ((num << 8) & 0xff0000) | ((num >> 8) & 0xff00) | ((num << 24) & 0xff000000);
