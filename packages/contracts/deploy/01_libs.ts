@@ -34,5 +34,5 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     });
 };
 
-func.tags = ["LibsV2"];
+func.tags = ["Libs"];
 export default func;
