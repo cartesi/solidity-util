@@ -77,6 +77,7 @@ const config: HardhatUserConfig = {
                     optimizer: {
                         enabled: true,
                     },
+                    evmVersion: "paris",
                 },
             },
         ],
