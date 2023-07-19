@@ -688,6 +688,21 @@
     debug "^4.1.1"
     lodash.isequal "^4.5.0"
 
+"@nomicfoundation/hardhat-verify@^1":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@nomicfoundation/hardhat-verify/-/hardhat-verify-1.0.4.tgz#a9e63ace50fa69fe348f38ec6bf9397dcc476ccc"
+  integrity sha512-zKH7lCgesD9MQbrMsV9DH9NS5Qhkv9K1W9LvbkZWvUQdpyS6zzDyIuJwmfxRKfUGXVlpA2X8nSL3MtxSj3s5aw==
+  dependencies:
+    "@ethersproject/abi" "^5.1.2"
+    "@ethersproject/address" "^5.0.2"
+    cbor "^8.1.0"
+    chalk "^2.4.2"
+    debug "^4.1.1"
+    lodash.clonedeep "^4.5.0"
+    semver "^6.3.0"
+    table "^6.8.0"
+    undici "^5.14.0"
+
 "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@nomicfoundation/solidity-analyzer-darwin-arm64/-/solidity-analyzer-darwin-arm64-0.1.1.tgz#4c858096b1c17fe58a474fe81b46815f93645c15"
@@ -753,22 +768,6 @@
     "@nomicfoundation/solidity-analyzer-win32-arm64-msvc" "0.1.1"
     "@nomicfoundation/solidity-analyzer-win32-ia32-msvc" "0.1.1"
     "@nomicfoundation/solidity-analyzer-win32-x64-msvc" "0.1.1"
-
-"@nomiclabs/hardhat-etherscan@^3":
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/@nomiclabs/hardhat-etherscan/-/hardhat-etherscan-3.1.7.tgz#72e3d5bd5d0ceb695e097a7f6f5ff6fcbf062b9a"
-  integrity sha512-tZ3TvSgpvsQ6B6OGmo1/Au6u8BrAkvs1mIC/eURA3xgIfznUZBhmpne8hv7BXUzw9xNL3fXdpOYgOQlVMTcoHQ==
-  dependencies:
-    "@ethersproject/abi" "^5.1.2"
-    "@ethersproject/address" "^5.0.2"
-    cbor "^8.1.0"
-    chalk "^2.4.2"
-    debug "^4.1.1"
-    fs-extra "^7.0.1"
-    lodash "^4.17.11"
-    semver "^6.3.0"
-    table "^6.8.0"
-    undici "^5.14.0"
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -4097,6 +4096,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
 
 lodash.isequal@^4.5.0:
   version "4.5.0"
