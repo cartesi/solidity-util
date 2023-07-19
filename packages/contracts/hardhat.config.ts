@@ -10,6 +10,7 @@
 
 import { HardhatUserConfig } from "hardhat/config";
 import { HttpNetworkUserConfig } from "hardhat/types";
+import { getSingletonFactoryInfo } from "@safe-global/safe-singleton-factory";
 
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomicfoundation/hardhat-ethers";
@@ -32,6 +33,28 @@ const ankr = (
     accounts: mnemonic ? { mnemonic } : undefined,
 });
 
+const chainIds: Record<string, number> = {
+    arbitrum: 42161,
+    arbitrum_goerli: 421613,
+    avalanche: 43114,
+    avalanche_fuji: 43113,
+    bsc: 56,
+    bsc_testnet: 97,
+    chiado: 10200,
+    gnosis: 100,
+    goerli: 5,
+    iotex: 4689,
+    iotex_testnet: 4690,
+    mainnet: 1,
+    metis: 1088,
+    metis_goerli: 599,
+    optimism: 10,
+    optimism_goerli: 420,
+    polygon: 137,
+    polygon_mumbai: 80001,
+    sepolia: 11155111,
+};
+
 const config: HardhatUserConfig = {
     networks: {
         hardhat: mnemonic ? { accounts: { mnemonic } } : {},
@@ -39,30 +62,30 @@ const config: HardhatUserConfig = {
             url: process.env.RPC_URL || "http://localhost:8545",
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        arbitrum: ankr("arbitrum", 42161),
+        arbitrum: ankr("arbitrum", chainIds.arbitrum),
         arbitrum_goerli: {
             url: "https://goerli-rollup.arbitrum.io/rpc",
-            chainId: 421613,
+            chainId: chainIds.arbitrum_goerli,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        avalanche: ankr("avalanche", 43114),
-        avalanche_fuji: ankr("avalanche_fuji", 43113),
-        bsc: ankr("bsc", 56),
-        bsc_testnet: ankr("bsc_testnet_chapel", 97),
+        avalanche: ankr("avalanche", chainIds.avalanche),
+        avalanche_fuji: ankr("avalanche_fuji", chainIds.avalanche_fuji),
+        bsc: ankr("bsc", chainIds.bsc),
+        bsc_testnet: ankr("bsc_testnet_chapel", chainIds.bsc_testnet),
         chiado: {
             url: "https://rpc.chiadochain.net",
-            chainId: 10200,
+            chainId: chainIds.chiado,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        gnosis: ankr("gnosis", 100),
-        goerli: ankr("eth_goerli", 5),
-        iotex: ankr("iotex", 4689),
+        gnosis: ankr("gnosis", chainIds.gnosis),
+        goerli: ankr("eth_goerli", chainIds.goerli),
+        iotex: ankr("iotex", chainIds.iotex),
         iotex_testnet: {
             url: "https://babel-api.testnet.iotex.io",
-            chainId: 4690,
+            chainId: chainIds.iotex_testnet,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        mainnet: ankr("eth", 1),
+        mainnet: ankr("eth", chainIds.mainnet),
         metis: {
             url: "https://metis-rpc.gateway.pokt.network",
             chainId: 1088,
@@ -70,14 +93,14 @@ const config: HardhatUserConfig = {
         },
         metis_goerli: {
             url: "https://goerli.gateway.metisdevops.link",
-            chainId: 599,
+            chainId: chainIds.metis_goerli,
             accounts: mnemonic ? { mnemonic } : undefined,
         },
-        optimism: ankr("optimism", 10),
-        optimism_goerli: ankr("optimism_testnet", 420),
-        polygon: ankr("polygon", 137),
-        polygon_mumbai: ankr("polygon_mumbai", 80001),
-        sepolia: ankr("eth_sepolia", 11155111),
+        optimism: ankr("optimism", chainIds.optimism),
+        optimism_goerli: ankr("optimism_testnet", chainIds.optimism_goerli),
+        polygon: ankr("polygon", chainIds.polygon),
+        polygon_mumbai: ankr("polygon_mumbai", chainIds.polygon_mumbai),
+        sepolia: ankr("eth_sepolia", chainIds.sepolia),
     },
     solidity: {
         compilers: [
@@ -91,6 +114,37 @@ const config: HardhatUserConfig = {
                 },
             },
         ],
+    },
+    deterministicDeployment: (network: string) => {
+        // networks that will use another deterministic deployment proxy
+        // https://github.com/safe-global/safe-singleton-factory
+        const ssf = [
+            chainIds.iotex,
+            chainIds.iotex_testnet,
+            chainIds.metis,
+            chainIds.metis_goerli,
+        ];
+        const chainId = parseInt(network);
+
+        if (ssf.indexOf(chainId) != -1) {
+            const info = getSingletonFactoryInfo(chainId);
+            if (info) {
+                return {
+                    factory: info.address,
+                    deployer: info.signerAddress,
+                    funding: (
+                        BigInt(info.gasPrice) * BigInt(info.gasLimit)
+                    ).toString(),
+                    signedTx: info.transaction,
+                };
+            } else {
+                console.warn(
+                    `unsupported deterministic deployment for network ${network}`
+                );
+                return undefined;
+            }
+        }
+        return undefined;
     },
     paths: {
         artifacts: "artifacts",
