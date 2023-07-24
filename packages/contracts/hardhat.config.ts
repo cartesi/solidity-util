@@ -49,11 +49,22 @@ import "solidity-coverage";
 // read MNEMONIC from file or from env variable
 let mnemonic = process.env.MNEMONIC;
 
-const networkConfig = (chain: Chain): HttpNetworkUserConfig => ({
-    chainId: chain.id,
-    url: chain.rpcUrls.public.http.at(0),
-    accounts: mnemonic ? { mnemonic } : undefined,
-});
+const networkConfig = (chain: Chain): HttpNetworkUserConfig => {
+    let url = chain.rpcUrls.public.http.at(0);
+
+    // support for infura and alchemy URLs through env variables
+    if (process.env.INFURA_ID && chain.rpcUrls.infura?.http) {
+        url = `${chain.rpcUrls.infura.http}/${process.env.INFURA_ID}`;
+    } else if (process.env.ALCHEMY_ID && chain.rpcUrls.alchemy?.http) {
+        url = `${chain.rpcUrls.alchemy.http}/${process.env.ALCHEMY_ID}`;
+    }
+
+    return {
+        chainId: chain.id,
+        url,
+        accounts: mnemonic ? { mnemonic } : undefined,
+    };
+};
 
 const config: HardhatUserConfig = {
     networks: {
