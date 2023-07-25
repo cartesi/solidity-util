@@ -19,8 +19,8 @@ import createKeccakHash from "keccak";
 const emptyDataHashes = [
     Buffer.from(
         ethers.getBytes(
-            "0x011b4d03dd8c01f1049143cf9c4c817e4b167f1d1b83e5c6f0f10d89ba1e7bce"
-        )
+            "0x011b4d03dd8c01f1049143cf9c4c817e4b167f1d1b83e5c6f0f10d89ba1e7bce",
+        ),
     ),
 ];
 
@@ -93,7 +93,7 @@ export function getEmptyTreeHash(level: number) {
 export function computeMerkleRootHashFromHashes(
     hashes: Buffer[],
     level: number,
-    rootLevel: number
+    rootLevel: number,
 ): Buffer {
     if (hashes.length === 1 && level === rootLevel) {
         // reached root: just returns hash
@@ -114,7 +114,7 @@ export function computeMerkleRootHashFromHashes(
         return computeMerkleRootHashFromHashes(
             upperLevelHashes,
             level + 1,
-            rootLevel
+            rootLevel,
         );
     }
 }

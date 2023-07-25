@@ -126,7 +126,7 @@ const config: HardhatUserConfig = {
             };
         } else {
             console.warn(
-                `unsupported deterministic deployment for network ${network}`
+                `unsupported deterministic deployment for network ${network}`,
             );
             return undefined;
         }

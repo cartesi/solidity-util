@@ -57,10 +57,10 @@ describe("Test Logarithms Algorithms", async () => {
         await Promise.all(tasks);
         let errString = max_err.toSignificantDigits(10);
         console.debug(
-            `\t\tGround truth logs of Cordic: Max error ${errString}`
+            `\t\tGround truth logs of Cordic: Max error ${errString}`,
         );
         console.debug(
-            `\t\t Max Gas: ${max_gas.toString()}, Min Gas: ${min_gas.toString()}`
+            `\t\t Max Gas: ${max_gas.toString()}, Min Gas: ${min_gas.toString()}`,
         );
         expect(max_err.lessThan("1e-17"), "error larger than 1e-17").to.be.true;
     }).timeout(60 * 1000 * 60);
@@ -84,7 +84,7 @@ describe("Test Logarithms Algorithms", async () => {
         let errString = max_err.toSignificantDigits(10);
         console.debug(`\t\tRandom Logs of Cordic: Max error ${errString}`);
         console.debug(
-            `\t\t Max Gas: ${max_gas.toString()}, Min Gas: ${min_gas.toString()}`
+            `\t\t Max Gas: ${max_gas.toString()}, Min Gas: ${min_gas.toString()}`,
         );
         expect(max_err.lessThan("1e-17"), "error larger than 1e-17").to.be.true;
     }).timeout(60 * 1000 * 60);
