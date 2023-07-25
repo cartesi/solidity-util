@@ -1,18 +1,36 @@
-> :warning: The Cartesi team keeps working internally on the next version of this repository, following its regular development roadmap. Whenever there's a new version ready or important fix, these are published to the public source tree as new releases.
-
 # solidity-util
 
 Basic solidity contracts and solidity libraries used the Cartesi on-chain code.
 
 Packaged as npm and published at https://www.npmjs.com/package/@cartesi/util
 
-The npm package contains `hardhat` deployment artifacts with information of deployed contracts on the following testnets:
+The npm package contains `hardhat` deployment artifacts with information of deployed contracts on the following networks:
 
+-   Arbitrum
+-   Arbitrum Goerli
+-   Avalanche
+-   Avalanche Fuji
+-   BNB Smart Chain
+-   BNB Smart Chain Testnet
+-   Celo
+-   Celo Alfajores
+-   Gnosis Chiado
+-   Fantom
+-   Fantom Testnet
+-   Gnosis
 -   Goerli
--   Matic Testnet
--   Binance Smart Chain Testnet
+-   IoTex
+-   IoTex Testnet
+-   Mainnet
+-   Metis
+-   Metis Goerli
+-   Optimism
+-   Optimism Goerli
+-   Polygon
+-   Polygon Mumbai
+-   Sepolia
 
-In the future it may also include deployment to mainnets.
+Deployment was done using deterministic deployment with the [Safe Singleton Factory](https://github.com/safe-global/safe-singleton-factory) (with the exceptions of IoTex Testnet and Gnosis Chiado).
 
 ## Getting Started
 
@@ -24,11 +42,11 @@ To use this package in another project you must include as a dependency in `pack
 
 And in your solidity contract import it as:
 
-    import "@cartesi/util/contracts/Instantiator.sol";
+    import "@cartesi/util/contracts/MerkleV2.sol";
 
 ## Build
 
-To get a list of all available `yarn` targets run:
+To get a list of all available `yarn` targets run the following inside `packages/contracts`:
 
     % yarn run info
 
