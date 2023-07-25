@@ -118,12 +118,12 @@ describe("TestMerkle", async () => {
     it("getEmptyTreeHash", async () => {
         await expect(
             TestMerkle.getEmptyTreeHashAtIndex(64),
-            "empty tree lookup beyond index should revert"
+            "empty tree lookup beyond index should revert",
         ).to.be.reverted;
 
         for (let i = 0; i < zeroMerkle.length - 1; i++) {
             expect(await TestMerkle.getEmptyTreeHashAtIndex(i)).to.equal(
-                zeroMerkle[i]
+                zeroMerkle[i],
             );
         }
     });
@@ -132,27 +132,27 @@ describe("TestMerkle", async () => {
         // reverts
         await expect(
             TestMerkle.getMerkleRootFromBytes("0xaa", 2),
-            "getMerkleRootFromBytes should revert is log2size < 3"
+            "getMerkleRootFromBytes should revert is log2size < 3",
         ).to.be.reverted;
 
         await expect(
             TestMerkle.getMerkleRootFromBytes("0xaa", 65),
-            "getMerkleRootFromBytes should revert is log2size > 64 "
+            "getMerkleRootFromBytes should revert is log2size > 64 ",
         ).to.be.reverted;
 
         await expect(
             TestMerkle.getMerkleRootFromBytes(
                 "0xaaaabbccddaabbccddabbccddaabbccddaabbccddaabbccddabbccddaabbccdd",
-                3
+                3,
             ),
-            "getMerkleRootFromBytes should revert is data > drive"
+            "getMerkleRootFromBytes should revert is data > drive",
         ).to.be.reverted;
 
         // empty data
         for (var i = 3; i < 64; i++) {
             expect(
                 await TestMerkle.getMerkleRootFromBytes(new Uint8Array(), i),
-                "empyt data should return pristine hash"
+                "empyt data should return pristine hash",
             ).to.equal(zeroMerkle[i - 3]);
         }
 
@@ -172,9 +172,9 @@ describe("TestMerkle", async () => {
                 expect(
                     await TestMerkle.getMerkleRootFromBytes(
                         Buffer.from(testcase),
-                        size
+                        size,
                     ),
-                    `merkle root hash of testcase ${testcase} for size ${size} didn't match`
+                    `merkle root hash of testcase ${testcase} for size ${size} didn't match`,
                 ).to.equal(computeMerkleRootHash(Buffer.from(testcase), size));
             }
         }
@@ -184,9 +184,9 @@ describe("TestMerkle", async () => {
             expect(
                 await TestMerkle.getMerkleRootFromBytes(
                     Buffer.from(testcases[0]),
-                    size
+                    size,
                 ),
-                `merkle root hash for small log2 size of ${size} didn't match`
+                `merkle root hash for small log2 size of ${size} didn't match`,
             ).to.equal(computeMerkleRootHash(Buffer.from(testcases[0]), size));
         }
     });
@@ -214,12 +214,12 @@ describe("TestMerkle", async () => {
         ];
         for (var i = 0; i < slice.length; i++) {
             expect(
-                await TestMerkle.getHashOfWordAtIndex(fullstring, i)
+                await TestMerkle.getHashOfWordAtIndex(fullstring, i),
             ).to.equal(keccak256(slice[i]));
         }
         await expect(
             TestMerkle.getHashOfWordAtIndex(fullstring, fullstring.length + 1),
-            "hash lookup after index should revert"
+            "hash lookup after index should revert",
         ).to.be.reverted;
     });
 
@@ -232,7 +232,7 @@ describe("TestMerkle", async () => {
         // the value of replacement should be '0x8753642e49d77fee978f980a21debd480e8243a4b5f5732ac7bd07b851911847' calculated from keccak
         let replacement = await TestMerkle.getMerkleRootFromBytes(
             "0x506fd6f6d63fb8676828b1a34518656754450a35c72cfcbc1d5514d954a3aea9",
-            logSizeOfReplacement
+            logSizeOfReplacement,
         );
         // siblings from bottom up
         let siblings = [
@@ -260,18 +260,18 @@ describe("TestMerkle", async () => {
                 logSizeOfReplacement,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
+                siblings,
             ),
-            "test case 1"
+            "test case 1",
         ).to.equal(
-            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9"
+            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9",
         );
 
         // *** test case 2 ***
         position = 1 << logSizeOfReplacement; // index 1
         logSizeOfFullDrive = 37;
         replacement = keccak256(
-            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9"
+            "0x4d5d7f017cfb39a10b02e8800db1380d507fefc25b9efbfcfb81149eeff417a9",
         );
         siblings = [
             "0xf887dff6c734c5faf153d9788f64b984b92da62147d64fcd219a7862c9e3144f",
@@ -314,11 +314,11 @@ describe("TestMerkle", async () => {
                 logSizeOfReplacement,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
+                siblings,
             ),
-            "test case 2"
+            "test case 2",
         ).to.equal(
-            "0x29a43b498006128f0fd6026242662f4a6f47412f027954cd3973e3419e531adf"
+            "0x29a43b498006128f0fd6026242662f4a6f47412f027954cd3973e3419e531adf",
         );
 
         // *** test exceptions ***
@@ -328,8 +328,8 @@ describe("TestMerkle", async () => {
                 logSizeOfFullDrive + 1,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
-            )
+                siblings,
+            ),
         ).to.be.reverted;
         // ).to.be.revertedWith(
         //     "Replacement bigger than original drive"
@@ -341,8 +341,8 @@ describe("TestMerkle", async () => {
                 2,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
-            )
+                siblings,
+            ),
         ).to.be.reverted;
         // ).to.be.revertedWith(
         //     "Replacement must be at least one word"
@@ -357,8 +357,8 @@ describe("TestMerkle", async () => {
                 logSizeOfReplacement,
                 65,
                 replacement,
-                siblings
-            )
+                siblings,
+            ),
         ).to.be.reverted;
         // ).to.be.revertedWith(
         //     "Full drive can't be bigger than the machine itself"
@@ -370,8 +370,8 @@ describe("TestMerkle", async () => {
                 logSizeOfReplacement,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
-            )
+                siblings,
+            ),
         ).to.be.reverted;
         // ).to.be.revertedWith(
         //     "Position is not aligned"
@@ -383,8 +383,8 @@ describe("TestMerkle", async () => {
                 logSizeOfReplacement,
                 logSizeOfFullDrive,
                 replacement,
-                siblings
-            )
+                siblings,
+            ),
         ).to.be.reverted;
         // ).to.be.revertedWith(
         //     "Position is not aligned"
@@ -414,18 +414,18 @@ describe("TestMerkle", async () => {
         let bufferHashes = [];
         for (let i = 0; i < power2hashes.length; i++) {
             bufferHashes.push(
-                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+                Buffer.from(power2hashes[i].substr(2, 64), "hex"),
             );
         }
         expect(
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
-            "test case 1"
+            "test case 1",
         ).to.equal(
             `0x${computeMerkleRootHashFromHashes(
                 bufferHashes,
                 0,
-                Math.log2(power2hashes.length)
-            ).toString("hex")}`
+                Math.log2(power2hashes.length),
+            ).toString("hex")}`,
         );
 
         // *** test case 2 ***
@@ -466,18 +466,18 @@ describe("TestMerkle", async () => {
         bufferHashes = [];
         for (let i = 0; i < power2hashes.length; i++) {
             bufferHashes.push(
-                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+                Buffer.from(power2hashes[i].substr(2, 64), "hex"),
             );
         }
         expect(
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
-            "test case 2"
+            "test case 2",
         ).to.equal(
             `0x${computeMerkleRootHashFromHashes(
                 bufferHashes,
                 0,
-                Math.log2(power2hashes.length)
-            ).toString("hex")}`
+                Math.log2(power2hashes.length),
+            ).toString("hex")}`,
         );
 
         // *** test case 3 ***
@@ -488,11 +488,11 @@ describe("TestMerkle", async () => {
         bufferHashes.push(Buffer.from(power2hashes[0].substr(2, 64), "hex"));
         expect(
             await TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
-            "test case 3"
+            "test case 3",
         ).to.equal(
             `0x${computeMerkleRootHashFromHashes(bufferHashes, 0, 0).toString(
-                "hex"
-            )}`
+                "hex",
+            )}`,
         );
 
         // *** test exceptions ***
@@ -504,12 +504,12 @@ describe("TestMerkle", async () => {
         bufferHashes = [];
         for (let i = 0; i < power2hashes.length; i++) {
             bufferHashes.push(
-                Buffer.from(power2hashes[i].substr(2, 64), "hex")
+                Buffer.from(power2hashes[i].substr(2, 64), "hex"),
             );
         }
         await expect(
             TestMerkle.calculateRootFromPowerOfTwo(power2hashes),
-            "not power of 2"
+            "not power of 2",
         ).to.be.reverted;
     });
 });

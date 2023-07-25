@@ -20,7 +20,7 @@ const func: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     // Chiado is not working, see https://github.com/safe-global/safe-singleton-factory/issues/201
     const nonDeterministicNetworks = ["iotex_testnet", "chiado"];
     const deterministicDeployment = !nonDeterministicNetworks.includes(
-        network.name
+        network.name,
     );
 
     const opts: DeployOptions = {

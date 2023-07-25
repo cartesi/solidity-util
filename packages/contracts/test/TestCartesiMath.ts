@@ -168,7 +168,7 @@ describe("TestCartesiMath", async () => {
 
         for (let i = 1; i < 129; i++) {
             expect(await TestCartesiMath.getLog2TableTimes1M(i)).to.be.equal(
-                log2tableTimes1M[i]
+                log2tableTimes1M[i],
             );
         }
     });
@@ -250,12 +250,12 @@ describe("TestCartesiMath", async () => {
 
         for (let i = 0; i < nums.length; i++) {
             expect(await TestCartesiMath.isPowerOf2(nums[i])).to.be.equal(
-                powerOf2(nums[i])
+                powerOf2(nums[i]),
             );
         }
         for (let i = 0; i < bignums.length; i++) {
             expect(await TestCartesiMath.isPowerOf2(bignums[i])).to.be.equal(
-                bigres[i]
+                bigres[i],
             );
         }
     });
@@ -263,7 +263,7 @@ describe("TestCartesiMath", async () => {
     it("getLog2Floor", async () => {
         await expect(
             TestCartesiMath.getLog2Floor(0),
-            "log of zero should revert"
+            "log of zero should revert",
         ).to.be.revertedWith("log of zero is undefined");
 
         var nums = [1, 2, 4, 8, 9, 11, 2 ** 8, 110, 2 ** 40, 2 ** 50, 0xffff];
@@ -281,13 +281,13 @@ describe("TestCartesiMath", async () => {
 
         for (let i = 0; i < nums.length; i++) {
             expect(await TestCartesiMath.getLog2Floor(nums[i])).to.be.equal(
-                log2F(nums[i])
+                log2F(nums[i]),
             );
         }
 
         for (let i = 0; i < bignums.length; i++) {
             expect(await TestCartesiMath.getLog2Floor(bignums[i])).to.be.equal(
-                bigres[i]
+                bigres[i],
             );
         }
     });
