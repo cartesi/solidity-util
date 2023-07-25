@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util-wagmi",
-    "version": "6.0.0-alpha.0",
+    "version": "6.0.0",
     "description": "Cartesi Solidity Util Wagmi Bindings",
     "main": "dist/index.js",
     "author": "Danilo Tuler",
@@ -12,7 +12,7 @@
         "prepack": "run-s build"
     },
     "dependencies": {
-        "@cartesi/util": "6.0.0-alpha.0"
+        "@cartesi/util": "6.0.0"
     },
     "devDependencies": {
         "@wagmi/cli": "^1.3",

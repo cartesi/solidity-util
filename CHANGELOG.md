@@ -7,13 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [6.0.0-alpha.0] - 2023-04-25
+## [6.0.0] - 2023-07-25
 
 ### Changes
 
 -   Delete unused code of offchain worker handling
+-   Delete deprecated solidity contracts
 -   Migration to monorepo
 -   Separation of contracts/deployments from bindings libraries
+-   Deploy to a total of 23 networks, including test and production networks
+-   Deterministic deployment using [Safe Singleton Factory](https://github.com/safe-global/safe-singleton-factory)
+-   Using @wagmi/chains for network configuration
+-   Updating all dependencies
+-   Upgrade soliity compiler to 0.8.20 (target Paris EVM)
 
 ## [5.0.2] - 2023-01-10
 
