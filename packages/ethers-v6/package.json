@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util-ethers-v6",
-    "version": "6.0.0-alpha.0",
+    "version": "6.0.0",
     "description": "Cartesi Solidity Util Typechain Ethers V6",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
         "prepack": "run-s build"
     },
     "dependencies": {
-        "@cartesi/util": "*6.0.0-alpha.0",
+        "@cartesi/util": "*6.0.0",
         "ethers": "^6"
     },
     "devDependencies": {
