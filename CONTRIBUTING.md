@@ -16,7 +16,20 @@ Please note the below! We appreciate everyone following the guidelines.
 -   Use non-master branches, using a short meaningful description, with words separated by dash (e.g. 'fix-this-bug');
 -   All modifications must be made in a pull-request to solicit feedback from other contributors.
 
+## <a name="authors" \>Authors
+
+Any contributor who has in the past had at least one pull request for a code change accepted in that repo may submit a pull request to have their name added to the AUTHORS file.
+Submissions to the AUTHORS file should be in the format below:
+
+```
+Name <email>
+```
+
+Inclusion in the AUTHORS file for each repo is entirely voluntary.
+It is up to each individual author to decide whether they would like attribution in a given AUTHORS file and to submit a pull request accordingly.
+Please note that a contributor's decision on whether to seek attribution in an AUTHORS file will have no impact on copyright ownership.
+
 ## Get in Touch
 
 When contributing in a deeper manner to this repository, please first discuss the change you wish to make via our
-[Discord channel here](https://discord.gg/Pt2NrnS), or contact us at info@cartesi.io email before working on the change.
+[Discord channel here](https://discord.gg/cartesi), or contact us at info@cartesi.io email before working on the change.
