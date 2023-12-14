@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util-ethers-v6",
-    "version": "6.0.0",
+    "version": "6.1.0",
     "description": "Cartesi Solidity Util Typechain Ethers V6",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
         "ethers": "^6"
     },
     "devDependencies": {
-        "@typechain/ethers-v6": "^0.4",
+        "@typechain/ethers-v6": "^0.5",
         "npm-run-all": "^4",
         "tsconfig": "*",
         "typechain": "^8",

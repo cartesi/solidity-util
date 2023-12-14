@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0] - 2023-12-14
+
+### Changes
+
+-   Replace @wagmi/chains with viem/chains
+-   Deploy to arbitrum-sepolia and optimism-sepolia
+
 ## [6.0.0] - 2023-07-25
 
 ### Changes
