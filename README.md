@@ -8,6 +8,7 @@ The npm package contains `hardhat` deployment artifacts with information of depl
 
 -   Arbitrum
 -   Arbitrum Goerli
+-   Arbitrum Sepolia
 -   Avalanche
 -   Avalanche Fuji
 -   BNB Smart Chain
@@ -26,6 +27,7 @@ The npm package contains `hardhat` deployment artifacts with information of depl
 -   Metis Goerli
 -   Optimism
 -   Optimism Goerli
+-   Optimism Sepolia
 -   Polygon
 -   Polygon Mumbai
 -   Sepolia
