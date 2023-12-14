@@ -16,6 +16,7 @@ import {
     Chain,
     arbitrum,
     arbitrumGoerli,
+    arbitrumSepolia,
     avalanche,
     avalancheFuji,
     bsc,
@@ -34,10 +35,11 @@ import {
     metisGoerli,
     optimism,
     optimismGoerli,
+    optimismSepolia,
     polygon,
     polygonMumbai,
     sepolia,
-} from "@wagmi/chains";
+} from "viem/chains";
 
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomicfoundation/hardhat-ethers";
@@ -75,6 +77,7 @@ const config: HardhatUserConfig = {
         },
         arbitrum: networkConfig(arbitrum),
         arbitrum_goerli: networkConfig(arbitrumGoerli),
+        arbitrum_sepolia: networkConfig(arbitrumSepolia),
         avalanche: networkConfig(avalanche),
         avalanche_fuji: networkConfig(avalancheFuji),
         bsc: networkConfig(bsc),
@@ -93,6 +96,7 @@ const config: HardhatUserConfig = {
         metis_goerli: networkConfig(metisGoerli),
         optimism: networkConfig(optimism),
         optimism_goerli: networkConfig(optimismGoerli),
+        optimism_sepolia: networkConfig(optimismSepolia),
         polygon: networkConfig(polygon),
         polygon_mumbai: networkConfig(polygonMumbai),
         sepolia: networkConfig(sepolia),
@@ -142,6 +146,24 @@ const config: HardhatUserConfig = {
     },
     etherscan: {
         apiKey: process.env.ETHERSCAN_API_KEY,
+        customChains: [
+            {
+                chainId: 421614,
+                network: "arbitrum_sepolia",
+                urls: {
+                    apiURL: "https://api-sepolia.arbiscan.io/api",
+                    browserURL: "https://sepolia.arbiscan.io",
+                },
+            },
+            {
+                chainId: 11155420,
+                network: "optimism_sepolia",
+                urls: {
+                    apiURL: "https://sepolia-optimistic.etherscan.io/api",
+                    browserURL: "https://sepolia-optimism.etherscan.io",
+                },
+            },
+        ],
     },
     namedAccounts: {
         deployer: {
