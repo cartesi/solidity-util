@@ -36,6 +36,11 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@cartesi/util@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@cartesi/util/-/util-6.1.0.tgz#45f4a55b09b89e8dab506b5c31e6c2424fad0711"
+  integrity sha512-j92nSoMHCyu6h7nZgn+MeXjkp8oa1Cy6qaImyxVXmPN2Rcqzl/TkWm/RkhbODU9rh4U3OuUteYqKRjefI3/XIQ==
+
 "@chainsafe/as-sha256@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@chainsafe/as-sha256/-/as-sha256-0.3.1.tgz#3639df0e1435cab03f4d9870cc3ac079e57a6fc9"
