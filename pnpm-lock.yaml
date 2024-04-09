@@ -63,8 +63,8 @@ importers:
         specifier: ^2
         version: 2.22.2(ts-node@10.9.2)(typescript@5.4.4)
       hardhat-deploy:
-        specifier: '0.11'
-        version: 0.11.45
+        specifier: ~0.12.2
+        version: 0.12.2
       mocha:
         specifier: ^10
         version: 10.4.0
@@ -105,8 +105,8 @@ importers:
         specifier: ^5
         version: 5.4.4
       viem:
-        specifier: ^1
-        version: 1.21.4(typescript@5.4.4)
+        specifier: ^2.9.15
+        version: 2.9.15(typescript@5.4.4)(zod@3.22.4)
 
   packages/ethers-v5:
     dependencies:
@@ -1503,20 +1503,6 @@ packages:
     dependencies:
       typescript: 5.4.4
       zod: 3.22.4
-    dev: true
-
-  /abitype@0.9.8(typescript@5.4.4):
-    resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
-    peerDependencies:
-      typescript: '>=5.0.4'
-      zod: ^3 >=3.19.1
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-      zod:
-        optional: true
-    dependencies:
-      typescript: 5.4.4
     dev: true
 
   /abitype@1.0.0(typescript@5.4.4)(zod@3.22.4):
@@ -3274,8 +3260,8 @@ packages:
       uglify-js: 3.17.4
     dev: true
 
-  /hardhat-deploy@0.11.45:
-    resolution: {integrity: sha512-aC8UNaq3JcORnEUIwV945iJuvBwi65tjHVDU3v6mOcqik7WAzHVCJ7cwmkkipsHrWysrB5YvGF1q9S1vIph83w==}
+  /hardhat-deploy@0.12.2:
+    resolution: {integrity: sha512-Xp/4Lb5lC/j3kvitaWW5IZN5Meqv5D3kTIifc3ZwBoQtFLN26/fDfRV6MWAAcRO9gH64hZVokvtcDdl/fd7w3A==}
     dependencies:
       '@ethersproject/abi': 5.7.0
       '@ethersproject/abstract-signer': 5.7.0
@@ -3300,7 +3286,7 @@ packages:
       match-all: 1.2.6
       murmur-128: 0.2.1
       qs: 6.12.0
-      zksync-web3: 0.14.4(ethers@5.7.2)
+      zksync-ethers: 5.7.0(ethers@5.7.2)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -5854,29 +5840,6 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /viem@1.21.4(typescript@5.4.4):
-    resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
-    peerDependencies:
-      typescript: '>=5.0.4'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@adraffy/ens-normalize': 1.10.0
-      '@noble/curves': 1.2.0
-      '@noble/hashes': 1.3.2
-      '@scure/bip32': 1.3.2
-      '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@5.4.4)
-      isows: 1.0.3(ws@8.13.0)
-      typescript: 5.4.4
-      ws: 8.13.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: true
-
   /viem@2.9.15(typescript@5.4.4)(zod@3.22.4):
     resolution: {integrity: sha512-7kcmHqybc3JhpjL8gKY7YxBYpZt1//qhoTZIU5Ez9JdyRCnYMMnJu20s7wd7Gv6a3zPbq8jV8dCp94a/NLJJcA==}
     peerDependencies:
@@ -6118,11 +6081,11 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zksync-web3@0.14.4(ethers@5.7.2):
-    resolution: {integrity: sha512-kYehMD/S6Uhe1g434UnaMN+sBr9nQm23Ywn0EUP5BfQCsbjcr3ORuS68PosZw8xUTu3pac7G6YMSnNHk+fwzvg==}
-    deprecated: This package has been deprecated in favor of zksync-ethers@5.0.0
+  /zksync-ethers@5.7.0(ethers@5.7.2):
+    resolution: {integrity: sha512-X99c5APICTlRzyXXjfwkEjRzOPp3Jwo62+z2DVGaZbe+b9Apbizcd2UGV4NGomoAR2GXPbeiSqi1cf3Hbo3cQw==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
-      ethers: ^5.7.0
+      ethers: ~5.7.0
     dependencies:
       ethers: 5.7.2
     dev: true

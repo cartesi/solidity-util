@@ -86,7 +86,6 @@
         "test": "Run unit tests",
         "test:coverage": "Run test coverage report"
     },
-    "dependencies": {},
     "devDependencies": {
         "@nomicfoundation/hardhat-chai-matchers": "^2",
         "@nomicfoundation/hardhat-ethers": "^3",
@@ -103,7 +102,7 @@
         "decimal.js": "^10",
         "ethers": "^6",
         "hardhat": "^2",
-        "hardhat-deploy": "0.11",
+        "hardhat-deploy": "~0.12.2",
         "mocha": "^10",
         "npm-run-all": "^4",
         "npm-scripts-info": "^0.3",
@@ -117,7 +116,7 @@
         "ts-node": "^10",
         "typechain": "^8",
         "typescript": "^5",
-        "viem": "^1"
+        "viem": "^2.9.15"
     },
     "repository": {
         "type": "git",

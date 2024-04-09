@@ -53,7 +53,7 @@ import "solidity-coverage";
 let mnemonic = process.env.MNEMONIC;
 
 const networkConfig = (chain: Chain): HttpNetworkUserConfig => {
-    let url = chain.rpcUrls.public.http.at(0);
+    let url = chain.rpcUrls.default.http.at(0);
 
     // support for infura and alchemy URLs through env variables
     if (process.env.INFURA_ID && chain.rpcUrls.infura?.http) {
