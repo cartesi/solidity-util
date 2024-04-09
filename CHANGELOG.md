@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.2.0] - 2024-04-09
 
+### Changes
+
+-   Migration from yarn to pnpm
+
 ### Added
 
 -   Deployment to base

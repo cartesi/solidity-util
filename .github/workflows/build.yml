@@ -4,19 +4,22 @@ jobs:
     build:
         runs-on: ubuntu-22.04
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
               with:
                   submodules: recursive
                   token: ${{ secrets.CI_TOKEN }}
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v4
               with:
-                  node-version: "16"
-            - run: yarn install
-            - run: yarn prettier
+                  node-version: "20"
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+            - run: pnpm install
+            - run: pnpm run prettier
               working-directory: packages/contracts
-            - run: yarn prepack
+            - run: pnpm run prepack
               working-directory: packages/contracts
-            - run: yarn test:coverage
+            - run: pnpm run test:coverage
               working-directory: packages/contracts
             - name: Coveralls
               uses: coverallsapp/github-action@master
