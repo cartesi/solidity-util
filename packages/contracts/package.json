@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util",
-    "version": "6.1.0",
+    "version": "6.2.0",
     "description": "Solidity Util Contracts",
     "scripts": {
         "build": "run-s compile export",
@@ -15,6 +15,7 @@
         "deploy:arbitrum_sepolia": "hardhat deploy --network arbitrum_sepolia --export export/abi/arbitrum_sepolia.json",
         "deploy:avalanche": "hardhat deploy --network avalanche --export export/abi/avalanche.json",
         "deploy:avalanche_fuji": "hardhat deploy --network avalanche_fuji --export export/abi/avalanche_fuji.json",
+        "deploy:base": "hardhat deploy --network base --export export/abi/base.json",
         "deploy:bsc": "hardhat deploy --network bsc --export export/abi/bsc.json",
         "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet --export export/abi/bsc_testnet.json",
         "deploy:celo": "hardhat deploy --network celo --export export/abi/celo.json",
@@ -28,7 +29,7 @@
         "deploy:iotex": "hardhat deploy --network iotex --export export/abi/iotex.json",
         "deploy:iotex_testnet": "hardhat deploy --network iotex_testnet --export export/abi/iotex_testnet.json",
         "deploy:mainnet": "hardhat deploy --network mainnet --export export/abi/mainnet.json",
-        "deploy:mainnets": "run-s deploy:arbitrum deploy:avalanche deploy:bsc deploy:celo deploy:fantom deploy:gnosis deploy:iotex deploy:mainnet deploy:metis deploy:optimism deploy:polygon",
+        "deploy:mainnets": "run-s deploy:arbitrum deploy:avalanche deploy:base deploy:bsc deploy:celo deploy:fantom deploy:gnosis deploy:iotex deploy:mainnet deploy:metis deploy:optimism deploy:polygon",
         "deploy:metis": "hardhat deploy --network metis --export export/abi/metis.json",
         "deploy:metis_goerli": "hardhat deploy --network metis_goerli --export export/abi/metis_goerli.json",
         "deploy:optimism": "hardhat deploy --network optimism --export export/abi/optimism.json",
@@ -58,6 +59,7 @@
         "deploy:arbitrum_sepolia": "Deploy contracts to arbitrum_sepolia. Requires environment variable MNEMONIC.",
         "deploy:avalanche": "Deploy contracts to avalanche. Requires environment variable MNEMONIC.",
         "deploy:avalanche_fuji": "Deploy contracts to avalanche_fuji. Requires environment variable MNEMONIC.",
+        "deploy:base": "Deploy contracts to base. Requires environment variable MNEMONIC.",
         "deploy:bsc": "Deploy contracts to bsc. Requires environment variable MNEMONIC.",
         "deploy:bsc_testnet": "Deploy contracts to bsc_testnet. Requires environment variable MNEMONIC.",
         "deploy:chiado": "Deploy contracts to chiado. Requires environment variable MNEMONIC.",
