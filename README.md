@@ -48,9 +48,9 @@ And in your solidity contract import it as:
 
 ## Build
 
-To get a list of all available `yarn` targets run the following inside `packages/contracts`:
+To get a list of all available `pnpm` targets run the following inside `packages/contracts`:
 
-    % yarn run info
+    % pnpm run info
 
 ## Contributing
 

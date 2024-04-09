@@ -13,13 +13,13 @@
         "prepack": "run-s build"
     },
     "dependencies": {
-        "@cartesi/util": "6.1.0",
+        "@cartesi/util": "workspace:*",
         "ethers": "^5"
     },
     "devDependencies": {
         "@typechain/ethers-v5": "^11",
         "npm-run-all": "^4",
-        "tsconfig": "*",
+        "tsconfig": "workspace:*",
         "typechain": "^8",
         "typescript": "^5"
     }
