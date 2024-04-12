@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util",
-    "version": "6.2.0",
+    "version": "6.3.0",
     "description": "Solidity Util Contracts",
     "scripts": {
         "build": "run-s compile export",
@@ -16,6 +16,7 @@
         "deploy:avalanche": "hardhat deploy --network avalanche --export export/abi/avalanche.json",
         "deploy:avalanche_fuji": "hardhat deploy --network avalanche_fuji --export export/abi/avalanche_fuji.json",
         "deploy:base": "hardhat deploy --network base --export export/abi/base.json",
+        "deploy:base_sepolia": "hardhat deploy --network base_sepolia --export export/abi/base_sepolia.json",
         "deploy:bsc": "hardhat deploy --network bsc --export export/abi/bsc.json",
         "deploy:bsc_testnet": "hardhat deploy --network bsc_testnet --export export/abi/bsc_testnet.json",
         "deploy:celo": "hardhat deploy --network celo --export export/abi/celo.json",
@@ -60,6 +61,7 @@
         "deploy:avalanche": "Deploy contracts to avalanche. Requires environment variable MNEMONIC.",
         "deploy:avalanche_fuji": "Deploy contracts to avalanche_fuji. Requires environment variable MNEMONIC.",
         "deploy:base": "Deploy contracts to base. Requires environment variable MNEMONIC.",
+        "deploy:base_sepolia": "Deploy contracts to base_sepolia. Requires environment variable MNEMONIC.",
         "deploy:bsc": "Deploy contracts to bsc. Requires environment variable MNEMONIC.",
         "deploy:bsc_testnet": "Deploy contracts to bsc_testnet. Requires environment variable MNEMONIC.",
         "deploy:chiado": "Deploy contracts to chiado. Requires environment variable MNEMONIC.",
