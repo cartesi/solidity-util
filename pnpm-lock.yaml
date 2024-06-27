@@ -24,8 +24,8 @@ importers:
         specifier: ^3
         version: 3.0.5(ethers@6.11.1)(hardhat@2.22.2)
       '@nomicfoundation/hardhat-verify':
-        specifier: ^2
-        version: 2.0.5(hardhat@2.22.2)
+        specifier: ^2.0.8
+        version: 2.0.8(hardhat@2.22.2)
       '@safe-global/safe-singleton-factory':
         specifier: ^1
         version: 1.0.22
@@ -993,8 +993,8 @@ packages:
       - supports-color
     dev: true
 
-  /@nomicfoundation/hardhat-verify@2.0.5(hardhat@2.22.2):
-    resolution: {integrity: sha512-Tg4zu8RkWpyADSFIgF4FlJIUEI4VkxcvELsmbJn2OokbvH2SnUrqKmw0BBfDrtvP0hhmx8wsnrRKP5DV/oTyTA==}
+  /@nomicfoundation/hardhat-verify@2.0.8(hardhat@2.22.2):
+    resolution: {integrity: sha512-x/OYya7A2Kcz+3W/J78dyDHxr0ezU23DKTrRKfy5wDPCnePqnr79vm8EXqX3gYps6IjPBYyGPZ9K6E5BnrWx5Q==}
     peerDependencies:
       hardhat: ^2.0.4
     dependencies:
