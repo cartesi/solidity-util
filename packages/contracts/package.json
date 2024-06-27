@@ -91,7 +91,7 @@
     "devDependencies": {
         "@nomicfoundation/hardhat-chai-matchers": "^2",
         "@nomicfoundation/hardhat-ethers": "^3",
-        "@nomicfoundation/hardhat-verify": "^2",
+        "@nomicfoundation/hardhat-verify": "^2.0.8",
         "@safe-global/safe-singleton-factory": "^1",
         "@typechain/ethers-v6": "^0.5",
         "@typechain/hardhat": "^9",
