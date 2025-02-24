@@ -1,0 +1,28 @@
+name = "cartesi-util"
+version = "6.3.0"
+description = "Cartesi Smart Contract Utilities"
+
+[deploy.Bitmask]
+artifact = "Bitmask"
+create2 = "0xE1CB04A0fA36DdD16a06ea828007E35e1a3cBC37"
+salt = "0x0000000000000000000000000000000000000000000000000000000000000000"
+ifExists = "continue"
+
+[deploy.CartesiMathV2]
+artifact = "CartesiMathV2"
+create2 = "0xE1CB04A0fA36DdD16a06ea828007E35e1a3cBC37"
+salt = "0x0000000000000000000000000000000000000000000000000000000000000000"
+ifExists = "continue"
+
+[deploy.MerkleV2]
+artifact = "MerkleV2"
+create2 = "0xE1CB04A0fA36DdD16a06ea828007E35e1a3cBC37"
+salt = "0x0000000000000000000000000000000000000000000000000000000000000000"
+libraries = { CartesiMathV2 = "<%= contracts.CartesiMathV2.address %>" }
+ifExists = "continue"
+
+[deploy.UnrolledCordic]
+artifact = "UnrolledCordic"
+create2 = "0xE1CB04A0fA36DdD16a06ea828007E35e1a3cBC37"
+salt = "0x0000000000000000000000000000000000000000000000000000000000000000"
+ifExists = "continue"
