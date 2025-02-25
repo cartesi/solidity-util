@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.4.0] - 2025-02-24
+
+### Added
+
+-   Add support to cannon
+
 ## [6.3.0] - 2024-04-12
 
 ### Added

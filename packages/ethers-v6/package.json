@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util-ethers-v6",
-    "version": "6.1.0",
+    "version": "6.4.0",
     "description": "Cartesi Solidity Util Typechain Ethers V6",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

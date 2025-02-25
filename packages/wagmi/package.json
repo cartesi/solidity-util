@@ -1,6 +1,6 @@
 {
     "name": "@cartesi/util-wagmi",
-    "version": "6.1.0",
+    "version": "6.4.0",
     "description": "Cartesi Solidity Util Wagmi Bindings",
     "main": "dist/index.js",
     "author": "Danilo Tuler",
