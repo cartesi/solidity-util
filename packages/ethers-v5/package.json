@@ -14,7 +14,8 @@
     },
     "dependencies": {
         "@cartesi/util": "workspace:*",
-        "ethers": "^5"
+        "ethers": "^5",
+        "tslib": "^2.8.1"
     },
     "devDependencies": {
         "@typechain/ethers-v5": "^11",
@@ -22,5 +23,9 @@
         "tsconfig": "workspace:*",
         "typechain": "^8",
         "typescript": "^5"
+    },
+    "peerDependencies": {
+        "@ethersproject/abi": "^5.7.0",
+        "@ethersproject/providers": "^5.7.2"
     }
 }
